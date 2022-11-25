@@ -1,0 +1,12 @@
+const mongoose = require("mongodb");
+
+const UserSchema = new mongoose.Schema({
+    nombre: {type: String, required: true ["Por favor introduce tu nombre"], unique:false},
+    apellidos: {type: String, required: true ["Por favor introduce tus apellidos"], unique:false},
+    usuario:{type: String, required: true ["Por favor introduce un usuario"], unique: [true, "el usuario ya existe"]},
+    mail:{type: String, required: true ["Por favor introduce un email"], unique: [true, "el email ya existe"]},
+    password:{type: String, required: true ["Por favor introduce una contraseña"], unique:false}
+
+})
+
+module.exports = mongoose.model.Users || mongoose.model("DatosUsuario", UserSchema)
