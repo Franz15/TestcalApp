@@ -1,5 +1,9 @@
 const express = require("express");
- 
+const { verifySignUp } = require("../middlewares");
+const authController = require("../controllers/auth.controller");
+const { authJwt } = require("../middlewares");
+const userController = require("../controllers/user.controller");
+
 // recordRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
@@ -10,9 +14,63 @@ const dbo = require("../db/conn");
  
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
+
+
+//------------------------------------------------------//
+
+//Aqui se comprueban los datos del login
+module.exports = function(app) {
+  app.use(function(req, res, next) {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "x-access-token, Origin, Content-Type, Accept"
+    );
+    next();
+  });
+
+  app.post(
+    "/record/signup",
+    [
+      verifySignUp.checkDuplicateUsernameOrEmail,
+
+    ],
+    authController.signup
+  );
+
+  app.post("/api/auth/signin", authController.signin);
+};
+
+
+
+module.exports = function(app) {
+  app.use(function(req, res, next) {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "x-access-token, Origin, Content-Type, Accept"
+    );
+    next();
+  });
+
+  app.get("/api/test/all", userController.allAccess);
+
+  app.get("/api/test/user", [authJwt.verifyToken], userController.userBoard);
+
+};
+
+
+
+
+
+
+
+
+
+//------------------------------------------------------//
+
+
  
 // Aqui se crean nuevos registros en la BBDD para las 3 colecciones.
-recordRoutes.route("/record/addUser").post(function (req, response) {
+recordRoutes.route("/record/add/user").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     nombre: req.body.nombre,
