@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
  
-export default function Create() {
+export default function CreateUser() {
  const [form, setForm] = useState({
    nombre: "",
    apellido: "",
@@ -29,7 +29,7 @@ export default function Create() {
  
 
    // ??????????????????????????????????????????
-   await fetch("http://localhost:5555/record/add", {
+   await fetch("http://localhost:5555/record/addUser", {
      method: "POST",
      headers: {
        "Content-Type": "application/json",

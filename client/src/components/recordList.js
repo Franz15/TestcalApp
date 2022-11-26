@@ -3,10 +3,16 @@ import { Link } from "react-router-dom";
  
 const Record = (props) => (
  <tr>
-   <td>{props.record.nombre}</td>
-   <td>{props.record.apellido}</td>
-   <td>{props.record.usuario}</td>
-   <td>{props.record.mail}</td>
+   <td>{props.record.fecha}</td>
+   <td>{props.record.pesoCorp}</td>
+   <td>{props.record.test1Peso}</td>
+   <td>{props.record.test1Porcent}</td>
+   <td>{props.record.test2Peso}</td>
+   <td>{props.record.test2Porcent}</td>
+   <td>{props.record.test3Tiempo}</td>
+   <td>{props.record.variante}</td>
+   <td>{props.record.test4Tiempo}</td>
+   <td>{props.record.gradoTeorico}</td>
    <td>
      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Editar</Link> |
      <button className="btn btn-link"
@@ -26,7 +32,7 @@ export default function RecordList() {
  // This method fetches the records from the database.
  useEffect(() => {
    async function getRecords() {
-     const response = await fetch(`http://localhost:5555/record/`);
+     const response = await fetch(`http://localhost:5555/record/results`);
  
      if (!response.ok) {
        const message = `An error occurred: ${response.statusText}`;
@@ -39,13 +45,15 @@ export default function RecordList() {
    }
  
    getRecords();
- 
+   
    return;
- }, [records.length]);
+ }, 
+    [records.length]);
+ 
  
  // This method will delete a record
  async function deleteRecord(id) {
-   await fetch(`http://localhost:5555/${id}`, {
+   await fetch(`http://localhost:5555/results/${id}`, {
      method: "DELETE"
    });
  
@@ -69,15 +77,20 @@ export default function RecordList() {
  // This following section will display the table with the records of individuals.
  return (
    <div>
-     <h3>Record List</h3>
+     <h3>Resultados Test</h3>
      <table className="table table-striped" style={{ marginTop: 20 }}>
        <thead>
          <tr>
-           <th>Nombre</th>
-           <th>Apellido</th>
-           <th>Usuario</th>
-           <th>Email</th>
-           <th>Accion</th>
+          <th>Fecha</th>
+          <th>Peso Corporal</th>
+          <th>Peso Test 1 (Kg)</th>
+          <th>Peso Test 1(%)</th>
+          <th>Peso Test 2 (Kg)</th>
+          <th>Peso Test 2(%)</th>
+          <th>Tiempo Test 3</th>
+          <th>Variante</th>
+          <th>Tiempo Test 4</th>
+          <th>Acciones</th>
          </tr>
        </thead>
        <tbody>{recordList()}</tbody>
