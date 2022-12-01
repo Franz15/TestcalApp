@@ -103,22 +103,22 @@ recordRoutes.route("/record/add/user").post(function (req, response) {
 recordRoutes.route("/record/add/results").post(function (req, response) {
    let db_connect = dbo.getDb();
    let myobj = {
-     fecha: new Date().toISOString().replace(/T.*/,'').split('-').reverse().join('-'),
-     //grado: req.body.grado, //tanto grado como peso deberían venir dados de la tabla de DatosFisicos
-     peso: req.body.pesoCorp,
-     test1Peso: req.body.test1Peso,
-     test1Punt: req.body.puntos1,
-     test1Porcent: req.body.porcent1,
-     test2Peso: req.body.test2Peso,
-     test2Porcent: req.body.porcent2,
-     test2Punt: req.body.puntos2,
-     test3Tiempo: req.body.test3Tiempo,
-     variante: req.body.variante,
-     test3Punt: req.body.puntos3,
-     test4Tiempo: req.body.test4Tiempo,
-     test4Punt: req.body.puntos4,
-     gradoTeorico: req.body.grado
-     //userid: req.body._id 
+      fecha: new Date().toISOString().replace(/T.*/,'').split('-').reverse().join('-'),
+      userid: req.body.id,
+      gradoDeclarado: req.body.gradoDeclarado,
+      peso: req.body.pesoCorp,
+      test1Peso: req.body.test1Peso,
+      test1Porcent: req.body.porcent1,
+      test1Punt: req.body.puntos1,
+      test2Peso: req.body.test2Peso,
+      test2Punt: req.body.puntos2,
+      test2Porcent: req.body.porcent2,
+      test3Tiempo: req.body.test3Tiempo,
+      variante: req.body.variante,
+      test3Punt: req.body.puntos3,
+      test4Tiempo: req.body.test4Tiempo,
+      test4Punt: req.body.puntos4,
+      gradoTeorico: req.body.gradoTeorico
    };
    db_connect.collection("ResultadosTests").insertOne(myobj, function (err, res) {
      if (err) throw err;

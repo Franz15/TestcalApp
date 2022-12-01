@@ -2,6 +2,7 @@
 const bcrypt = require ("bcrypt");
 const user = require("../models/user");
 const fs = require ("fs");
+const path = require("path");
 
 //Importar modelos
 const User = require ("../models/user");
@@ -259,12 +260,14 @@ const avatar =(req,res)=>{
     const filePath = "./uploads/avatars/"+file;
 
     //Comprobar que existe
+    fs.statSync(filePath, (error, exists)=>{
+        if (!exists) return res.status(404).send ({status:"error", message: "No existe la imagen"});
+
+        //Devolver resultado
+        return res.sendFile(path.resolve(filePath));
     
-    //Devolver resultado
-    return res.status(200).send({
-        status: "success",
-        
     });
+    
 
 }
 //Exportar acciones
