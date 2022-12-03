@@ -18,9 +18,9 @@ export default function BateriaTests() {
   async function handleSubmit (evt){
       evt.preventDefault(); 
       let puntos1= (Test1Test2(test1Peso,pesoCorp));
-      let porcent1=(Porcentaje(test1Peso,pesoCorp));
+      let test1Porcent=(Porcentaje(test1Peso,pesoCorp));
       let puntos2= (Test1Test2(test2Peso,pesoCorp));
-      let porcent2=(Porcentaje(test1Peso,pesoCorp));
+      let test2Porcent=(Porcentaje(test1Peso,pesoCorp));
       let puntos3= (Test3(test3Tiempo,variante));
       let puntos4= (Test4(test4Tiempo));
       [resultados,grado]= (Puntuaciones(puntos1,puntos2,puntos3,puntos4));
@@ -32,10 +32,10 @@ export default function BateriaTests() {
         //gradoUser
         test1Peso: test1Peso,
         puntos1: puntos1,
-        porcent1: porcent1,
+        test1Porcent: test1Porcent,
         test2Peso: test2Peso,
         puntos2: puntos2,
-        porcent2: porcent2,
+        test2Porcent: test2Porcent,
         test3Tiempo:test3Tiempo,
         variante: variante,
         puntos3:puntos3,

@@ -24,7 +24,7 @@ const pruebaUser =(req,res)=>{
 const register = (req,res) => {
     //Recoger Datos
     let params = req.body;
-    //Comprobar que llegan (+validacion)
+    //Comprobar que llegan (+validación)
     if (!params.nombre || !params.apellido || !params.email || !params.user || !params.password){
         return res.status(400).json({
             status: "error",
@@ -53,7 +53,7 @@ const register = (req,res) => {
             //Crear objeto de usuario
             let user_to_save = new User(params);
 
-            //Guardar usuario en la bbdd
+            //Guardar usuario en la BBDD
            user_to_save.save((error, userStored)=>{
                 userStored = user_to_save;
                 if(error || !userStored) return res.status(500).send({status: "error", "message": "Error al guardar el usuario"});
@@ -140,7 +140,7 @@ const profileUser = (req, res)=>{
 
 }
 
-//Actualizacion de los datos del usuario
+//Actualización de los datos del usuario
 const update = (req,res)=>{
     //Recuperar info del usuario a actualizar
     let userId = req.user;
@@ -184,7 +184,7 @@ const update = (req,res)=>{
             }
              
             //Buscar y actualizar
-            User.findByIdAndUpdate(userId.id, userToUpdate, {new: true},(error, userUpdated)=>{
+            User.findByIdAndUpdate(userId.id, userToUpdate, {new: true, upsert: true },(error, userUpdated)=>{
 
                 if (error || !userUpdated){
                     return res.status(500).json({status: "error", message: "Error al actualizar usuario"});
@@ -192,7 +192,7 @@ const update = (req,res)=>{
             
             return res.status (200).send({
                 status:"success",
-                message: "Actualizacion",
+                message: "Actualización",
                 user1: userToUpdate,
                 userId,
                 user2: userUpdated

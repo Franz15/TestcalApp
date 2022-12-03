@@ -5,7 +5,7 @@ const moment = require ("moment");
 //Clave secreta
 const secret = "CLAVE_SECRETA-TestcalApp-TFG_JavierV-ITEP-22";
 
-//Crear funcion para generar tokens
+//Crear función para generar tokens
 const createToken =(user)=>{
     const payload ={
         id: user._id,

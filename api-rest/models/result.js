@@ -21,7 +21,7 @@ const ResultSchema = Schema({
         type: Number,
         default: 0
     },
-    porcent1:{
+    test1Porcent:{
         type: Number,
         default: 100
     },
@@ -32,7 +32,7 @@ const ResultSchema = Schema({
         type: Number,
         default: 0
     },
-    porcent2:{
+    test2Porcent:{
         type: Number,
         default: 100
     },
@@ -44,8 +44,7 @@ const ResultSchema = Schema({
         default: 0
     },
     variante:{
-        type: Number,
-        default: 100
+        type: String,
     },
     test3Punt:{
         type: Number,
@@ -58,7 +57,7 @@ const ResultSchema = Schema({
         type: Number,
     },
     gradoTeorico:{
-        type: Number,
+        type: String,
     }
 });
 
