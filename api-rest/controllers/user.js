@@ -115,28 +115,26 @@ const login = (req,res)=>{
 //Perfil del usuario
 const profileUser = (req, res)=>{
     //Recibir el parámetro ID de usuario por la URL
-    let params =req.body;
+    let id =req.params.id;
 
     //Consultas para recuperar los datos de usuario
-    User.findOne({id:params._id})
-    .select({password: 0, role: 0})
-    .exec((error, userProfile)=>{
-        console.log(User)
+    User.findById(id)
+    .select({password: 0})
+    .exec((error,userProfile) =>{
         if(error || !userProfile){
-            return res.status (404).send({
-                status:"error",
-                message: "Usuario no encontrado"
-
+            return res.status(404).send({
+                status: "error",
+                message: "El usuario no existe o hay un error"
             });
         }
-
+        //Devolver el resultado
         return res.status (200).send({
             status:"success",
             user: userProfile
 
         });
 
-    })
+    });
 
 }
 

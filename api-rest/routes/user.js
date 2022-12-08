@@ -22,10 +22,10 @@ const uploads = multer({storage});
 router.get("/prueba-user", check.auth, UserController.pruebaUser);
 router.post ("/register", UserController.register);
 router.post ("/login", UserController.login);
-router.get("/profile/:id", check.auth, UserController.profileUser);
+router.get("/profile/:id",check.auth, UserController.profileUser);
 router.put("/update", check.auth, UserController.update);
 router.post("/upload", [check.auth, uploads.single("file0")], UserController.upload);
-router.get("/avatar/:file", check.auth, UserController.avatar);
+router.get("/avatar/:file", UserController.avatar);
 
 //Exportar router
 module.exports = router;
