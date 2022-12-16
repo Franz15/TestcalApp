@@ -64,6 +64,26 @@ export const Register = () => {
           <input type="password" name="password" onChange={changed} />
         </div>
 
+        <div className="form-group">
+          <label htmlFor="grado">Máximo grado encadenado en roca</label>
+          <input type="text" name="grado" onChange={changed} />
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="altura">Altura (en cm)</label>
+          <input type="number" name="altura" onChange={changed} />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="peso">Peso (en kg)</label>
+          <input type="number" name="peso" onChange={changed} />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="envergadura">Envergadura (en cm)</label>
+          <input type="number" name="envergadura" onChange={changed} />
+        </div>
+
         <input type="submit" value="Regístrate" className="btn btn-success" />
       </form>
 
@@ -78,3 +98,16 @@ export const Register = () => {
     </>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+      
