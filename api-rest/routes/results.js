@@ -8,7 +8,7 @@ router.get("/prueba-results", ResultsController.pruebaResults);
 router.post("/save", check.auth, ResultsController.saveResults);
 router.get("/detail/:id",check.auth, ResultsController.detail);
 router.delete("/remove/:id",check.auth, ResultsController.remove);
-router.get("/user/:page?", check.auth, ResultsController.listResults);
+router.get("/list/:page?", check.auth, ResultsController.listResults);
 router.get("/grade/:id", check.auth, ResultsController.sameGrade);
 
 

@@ -30,13 +30,6 @@ export const Nav = () => {
             <span className="menu-list__title">Test 9C</span>
           </NavLink>
         </li>
-
-        <li className="menu-list__item">
-          <a href="#" className="menu-list__link">
-            <i className="fa-regular fa-envelope"></i>
-            <span className="menu-list__title">3</span>
-          </a>
-        </li>
       </ul>
 
       <ul className="container-lists__list-end">
@@ -52,10 +45,10 @@ export const Nav = () => {
           </a>
         </li>
         <li className="list-end__item">
-          <a href="#" className="list-end__link">
+          <NavLink to ="/social/ajustes" className="list-end__link">
             <i className ='fa-solid fa-gear'></i>
             <span className="list-end__name">Ajustes</span>
-          </a>
+          </NavLink>
         </li>
         <li className="list-end__item">
           <NavLink to ="/social/logout" className="list-end__link">

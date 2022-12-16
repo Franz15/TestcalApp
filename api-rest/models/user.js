@@ -29,9 +29,9 @@ const UserSchema = Schema({
     fechaNac: {
         type: Date
     },
-    sexo:{
+   /* sexo:{
         type: String
-    },
+    },*/
     grado: {
         type: String
     },

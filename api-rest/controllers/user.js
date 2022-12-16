@@ -154,6 +154,10 @@ const update = (req,res)=>{
         userToUpdate.user = userId.user;
     } if (!userToUpdate.email){
         userToUpdate.email = userId.email;
+    
+    //Solución a un error que tenía al editar el usuario en perfil. Si no cambiaba la contraseña me la actualizaba a nulo, y luego no podía volver a logearse el usuario. Esto lo arregla
+    } if (!userToUpdate.password || userToUpdate.password == "" || userToUpdate.password == " "){
+        userToUpdate.password = userId.password;
 
     //Comprobar si el user ya existe
     }User.find ({ $or:[
@@ -231,7 +235,7 @@ const upload =(req, res)=>{
     }
 
     //Si es válida, guardar imagen en BBDD
-    User.findOneAndUpdate(req.user.id, {image: req.file.filename}, {new: true},(error, userUpdated)=>{
+    User.findByIdAndUpdate(req.user.id, {image: req.file.filename}, {new: true},(error, userUpdated)=>{
         if (error || !userUpdated){
             return res.status(500).send({
                 status: "error",
@@ -243,7 +247,8 @@ const upload =(req, res)=>{
         //Devolver resultado
         return res.status(200).send({
             status: "success",
-            user: userUpdated
+            user: userUpdated,
+            file: req.file,
         });
     })
 
@@ -253,12 +258,12 @@ const upload =(req, res)=>{
 const avatar =(req,res)=>{
     //Sacar el parámetro de la URL
     const file = req.params.file;
-
+    console.log(file);
     //Montar el path real de la imagen
     const filePath = "./uploads/avatars/"+file;
-
+    console.log(filePath);
     //Comprobar que existe
-    fs.statSync(filePath, (error, exists)=>{
+    fs.stat(filePath, (error, exists)=>{
         if (!exists) return res.status(404).send ({status:"error", message: "No existe la imagen"});
 
         //Devolver resultado

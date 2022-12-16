@@ -6,8 +6,8 @@ const ResultSchema = Schema({
         default: Date.now
     },
     userId: {
-        type: Schema.ObjectId,
-        ref: "User"
+        type: String,
+        required: true
     },
     gradoDeclarado: {
         type: String,

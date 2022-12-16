@@ -17,6 +17,7 @@ const pruebaResults =(req,res)=>{
 //Listar resultados de un usuario
 const listResults = (req,res)=>{
     const userId = req.user.id;
+
     //Control de página actual
     let page = 1;
     if(req.params.page) page=req.params.page;
@@ -41,7 +42,8 @@ const listResults = (req,res)=>{
             status:"success",
             page: page,
             total:total,
-            results           
+            results,
+            itemsPerPage           
             
         });
     
@@ -61,27 +63,25 @@ const listResults = (req,res)=>{
 const saveResults = (req, res)=>{
     //Recoger datos del body
     const params = req.body;
-
+    console.log("params", params);
     //Si no llegan datos, dar respuesta negativa
 
   
     //Crear y rellenar el objeto del modelo
     let newResult = new Result(params);
-    newResult.userId = req.user.id;
-    newResult.gradoDeclarado = req.user.grado;
-    newResult.pesoCorp = req.user.peso;
-
-
+    console.log ("newResult", newResult);
     //Guardar objeto en BBDD
     newResult.save((error, resultStored)=>{
-
-        /*if (error || !resultStored){
-            return res.status(404).send ({status: "error", message: "Resultado no guardado"});
-        }*/
+        resultStored = newResult;
+        console.log("resultStored", resultStored )
+        if (error || !resultStored) return res.status(500).send ({status: "error", message: "Resultado no guardado"});
+        
+        if (resultStored){
         return res.status(200).send({
             status:"success",
             result: resultStored
-        })
+        });
+        }
     })
 
 }

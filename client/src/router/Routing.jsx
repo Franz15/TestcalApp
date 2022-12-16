@@ -5,9 +5,12 @@ import { PublicLayout } from "../components/layout/public/PublicLayout";
 import { Login } from "../components/user/Login";
 import { Logout } from "../components/user/Logout";
 import { Register } from "../components/user/Register";
+import { Signup } from "../components/user/Signup";
 import { Results } from "../components/result/Results";
 import { AuthProvider } from "../context/AuthProvider";
 import { Test9c } from "../components/tests/Test9c";
+import { Config } from "../components/user/Config";
+
 
 export const Routing = () => {
   return (
@@ -25,6 +28,7 @@ export const Routing = () => {
           <Route path="results" element={<Results />} />
           <Route path="logout" element={<Logout />} />
           <Route path="test9c" element={<Test9c />} />
+          <Route path="ajustes" element={<Config />} />
         </Route>
 
         <Route

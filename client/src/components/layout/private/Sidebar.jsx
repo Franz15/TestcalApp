@@ -32,51 +32,11 @@ const Sidebar = () => {
             </div>
           </div>
 
-          <div className="profile-info__stats">
-            <div className="stats__following">
-              <a href="#" className="following__link">
-                <span className="following__title">Siguiendo</span>
-                <span className="following__number">10</span>
-              </a>
-            </div>
-            <div className="stats__following">
-              <a href="#" className="following__link">
-                <span className="following__title">Seguidores</span>
-                <span className="following__number">13</span>
-              </a>
-            </div>
-
-            <div className="stats__following">
-              <a href="#" className="following__link">
-                <span className="following__title">Publicaciones</span>
-                <span className="following__number">17</span>
-              </a>
-            </div>
-          </div>
+          
         </div>
 
         <div className="aside__container-form">
           <form className="container-form__form-post">
-            <div className="form-post__inputs">
-              <label htmlFor="post" className="form-post__label">
-                ¿Que estas pensando hoy?
-              </label>
-              <textarea name="post" className="form-post__textarea"></textarea>
-            </div>
-
-            <div className="form-post__inputs">
-              <label htmlFor="image" className="form-post__label">
-                Sube tu foto
-              </label>
-              <input type="file" name="image" className="form-post__image" />
-            </div>
-
-            <input
-              type="submit"
-              value="Enviar"
-              className="form-post__btn-submit"
-              disabled
-            />
           </form>
         </div>
       </div>

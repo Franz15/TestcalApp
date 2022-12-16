@@ -204,7 +204,7 @@ body {
 
 
 .post__container{
-    display: flex;
+    display: table-header-group;
     flex-direction: row;
 }
 
@@ -240,6 +240,25 @@ body {
     font-weight: 500;
 }
 
+.post__body{
+    color: var( --color-text-black);
+    font-size: 1.7rem;
+    width: 100%;
+    
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.post__header{
+    color: var( --color-text-black);
+    font-size: 1.7rem;
+    width: 100%;
+    
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
 .post__buttons{
     display: flex;
     align-items: center;
@@ -384,6 +403,7 @@ form{
 
 .form-post__inputs, 
 input[type="text"],
+input[type="number"],
 input[type="email"],
 input[type="password"],
 textarea{
@@ -399,6 +419,7 @@ textarea{
 .form-post__textarea,
 input[type="text"],
 input[type="email"],
+input[type="number"],
 input[type="password"],
 textarea{
     display: block;
@@ -417,6 +438,7 @@ textarea{
 .form-post__textarea:focus,
 input[type="text"]:focus,
 input[type="email"]:focus,
+input[type="number"]:focus,
 input[type="password"]:focus
 textarea:focus{
     border-color: var(--color-border-textarea-focus);
@@ -443,7 +465,7 @@ button{
     margin-bottom: 20px;
 }
 
-.alert-sucess{
+.alert-success{
     margin: 50px;
     color:#398439;
     font-size: 22px;
