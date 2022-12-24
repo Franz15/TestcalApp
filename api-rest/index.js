@@ -21,11 +21,9 @@ app.use(express.urlencoded({extended: true}));
 
 //Cargar config rutas
 const UserRoutes = require("./routes/user");
-const MeasuresRoutes = require("./routes/measures");
 const ResultsRoutes = require ("./routes/results");
 
 app.use ("/api/user", UserRoutes);
-app.use ("/api/measures", MeasuresRoutes);
 app.use ("/api/results", ResultsRoutes);
 
 //Poner servidor a escuchar peticiones HTTP
