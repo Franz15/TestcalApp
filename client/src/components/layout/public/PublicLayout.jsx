@@ -13,8 +13,6 @@ export const PublicLayout = () =>{
 
     return (
         <>
-            {/* LAYOUT */}
-            <Header />
 
             {/* Contenido Principal */}
             <section className="layout__content">
@@ -24,8 +22,6 @@ export const PublicLayout = () =>{
                     <Navigate to ="/social/"/>
             }
             </section>
-
-            <Footer></Footer>
         </>
     )
 }

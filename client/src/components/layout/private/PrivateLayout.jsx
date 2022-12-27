@@ -16,7 +16,7 @@ export const PrivateLayout = () => {
         {/* LAYOUT */}
 
         {/* Cabecera y navegación */}
-        <Header />
+     
 
         {/* Contenido Principal */}
         <section className="layout__content">
@@ -24,9 +24,9 @@ export const PrivateLayout = () => {
         </section>
 
         {/* Barra lateral */}
-        <Sidebar></Sidebar>
+        
 
-        <Footer></Footer>
+       
       </>
     );
   }

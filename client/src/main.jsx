@@ -4,10 +4,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 
 //Importar assets
-import "./assets/fonts/fontawesome-free-6.1.2-web/css/all.css";
-import "./assets/css/normalize.css";
-import "./assets/css/styles.css";
-import "./assets/css/responsive.css";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 

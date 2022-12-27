@@ -10,6 +10,7 @@ import { Results } from "../components/result/Results";
 import { AuthProvider } from "../context/AuthProvider";
 import { Test9c } from "../components/tests/Test9c";
 import { Config } from "../components/user/Config";
+import Dashboard from "../components/layout/private/Dashboard";
 
 
 export const Routing = () => {
@@ -24,7 +25,8 @@ export const Routing = () => {
         </Route>
 
         <Route path="/social" element={<PrivateLayout />}>
-          <Route index element={<Results />} />
+          <Route index element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="results" element={<Results />} />
           <Route path="logout" element={<Logout />} />
           <Route path="test9c" element={<Test9c />} />

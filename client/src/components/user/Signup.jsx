@@ -22,12 +22,11 @@ export class Signup extends Component {
   
   saveUser = async (values) => {
     //Prevenir actualización de la pantalla
-    
 
 
     //recoger los datos del formulario
     let newUser = values;
-
+    
     //Guardar usuario en el backend
     const request = await fetch(Global.url + "user/register", {
       method: "POST",
@@ -40,11 +39,9 @@ export class Signup extends Component {
     const data = await request.json();
 
     if (data.status == "success") {
-      <strong className="alert alert-success">
-          Usuario registrado correctamente
-        </strong>
+      console.log ("FUCK YEAH")
     } else {
-      <strong className="alert alert-error">Usuario no registrado</strong>
+      console.log ("NAAH")
     }
   };
 

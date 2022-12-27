@@ -19,7 +19,7 @@ export const AuthProvider = ({children}) => {
       const user =localStorage.getItem("user");
       console.log (localStorage);
       //Comprobar si tengo el token y el user
-      if (!token || !user){
+      if (!token || !user || token == null){
         setLoading(false);
         return false;
       }
