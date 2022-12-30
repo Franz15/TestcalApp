@@ -28,7 +28,7 @@ export function Results() {
     const data = await request.json();
     if (data.status == "success") {
       
-      if (data.total>data.itemsPerPage){ç
+      if (data.total>data.itemsPerPage){
         setResults(data.results);
         showButton = true;
       }else{

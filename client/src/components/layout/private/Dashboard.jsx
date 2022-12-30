@@ -1,86 +1,67 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
+import { Global } from "../../../helpers/Global";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import AppBar from '@mui/material/AppBar';
+import Rating from '@mui/material/Rating';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-
-const drawerWidth = 240;
-
+import { Header } from './Header';
+import Sidebar from './Sidebar';
+import Grid from '@mui/material/Grid';
+import getLastResult from "../../../hooks/test9c/getLastResult";
+import { Table9c } from "../../accesories/Table9c";
 export default function Dashboard() {
+  
+  //Token de autenticación
+  const token = localStorage.getItem("token");
+
+  let  result= getLastResult();
+ 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Testcalapp
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
-        }}
-      >
-        <Toolbar />
-        <Box sx={{ overflow: 'auto' }}>
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </Drawer>
+      <Header></Header>
+      <Sidebar></Sidebar>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
+        <Box
+              sx={{
+                p: 2,
+                bgcolor: 'background.default',
+                justifyContent: "space-between"
+              }}
+              >
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ mb: 2}}>{"Fuerza de Dedos"}</Box>
+                  {result != null &&<Rating name="ratingTest1" value={(result.test1Punt/2)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}
+                  {result == null &&<Rating name="ratingTest1" value={(0)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ mb: 2}}>{"Fuerza de Tracción"}</Box>
+                  {result != null &&<Rating name="ratingTest2" value={(result.test2Punt/2)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}                  
+                  {result == null &&<Rating name="ratingTest2" value={(0)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ mb: 2}}>{"Fuerza Abdominal"}</Box>
+                  {result != null &&<Rating name="ratingTest3" value={(result.test3Punt/2)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}                 
+                  {result == null &&<Rating name="ratingTest3" value={(0)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ mb: 2}}>{"Fuerza de agarre"}</Box>
+                  {result != null &&<Rating name="ratingTest4" value={(result.test4Punt/2)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}                  
+                  {result == null &&<Rating name="ratingTest4" value={(0)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}
+                  </Grid>
+                  
+
+                </Grid>
+        </Box>
+        <Box sx={{ flexGrow: 1, p: 3 }}>
+          <Table9c></Table9c>
+        </Box>
+        <Typography paragraph sx={{ flexGrow: 1, p: 3 }}>
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
           eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
           neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra

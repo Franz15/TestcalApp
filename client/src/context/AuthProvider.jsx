@@ -7,7 +7,7 @@ export const AuthProvider = ({children}) => {
 
     const [auth, setAuth] = useState ({});
     const [loading, setLoading] = useState (true);
-
+    let tokenValidated = false;
     
     useEffect(()=>{
       authUser();
@@ -21,6 +21,7 @@ export const AuthProvider = ({children}) => {
       //Comprobar si tengo el token y el user
       if (!token || !user || token == null){
         setLoading(false);
+        tokenValidated = false;
         return false;
       }
       //Transformar los datos a un objeto Javascript
@@ -41,22 +42,30 @@ export const AuthProvider = ({children}) => {
         }
       });
 
-      let data = await request.json();
-
+      const data = await request.json();
+      if (data.status == "success") {
+        
       console.log ("request", request);
       console.log("data", data);
-      
+  
       //Setear el estado del auth
       setAuth(data.user);
       setLoading(false);
+      tokenValidated = true;
 
+    }else{
+      setLoading(false);
+        return false;
+        tokenValidated = false;
     }
+    };
   return (
     <AuthContext.Provider
       value ={{
         auth,
         setAuth,
-        loading
+        loading,
+        tokenValidated
       }}>
         {children}
       </AuthContext.Provider>

@@ -1,7 +1,22 @@
 import React from "react";
 import { Global } from "../../../helpers/Global";
 import {useAuth} from "../../../hooks/useAuth";
+import Box from '@mui/material/Box';
 import avatar from "../../../assets/img/user.png";
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import Toolbar from '@mui/material/Toolbar';
+
+import Typography from '@mui/material/Typography';
+
+const drawerWidth = 240;
 
 const Sidebar = () => {
   
@@ -10,7 +25,40 @@ const Sidebar = () => {
   console.log("auth", auth);
   
   return (
-    <aside className="layout__aside">
+
+    <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+        }}
+      >
+        <Toolbar />
+        <Box sx={{ paddingTop: 2, overflow: 'auto' }}>
+          <List>
+            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
+      
+ 
+  );
+};
+
+export default Sidebar;
+
+
+/*   <aside className="layout__aside">
       <header className="aside__header">
         <h1 className="aside__title">Hola, {auth.nombre}</h1>
       </header>
@@ -40,8 +88,4 @@ const Sidebar = () => {
           </form>
         </div>
       </div>
-    </aside>
-  );
-};
-
-export default Sidebar;
+    </aside>*/
