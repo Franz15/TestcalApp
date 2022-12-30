@@ -4,12 +4,21 @@ import {useAuth} from "../../../hooks/useAuth";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import Sidebar from "./Sidebar";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const PrivateLayout = () => {
   const { auth, loading } = useAuth();
 
   if (loading) {
-    return <h1>Cargando...</h1>;
+    return (
+    
+    <CircularProgress
+    sx = {{position: 'fixed',
+    top: '50%',
+    left: '50%',
+   }} color="inherit" />
+    )
   } else {
     return (
       <>

@@ -5,11 +5,11 @@ import { PublicLayout } from "../components/layout/public/PublicLayout";
 import { Login } from "../components/user/Login";
 import { Logout } from "../components/user/Logout";
 import { Register } from "../components/user/Register";
-import { Signup } from "../components/user/Signup";
 import { Results } from "../components/result/Results";
 import { AuthProvider } from "../context/AuthProvider";
-import { Test9c } from "../components/tests/Test9c";
+import { Test9c } from "../components/tests/test9c/Test9c";
 import { Config } from "../components/user/Config";
+import DeleteTest9c from "../components/tests/test9c/DeleteTest9c";
 import Dashboard from "../components/layout/private/Dashboard";
 
 
@@ -31,6 +31,7 @@ export const Routing = () => {
           <Route path="logout" element={<Logout />} />
           <Route path="test9c" element={<Test9c />} />
           <Route path="ajustes" element={<Config />} />
+          <Route path="borrar9c" element={<DeleteTest9c />} />
         </Route>
 
         <Route

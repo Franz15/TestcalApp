@@ -18,16 +18,9 @@ const pruebaResults =(req,res)=>{
 const listResults = (req,res)=>{
     const userId = req.user.id;
 
-    //Control de página actual
-    let page = 1;
-    if(req.params.page) page=req.params.page;
-    
-    //Consulta de Mongoose paginate
-    let itemsPerPage = 5;
-
     Result.find({"userId": userId})
     .sort({"fecha": -1})
-    .paginate(page, itemsPerPage, (error, results, total)=>{
+    .exec((error, results, total)=>{
 
         if(error){
             return res.status(404).send({
@@ -40,23 +33,32 @@ const listResults = (req,res)=>{
         //Devuelve el resultado ()
         return res.status(200).send({
             status:"success",
-            page: page,
-            total:total,
-            results,
-            itemsPerPage           
-            
+            total,
+            results         
         });
     
     })
+}
 
 
+const lastResult = (req,res)=>{
     
-
-
-
-
-
-
+    const userId = req.user.id;
+    Result.findOne({"userId": userId})
+    .exec((error,result) =>{
+    if(error){
+        return res.status(404).send({
+            status:"error",
+            message: "Error",
+            error
+        })
+    }
+    //Devuelve el resultado ()
+    return res.status(200).send({
+        status:"success",
+        result             
+    });
+})
 }
 
 //Guardar resultados test
@@ -183,5 +185,6 @@ module.exports = {
     saveResults,
     detail,
     remove,
-    sameGrade
+    sameGrade,
+    lastResult
 }

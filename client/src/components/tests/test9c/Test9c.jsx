@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Test1Test2,Test3,Test4, Puntuaciones, Porcentaje } from "./ComponentsTest9c";
-import {useAuth} from "../../hooks/useAuth";
-import { Global } from "../../helpers/Global";
- 
+import { useAuth } from "../../../hooks/useAuth";
+import { Global } from "../../../helpers/Global";
+import Box from '@mui/material/Box';
+import Sidebar from "../../layout/private/Sidebar";
+import CssBaseline from '@mui/material/CssBaseline';
+import { Toolbar } from "@mui/material";
+import { Header } from "../../layout/private/Header";
+
 export function Test9c() {
   //Token de autenticación
   const token = localStorage.getItem("token");
@@ -90,6 +95,12 @@ export function Test9c() {
       
  return (
    <div>
+     <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <Header></Header>
+      <Sidebar></Sidebar>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
      <h3>Nueva Batería de Tests</h3>
 
      <form onSubmit={handleSubmit}>
@@ -157,6 +168,8 @@ export function Test9c() {
          />
        </div>
      </form>
+     </Box>
+     </Box>
    </div>
  );
 }
