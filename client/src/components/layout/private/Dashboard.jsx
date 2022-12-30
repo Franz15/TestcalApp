@@ -1,62 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Global } from "../../../helpers/Global";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import Box from '@mui/material/Box';
-import Rating from '@mui/material/Rating';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Header } from './Header';
 import Sidebar from './Sidebar';
-import Grid from '@mui/material/Grid';
-import getLastResult from "../../../hooks/test9c/getLastResult";
-import { Table9c } from "../../accesories/Table9c";
-export default function Dashboard() {
-  
-  //Token de autenticación
-  const token = localStorage.getItem("token");
 
-  let  result= getLastResult();
- 
-  return (
+
+import { Table9c } from "../../accesories/Table9c";
+import Ratings from "../../accesories/Ratings";
+export default function Dashboard() {
+    return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Header></Header>
       <Sidebar></Sidebar>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <Box
+        <Box className="Box"
               sx={{
                 p: 2,
                 bgcolor: 'background.default',
                 justifyContent: "space-between"
               }}
               >
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ mb: 2}}>{"Fuerza de Dedos"}</Box>
-                  {result != null &&<Rating name="ratingTest1" value={(result.test1Punt/2)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}
-                  {result == null &&<Rating name="ratingTest1" value={(0)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ mb: 2}}>{"Fuerza de Tracción"}</Box>
-                  {result != null &&<Rating name="ratingTest2" value={(result.test2Punt/2)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}                  
-                  {result == null &&<Rating name="ratingTest2" value={(0)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ mb: 2}}>{"Fuerza Abdominal"}</Box>
-                  {result != null &&<Rating name="ratingTest3" value={(result.test3Punt/2)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}                 
-                  {result == null &&<Rating name="ratingTest3" value={(0)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ mb: 2}}>{"Fuerza de agarre"}</Box>
-                  {result != null &&<Rating name="ratingTest4" value={(result.test4Punt/2)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}                  
-                  {result == null &&<Rating name="ratingTest4" value={(0)} precision={0.5} readOnly sx={{ flexGrow: 1}} />}
-                  </Grid>
-                  
-
-                </Grid>
+                <Ratings></Ratings>
         </Box>
         <Box sx={{ flexGrow: 1, p: 3 }}>
           <Table9c></Table9c>

@@ -18,8 +18,8 @@ export function getAllResults (){
     getResults();
   }, [params]);
 
-  const getResults = async (nextPage = 1) => {
-    const request = await fetch(Global.url + "results/list" + "/" + nextPage, {
+  const getResults = async () => {
+    const request = await fetch(Global.url + "results/list", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
