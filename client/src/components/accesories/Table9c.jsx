@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import moment from "moment";
+import { Paper } from "@mui/material";
 
 const Result = (props) => (
   <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
@@ -32,7 +33,9 @@ const Result = (props) => (
     <TableCell align="center">
       <Button
         variant="outlined"
-        onClick={() => {props.deleteResult(props.result._id), window.location.reload(false)}}
+        onClick={() => {
+          props.deleteResult(props.result._id), window.location.reload(false);
+        }}
       >
         <DeleteIcon />
       </Button>
@@ -87,6 +90,7 @@ export function Table9c() {
   }
 
   return (
+   
     <TableContainer>
       <Table stickyHeader aria-label="simple table">
         <TableHead>
@@ -106,5 +110,6 @@ export function Table9c() {
         <TableBody>{resultList()}</TableBody>
       </Table>
     </TableContainer>
+ 
   );
 }
