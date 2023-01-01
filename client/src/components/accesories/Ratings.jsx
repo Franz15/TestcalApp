@@ -1,16 +1,12 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
 import Rating from "@mui/material/Rating";
 import getLastResult from "../../hooks/test9c/getLastResult";
 import Box from "@mui/material/Box";
 
 const Ratings = () => {
-  
   let result = getLastResult();
 
-
- 
-  
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6} md={3}>

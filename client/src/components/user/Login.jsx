@@ -1,86 +1,72 @@
-import {React, useState} from 'react';
-import {useForm} from '../../hooks/useForm';
+import { React, useState } from "react";
+import { useForm } from "../../hooks/useForm";
 import { Global } from "../../helpers/Global";
-import {useAuth} from "../../hooks/useAuth";
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import background from '../../assets/img/backgrounds/background3.jpg';
+import { useAuth } from "../../hooks/useAuth";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import background from "../../assets/img/backgrounds/background3.jpg";
+import Note from "../accesories/Note";
 
 export const Login = () => {
-  
-  const {form, changed} = useForm({});
+  const { form, changed } = useForm({});
   const [saved, setSaved] = useState("not_sended");
 
-  const {setAuth} = useAuth();
+  const { setAuth } = useAuth();
 
   const theme = createTheme();
 
-  const loginUser = async(e)=>{
+  const loginUser = async (e) => {
     e.preventDefault();
 
     console.log("form", form);
-    console.log ("saved", saved);
-    
+    console.log("saved", saved);
 
     //Datos del usuario
     let userToLogin = form;
 
     //Petición al backend
-    const request = await fetch (Global.url + "user/login",{
+    const request = await fetch(Global.url + "user/login", {
       method: "POST",
-      headers:{
-        "Content-Type": "application/json"
+      headers: {
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(userToLogin)
-
+      body: JSON.stringify(userToLogin),
     });
 
     const data = await request.json();
-    console.log ("login data", data);
-    
-    if (data.status == "success"){
+    console.log("login data", data);
+
+    if (data.status == "success") {
       //Persistir los datos en el navegador
       localStorage.setItem("token", data.token);
-      localStorage.setItem("user",JSON.stringify(data.user));
+      localStorage.setItem("user", JSON.stringify(data.user));
       setSaved("login");
 
       //Setear datos en el auth
       setAuth(data.user);
-      console.log ("data user", data.user);
-      console.log ("Local Storage", localStorage);
-      console.log ("Local Storage token", localStorage.token);
-      console.log ("Local Storage user", localStorage.user);
-      
+      console.log("data user", data.user);
+      console.log("Local Storage", localStorage);
+      console.log("Local Storage token", localStorage.token);
+      console.log("Local Storage user", localStorage.user);
+
       //Redirección
       window.location.reload();
-
     } else setSaved("error");
-
-  }
-function Note(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-        {'-TestcalApp 0.0.1- en desarrollo, la maquetación y estilo puede variar drásticamente en la versión final. Las funcionalidades no están completamente desarrolladas todavía.'}
-        {'Javier Vallinas, TFG DAM ITEP '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-  );
-}
+  };
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
           item
@@ -90,9 +76,11 @@ function Note(props) {
           sx={{
             backgroundImage: `url(${background})`,
             backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -100,18 +88,23 @@ function Note(props) {
             sx={{
               my: 8,
               mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'rgb(225,179,69)' }}>
+            <Avatar sx={{ m: 1, bgcolor: "rgb(225,179,69)" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Login
             </Typography>
-            <Box component="form" noValidate onSubmit={loginUser} sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={loginUser}
+              sx={{ mt: 1 }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -121,7 +114,7 @@ function Note(props) {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                onChange ={changed}
+                onChange={changed}
               />
               <TextField
                 margin="normal"
@@ -132,7 +125,7 @@ function Note(props) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange ={changed}
+                onChange={changed}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -159,14 +152,21 @@ function Note(props) {
                   </Link>
                 </Grid>
               </Grid>
-              {saved == "error" ? 
-                <strong  style={{color: '#C04000'}} className="alert alert-error">Email o contraseña incorrectos</strong>
-                :""}
-              <Note sx={{ mt: 5 }} />
+              {saved == "error" ? (
+                <strong
+                  style={{ color: "#C04000" }}
+                  className="alert alert-error"
+                >
+                  Email o contraseña incorrectos
+                </strong>
+              ) : (
+                ""
+              )}
             </Box>
           </Box>
+          <Note />
         </Grid>
       </Grid>
     </ThemeProvider>
   );
-}
+};

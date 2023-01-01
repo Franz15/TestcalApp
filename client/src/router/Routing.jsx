@@ -12,40 +12,39 @@ import { Config } from "../components/user/Config";
 import DeleteTest9c from "../components/tests/test9c/DeleteTest9c";
 import Dashboard from "../components/layout/private/Dashboard";
 
-
 export const Routing = () => {
   return (
     <BrowserRouter>
-    <AuthProvider>
-      <Routes>
-        <Route path="/" element={<PublicLayout />}>
-          <Route index element={<Login />} />
-          <Route path="login" element={<Login />} />
-          <Route path="registro" element={<Register />} />
-        </Route>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<PublicLayout />}>
+            <Route index element={<Login />} />
+            <Route path="login" element={<Login />} />
+            <Route path="registro" element={<Register />} />
+          </Route>
 
-        <Route path="/social" element={<PrivateLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="results" element={<Results />} />
-          <Route path="logout" element={<Logout />} />
-          <Route path="test9c" element={<Test9c />} />
-          <Route path="ajustes" element={<Config />} />
-          <Route path="borrar9c" element={<DeleteTest9c />} />
-        </Route>
+          <Route path="/social" element={<PrivateLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="results" element={<Results />} />
+            <Route path="logout" element={<Logout />} />
+            <Route path="test9c" element={<Test9c />} />
+            <Route path="ajustes" element={<Config />} />
+            <Route path="borrar9c" element={<DeleteTest9c />} />
+          </Route>
 
-        <Route
-          path="*"
-          element={
-            <>
-              <p>
-                <h1> Error 404</h1>
-                <Link to="/">Volver al inicio</Link>
-              </p>
-            </>
-          }
-        />
-      </Routes>
+          <Route
+            path="*"
+            element={
+              <>
+                <p>
+                  <h1> Error 404</h1>
+                  <Link to="/">Volver al inicio</Link>
+                </p>
+              </>
+            }
+          />
+        </Routes>
       </AuthProvider>
     </BrowserRouter>
   );

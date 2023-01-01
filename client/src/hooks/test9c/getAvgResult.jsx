@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Global } from "../../helpers/Global";
-
+import { useAuth } from "../useAuth";
 export default function getLastResult() {
   //Token de autenticación
   const token = localStorage.getItem("token");
-
+  const { auth } = useAuth();
   const [result, setResult] = useState([]);
   const params = useParams();
 
@@ -14,7 +14,9 @@ export default function getLastResult() {
   }, [params]);
 
   const getResult = async () => {
-    const request = await fetch(Global.url + "results/result", {
+    console.log("userGrade", auth._id);
+
+    const request = await fetch(Global.url + "results/grade/" + auth._id, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -27,12 +29,10 @@ export default function getLastResult() {
       if (data.result == null) {
         setResult(0);
       } else {
-        setResult(data.result);
       }
     } else {
       console.log("errorrrr");
     }
   };
-
   return result;
 }

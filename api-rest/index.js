@@ -1,9 +1,9 @@
 //Importar dependencias
-const connection = require ("./database/connection");
-const express = require ("express");
-const cors = require ("cors");
+const connection = require("./database/connection");
+const express = require("express");
+const cors = require("cors");
 
-console.log ("API funcionando");
+console.log("API funcionando");
 
 //Conexión a Base de Datos
 connection();
@@ -17,16 +17,16 @@ app.use(cors());
 
 //Convertir los datos del body a objetos .js
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 //Cargar config rutas
 const UserRoutes = require("./routes/user");
-const ResultsRoutes = require ("./routes/results");
+const ResultsRoutes = require("./routes/results");
 
-app.use ("/api/user", UserRoutes);
-app.use ("/api/results", ResultsRoutes);
+app.use("/api/user", UserRoutes);
+app.use("/api/results", ResultsRoutes);
 
 //Poner servidor a escuchar peticiones HTTP
-app.listen (puerto,()=>{
-    console.log("Servidor NODE corriendo en el puerto: ",puerto);
+app.listen(puerto, () => {
+  console.log("Servidor NODE corriendo en el puerto: ", puerto);
 });

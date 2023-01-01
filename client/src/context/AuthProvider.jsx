@@ -1,75 +1,71 @@
-import { React, useState, useEffect, createContext } from 'react';
-import { Global } from '../helpers/Global';
+import { React, useState, useEffect, createContext } from "react";
+import { Global } from "../helpers/Global";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
+  const [auth, setAuth] = useState({});
+  const [loading, setLoading] = useState(true);
+  let tokenValidated = false;
 
-    const [auth, setAuth] = useState ({});
-    const [loading, setLoading] = useState (true);
-    let tokenValidated = false;
-    
-    useEffect(()=>{
-      authUser();
-    },[]);
+  useEffect(() => {
+    authUser();
+  }, []);
 
-    const authUser = async()=>{
-      //Sacar datos de usuario del localstorage
-      const token =localStorage.getItem("token");
-      const user =localStorage.getItem("user");
-      console.log (localStorage);
-      //Comprobar si tengo el token y el user
-      if (!token || !user || token == null){
-        setLoading(false);
-        tokenValidated = false;
-        return false;
-      }
-      //Transformar los datos a un objeto Javascript
-      const userObj = JSON.parse(user);
-      const userId = userObj.id;
-      console.log ("user", user);
-      console.log("userObj", userObj);
-      console.log ("userId", userId);
+  const authUser = async () => {
+    //Sacar datos de usuario del localstorage
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    console.log(localStorage);
+    //Comprobar si tengo el token y el user
+    if (!token || !user || token == null) {
+      setLoading(false);
+      tokenValidated = false;
+      return false;
+    }
+    //Transformar los datos a un objeto Javascript
+    const userObj = JSON.parse(user);
+    const userId = userObj.id;
+    console.log("user", user);
+    console.log("userObj", userObj);
+    console.log("userId", userId);
 
-     
-      //Petición Ajax al backend para que compruebe el token y me devuelva los datos del usuario
-      const request = await fetch (Global.url + "user/profile/" + userId, {
-        
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": token
-        }
-      });
+    //Petición Ajax al backend para que compruebe el token y me devuelva los datos del usuario
+    const request = await fetch(Global.url + "user/profile/" + userId, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
 
-      const data = await request.json();
-      if (data.status == "success") {
-        
-      console.log ("request", request);
+    const data = await request.json();
+    if (data.status == "success") {
+      console.log("request", request);
       console.log("data", data);
-  
+
       //Setear el estado del auth
       setAuth(data.user);
       setLoading(false);
       tokenValidated = true;
-
-    }else{
+    } else {
       setLoading(false);
-        return false;
-        tokenValidated = false;
+      return false;
+      tokenValidated = false;
     }
-    };
+  };
   return (
     <AuthContext.Provider
-      value ={{
+      value={{
         auth,
         setAuth,
         loading,
-        tokenValidated
-      }}>
-        {children}
-      </AuthContext.Provider>
-  )
-}
+        tokenValidated,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
 export default AuthContext;

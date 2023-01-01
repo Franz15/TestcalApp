@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { getAllResults } from "../../hooks/test9c/getAllResults";
 import DeleteTest9c from "../tests/test9c/DeleteTest9c";
 import { Global } from "../../helpers/Global";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Button from "@mui/material/Button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Button,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import moment from "moment";
-import { Paper } from "@mui/material";
 
 const Result = (props) => (
   <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
@@ -90,7 +90,6 @@ export function Table9c() {
   }
 
   return (
-   
     <TableContainer>
       <Table stickyHeader aria-label="simple table">
         <TableHead>
@@ -110,6 +109,5 @@ export function Table9c() {
         <TableBody>{resultList()}</TableBody>
       </Table>
     </TableContainer>
- 
   );
 }

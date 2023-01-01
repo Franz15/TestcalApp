@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Global } from '../../helpers/Global';
+import { useEffect, useState } from "react";
+import { Global } from "../../helpers/Global";
 import { useParams } from "react-router-dom";
 
-
-
-
-
-export function getAllResults (){
+export function getAllResults() {
   //Token de autenticación
   const token = localStorage.getItem("token");
 
   const [results, setResults] = useState([]);
   const params = useParams();
-
 
   useEffect(() => {
     getResults();
@@ -23,19 +18,18 @@ export function getAllResults (){
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
     });
 
     const data = await request.json();
     if (data.status == "success") {
-        setResults(data.results);
-      }else{
-        setResults(data.results);
+      setResults(data.results);
+    } else {
+      setResults(data.results);
     }
   };
-    return (
-    results
-  )
+  console.log("Results.fecha", results.fecha);
+  console.log("Data.status", results.status);
+  return results;
 }
-

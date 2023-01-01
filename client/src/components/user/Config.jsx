@@ -1,17 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { json } from "react-router-dom";
 import { Global } from "../../helpers/Global";
 import { SerializeForm } from "../../helpers/SerializeForm";
 import { useAuth } from "../../hooks/useAuth";
-import avatar from "../../assets/img/user.png";
-import Box from '@mui/material/Box';
-import { Link } from "react-router-dom";
-import Toolbar from '@mui/material/Toolbar';
-import CssBaseline from '@mui/material/CssBaseline';
-import { Header } from "../layout/private/Header";
-import Sidebar from "../layout/private/Sidebar";
-import {Avatar} from '@mui/material';
+import Box from "@mui/material/Box";
+import { Avatar } from "@mui/material";
 
 export const Config = () => {
   const { auth, setAuth } = useAuth();
@@ -31,65 +24,58 @@ export const Config = () => {
     delete newDataUser.file0;
 
     //Actualizar usuario en BBDD
-    const request = await fetch (Global.url + 'user/update',{
-        method: "PUT",
-        body: JSON.stringify(newDataUser),
-        headers:{
-            "Content-Type": "application/json",
-            "Authorization": token
-        }
+    const request = await fetch(Global.url + "user/update", {
+      method: "PUT",
+      body: JSON.stringify(newDataUser),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
     });
     const data = await request.json();
 
-    if (data.status == "success"){
-       delete data.user2.password;
+    if (data.status == "success") {
+      delete data.user2.password;
 
-        setAuth (data.user2);
-        setSaved ("saved");
+      setAuth(data.user2);
+      setSaved("saved");
     } else {
-        setSaved ("error")
+      setSaved("error");
     }
 
     //Subir imagen de perfil
     const fileInput = document.querySelector("#file");
 
-    if (data.status == "success" && fileInput.files[0]){
+    if (data.status == "success" && fileInput.files[0]) {
       const formData = new FormData();
 
       //Recogiendo imagen para subir
-      formData.append('file0', fileInput.files[0]);
+      formData.append("file0", fileInput.files[0]);
 
       //Petición para enviar el fichero
-      const uploadRequest = await fetch( Global.url + 'user/upload',{
-        method:"POST",
+      const uploadRequest = await fetch(Global.url + "user/upload", {
+        method: "POST",
         body: formData,
         headers: {
-          "Authorization": token
-        }
+          Authorization: token,
+        },
       });
       const uploadData = await uploadRequest.json();
-      
-      if (uploadData.status == "success"){
-      delete uploadData.user.password;
 
-      setAuth(uploadData.user);
-      //console.log (uploadData.user2);
-      setSaved("saved");
+      if (uploadData.status == "success") {
+        delete uploadData.user.password;
+
+        setAuth(uploadData.user);
+        //console.log (uploadData.user2);
+        setSaved("saved");
       } else {
-        setSaved ("error");
+        setSaved("error");
       }
-
     }
   };
 
   return (
-    <>
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <Header></Header>
-      <Sidebar></Sidebar>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar />
+    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <header className="content__header content__header--public">
         <h1 className="content__title">Ajustes</h1>
       </header>
@@ -119,7 +105,7 @@ export const Config = () => {
 
         <div className="form-group">
           <label htmlFor="password">Contraseña</label>
-          <input type="password" name="password"/>
+          <input type="password" name="password" />
         </div>
 
         <div className="form-group">
@@ -148,9 +134,12 @@ export const Config = () => {
 
         <div className="form-group">
           <label htmlFor="file0">Avatar</label>
-          <Avatar  src={Global.url + "user/avatar/" + auth.image} sx={{width: 125, height: 125}}/>
-          
-            <br/>
+          <Avatar
+            src={Global.url + "user/avatar/" + auth.image}
+            sx={{ width: 125, height: 125 }}
+          />
+
+          <br />
           <input type="file" name="file0" id="file" />
         </div>
         <br />
@@ -169,8 +158,6 @@ export const Config = () => {
       ) : (
         ""
       )}
-      </Box>
     </Box>
-    </>
   );
 };
