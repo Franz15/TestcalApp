@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 
 const Note = (props) => {
   return (
-    <Typography
+    <Typography sx={{pr:3, pl:3}}
       variant="body2"
       color="text.secondary"
       align="center"

@@ -37,23 +37,40 @@ const register = (req, res) => {
   }
 
   //Control usuarios duplicados
-  User.find({
-    $or: [
-      { email: params.email.toLowerCase() },
-      { user: params.user.toLowerCase() },
-    ],
-  }).exec(async (error, users) => {
+  User.find(
+   
+      { email: params.email.toLowerCase() }
+    
+   
+  ).exec(async (error, users) => {
     if (error)
       return res
         .status(500)
         .json({ status: "error", message: "Error en la consulta" });
 
     if (users && users.length >= 1) {
-      return res.status(200).send({
-        status: "success",
-        message: "El usuario ya existe",
+      return res.status(412).send({
+        status: "error",
+        message: "El email introducido ya está registrado",
       });
+      
     }
+    User.find(
+        
+        { user: params.user.toLowerCase() },
+      ).exec(async (error, users) => {
+      if (error)
+        return res
+          .status(500)
+          .json({ status: "error", message: "Error en la consulta" });
+  
+      if (users && users.length >= 1) {
+        return res.status(412).send({
+          status: "error",
+          message: "El usuario ya existe",
+        });
+        
+      }
     //Cifrar la contraseña
     let hashedPassword = await bcrypt.hash(params.password, 10);
     params.password = hashedPassword;
@@ -78,7 +95,7 @@ const register = (req, res) => {
       }
     });
   });
-};
+  })};
 
 //Login
 const login = (req, res) => {
@@ -92,7 +109,7 @@ const login = (req, res) => {
     });
   }
   //Buscar si existe en BBDD
-  User.findOne({ email: params.email }).exec((error, user) => {
+  User.findOne({ email: params.email.toLowerCase() }).exec((error, user) => {
     if (error || !user)
       return res
         .status(404)

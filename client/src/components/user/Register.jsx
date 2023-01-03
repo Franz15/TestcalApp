@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Global } from "../../helpers/Global";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,12 +15,17 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import background from "../../assets/img/backgrounds/background2.jpg";
 import Note from "../accesories/Note";
+import MenuItem from "@mui/material/MenuItem";
+import Alert from '@mui/material/Alert';
 
 export const Register = () => {
   const { form, changed } = useForm({});
   const [saved, setSaved] = useState("not_sended");
+  const [message,setMessage] = useState("");
+  const navigate = useNavigate();
 
   const theme = createTheme();
+  
 
   const saveUser = async (e) => {
     //Prevenir actualización de la pantalla
@@ -40,9 +46,12 @@ export const Register = () => {
 
     if (data.status == "success") {
       setSaved("saved");
-      navigate("/login");
+      setMessage(data.message);
+       //Navigate al login
+    navigate("/login");
     } else {
       setSaved("error");
+      setMessage(data.message);
     }
   };
   return (
@@ -67,7 +76,7 @@ export const Register = () => {
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
-              my: 8,
+              my: 3,
               mx: 4,
               display: "flex",
               flexDirection: "column",
@@ -89,6 +98,7 @@ export const Register = () => {
                 label="Nombre"
                 name="nombre"
                 autoComplete="nombre"
+                type="text"
                 autoFocus
                 onChange={changed}
               />
@@ -100,6 +110,7 @@ export const Register = () => {
                 label="Apellido"
                 name="apellido"
                 autoComplete="apellido"
+                type="text"
                 autoFocus
                 onChange={changed}
               />
@@ -111,6 +122,7 @@ export const Register = () => {
                 label="Dirección de correo electrónico"
                 name="email"
                 autoComplete="email"
+                type="email"
                 autoFocus
                 onChange={changed}
               />
@@ -121,7 +133,7 @@ export const Register = () => {
                 id="user"
                 label="Nombre de Usuario"
                 name="user"
-                autoComplete="user"
+                type="text"
                 autoFocus
                 onChange={changed}
               />
@@ -133,21 +145,47 @@ export const Register = () => {
                 label="Contraseña"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                
                 onChange={changed}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="grado"
-                label="Máximo grado encadenado en roca"
-                name="grado"
-                autoComplete="grado"
-                autoFocus
-                onChange={changed}
-              />
-              <TextField
+
+<TextField
+          required
+          fullWidth
+          margin="normal"
+          id="standard-select-currency"
+          select
+          label="Máximo grado encadenado en roca"
+          defaultValue="IV"
+        >
+                  <MenuItem value={"IV"}>IV</MenuItem>
+                  <MenuItem value={"V"}>V</MenuItem>
+                  <MenuItem value={"6a"}>6a</MenuItem>
+                  <MenuItem value={"6a+"}>6a+</MenuItem>
+                  <MenuItem value={"6b"}>6b</MenuItem>
+                  <MenuItem value={"6b+"}>6b+</MenuItem>
+                  <MenuItem value={"6c"}>6c</MenuItem>
+                  <MenuItem value={"6c+"}>6c+</MenuItem>
+                  <MenuItem value={"7a"}>7a</MenuItem>
+                  <MenuItem value={"7a+"}>7a+</MenuItem>
+                  <MenuItem value={"7b"}>7b</MenuItem>
+                  <MenuItem value={"7b+"}>7b+</MenuItem>
+                  <MenuItem value={"7c"}>7c</MenuItem>
+                  <MenuItem value={"7c+"}>7c+</MenuItem>
+                  <MenuItem value={"8a"}>8a</MenuItem>
+                  <MenuItem value={"8a+"}>8a+</MenuItem>
+                  <MenuItem value={"8b"}>8b</MenuItem>
+                  <MenuItem value={"8b+"}>8b+</MenuItem>
+                  <MenuItem value={"8c"}>8c</MenuItem>
+                  <MenuItem value={"8c+"}>8c+</MenuItem>
+                  <MenuItem value={"9a"}>9a</MenuItem>
+                  <MenuItem value={"9a+"}>9a+</MenuItem>
+                  <MenuItem value={"9b"}>9b</MenuItem>
+                  <MenuItem value={"9b+"}>9b+</MenuItem>
+                  <MenuItem value={"9c"}>9c</MenuItem>
+                
+              </TextField>
+              <TextField sx={{ mt: 2 }}
                 margin="normal"
                 required
                 fullWidth
@@ -156,6 +194,8 @@ export const Register = () => {
                 name="altura"
                 autoComplete="altura"
                 autoFocus
+                type="number"
+                InputProps={{ inputProps: { min: 0} }}
                 onChange={changed}
               />
               <TextField
@@ -167,6 +207,9 @@ export const Register = () => {
                 name="peso"
                 autoComplete="peso"
                 autoFocus
+                
+                type="number"
+                InputProps={{ inputProps: { min: 0} }}
                 onChange={changed}
               />
               <TextField
@@ -177,29 +220,29 @@ export const Register = () => {
                 label="Envergadura (en cm)"
                 name="envergadura"
                 autoComplete="envergadura"
+                type="number"
                 autoFocus
+                InputProps={{ inputProps: { min: 0} }}
                 onChange={changed}
               />
               {saved == "error" ? (
-                <strong
-                  style={{ color: "#C04000" }}
-                  className="alert alert-error"
-                >
-                  Usuario no registrado
-                </strong>
+                <Alert severity="error">{message}</Alert>
+               
               ) : (
                 ""
               )}
               {saved == "saved" ? (
                 <strong
-                  style={{ color: "#C04000" }}
-                  className="alert alert-error"
+                  style={{ color: "#1e8501" }}
+                  className="alert alert-success"
                 >
                   Usuario registrado Correctamente
                 </strong>
               ) : (
                 ""
               )}
+              <Typography  variant = "body2" color="text.secondary"
+      >Los campos marcados con * son necesarios</Typography>
               <Button
                 type="submit"
                 fullWidth
