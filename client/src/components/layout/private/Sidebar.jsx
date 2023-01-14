@@ -1,46 +1,55 @@
 import React from "react";
-import { Global } from "../../../helpers/Global";
-import {useAuth} from "../../../hooks/useAuth";
-import avatar from "../../../assets/img/user.png";
+import { useAuth } from "../../../hooks/useAuth";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import Toolbar from "@mui/material/Toolbar";
+import LogoutIcon from "@mui/icons-material/Logout";
+
+const drawerWidth = 240;
 
 const Sidebar = () => {
-  
-  const {auth} = useAuth();
+  const { auth } = useAuth();
 
   console.log("auth", auth);
-  
+
   return (
-    <aside className="layout__aside">
-      <header className="aside__header">
-        <h1 className="aside__title">Hola, {auth.nombre}</h1>
-      </header>
-
-      <div className="aside__container">
-        <div className="aside__profile-info">
-          <div className="profile-info__general-info">
-            <div className="general-info__container-avatar">
-              {auth.image != "default.png" && <img src={Global.url + "user/avatar/" + auth.image} className="container-avatar__img" alt="Foto de perfil"/>}
-              {auth.image == "default.png" && <img src={avatar} className="container-avatar__img" alt="Foto de perfil"/>}
-              
-            </div>
-
-            <div className="general-info__container-names">
-              <a href="#" className="container-names__name">
-                {auth.nombre} {auth.apellido}
-              </a>
-              <p className="container-names__nickname">{auth.user}</p>
-            </div>
-          </div>
-
-          
-        </div>
-
-        <div className="aside__container-form">
-          <form className="container-form__form-post">
-          </form>
-        </div>
-      </div>
-    </aside>
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+      }}
+    >
+      <Toolbar />
+      <Box sx={{ paddingTop: 2 }}>
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton to="/social/results">
+              <ListItemText primary="Resultados Test 9C" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton to="/social/test9c">
+              <ListItemText primary="Nuevo Test 9C" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </Box>
+      <Box sx={{ position: "absolute", width: "240", bottom: 0 }}>
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton to="/social/logout">
+              <LogoutIcon></LogoutIcon>
+              <ListItemText primary="Logout" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </Box>
+    </Drawer>
   );
 };
 

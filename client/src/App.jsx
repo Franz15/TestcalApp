@@ -1,11 +1,12 @@
-import {Routing} from './router/Routing';
+import { Routing } from "./router/Routing";
+import AppThemeProvider from "./assets/theme/Theme";
 
 function App() {
   return (
     <div className="layout">
-      
-        <Routing/>
-      
+      <AppThemeProvider>
+        <Routing />
+      </AppThemeProvider>
     </div>
   );
 }
