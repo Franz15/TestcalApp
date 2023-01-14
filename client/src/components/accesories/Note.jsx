@@ -10,7 +10,7 @@ const Note = (props) => {
       {...props}
     >
       {
-        "-TestcalApp 0.0.1- en desarrollo, la maquetación y estilo puede variar drásticamente en la versión final. Las funcionalidades no están completamente desarrolladas todavía."
+        "-TestcalApp 1.0.0- "
       }
       {"Javier Vallinas, TFG DAM ITEP "}
       {new Date().getFullYear()}

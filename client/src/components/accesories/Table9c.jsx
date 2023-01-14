@@ -33,6 +33,7 @@ const Result = (props) => (
     <TableCell align="center">
       <Button
         variant="outlined"
+        color="secondary"
         onClick={() => {
           props.deleteResult(props.result._id), window.location.reload(false);
         }}

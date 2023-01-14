@@ -55,7 +55,7 @@ export function Test9c() {
     slidesToScroll: 1,
   };
 
-  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     let puntos1 = Test1Test2(test1Peso, pesoCorp);
@@ -156,12 +156,12 @@ export function Test9c() {
       padding={3}
       style={{ minHeight: "100vh" }}
     >
-      <Stepper activeStep={activeStep}>
+      <Stepper activeStep={activeStep} >
         {steps.map((label) => {
           const stepProps = {};
           const labelProps = {};
           return (
-            <Step key={label} {...stepProps}>
+            <Step key={label} {...stepProps} >
               <StepLabel {...labelProps}>{label}</StepLabel>
             </Step>
           );
@@ -236,12 +236,13 @@ export function Test9c() {
                     20mm con el mayor lastre que puedas. Escribe aquí por favor
                     qué lastre has utilizado (si no pones nada serán 0kg)
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Introduce el peso de tu suspensión
+                  <Typography sx={{ml: 20, mt: 2, mb: 1 }} color="text.secondary">
+                  Introduce el peso de tu suspensión
                   </Typography>
+                  
 
                   <Input
-                    sx={{ ml: 30, mt: 2, mb: 1 }}
+                    sx={{ ml: 20, mt: 2, mb: 1 }}
                     type="number"
                     id="test1Peso"
                     onChange={handleChange1}
@@ -263,7 +264,7 @@ export function Test9c() {
                 }}
               >
                 <Button
-                  color="inherit"
+                  color="secondary"
                   disabled={activeStep === 0}
                   onClick={handleBack}
                   sx={{ mr: 1 }}
@@ -302,12 +303,13 @@ export function Test9c() {
                     lastre que puedas. Escribe aquí por favor qué lastre has
                     utilizado (si no pones nada serán 0kg)
                   </Typography>
-                  <Typography sx={{ mt: 2, mb: 1 }}>
+                  <Typography sx={{ml: 20, mt: 2, mb: 1 }} color="text.secondary">
                     Introduce el resultado de tu dominada lastrada
                   </Typography>
 
                   <Input
-                    sx={{ ml: 30, mt: 2, mb: 1 }}
+                    sx={{ ml: 20, mt: 2, mb: 1 }}
+                    type="number"
                     id="test2Tiempo"
                     onChange={handleChange2}
                     value={test2Peso}
@@ -320,7 +322,7 @@ export function Test9c() {
 
               <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                 <Button
-                  color="inherit"
+                  color="secondary"
                   disabled={activeStep === 0}
                   onClick={handleBack}
                   sx={{ mr: 1 }}
@@ -378,12 +380,15 @@ export function Test9c() {
                     estiradas, o, si no puedes, con las piernas dobladas, no hay
                     problema.
                   </Typography>
-
+                  <Typography sx={{ ml: 20, mt: 2, mb: 1 }} color="text.secondary">
+                  Introduce el tiempo que has aguantado (en segundos)
+                  </Typography>
                   <Input
-                    sx={{ ml: 30, mt: 2, mb: 1 }}
+                    sx={{ ml: 20, mt: 2, mb: 1 }}
                     id="test3Tiempo"
                     onChange={handleChange3}
                     value={test3Tiempo}
+                    InputProps={{ inputProps: { min: 0} }}
                     endAdornment={
                       <InputAdornment position="end">s</InputAdornment>
                     }
@@ -399,6 +404,7 @@ export function Test9c() {
                       name="controlled-radio-buttons-group"
                       value={variante}
                       onChange={handleChangeVariante}
+                      sx={{color:"text.secondary"}}
                     >
                       <FormControlLabel
                         value="Rodillas Dobladas"
@@ -422,7 +428,7 @@ export function Test9c() {
 
               <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                 <Button
-                  color="inherit"
+                  color="secondary"
                   disabled={activeStep === 0}
                   onClick={handleBack}
                   sx={{ mr: 1 }}
@@ -463,16 +469,18 @@ export function Test9c() {
                   puedes liberar una o moverlas). Escribe aquí por favor cuál ha
                   sido tu tiempo
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Introduce el peso de tu suspensión
-                </Typography>
+                <Typography sx={{ml: 20, mt: 2, mb: 1 }} color="text.secondary">
+                Introduce el peso de tu suspensión
+                  </Typography>
+                
 
                 <Input
-                  sx={{ ml: 30, mt: 2, mb: 1 }}
+                  sx={{ ml: 20, mt: 2, mb: 1 }}
                   type="number"
                   id="test1Peso"
                   onChange={handleChange4}
                   value={test4Tiempo}
+                  InputProps={{ inputProps: { min: 0} }}
                   endAdornment={
                     <InputAdornment position="end">s</InputAdornment>
                   }
@@ -481,7 +489,7 @@ export function Test9c() {
             </Card>
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
-                color="inherit"
+                color="secondary"
                 disabled={activeStep === 0}
                 onClick={handleBack}
                 sx={{ mr: 1 }}

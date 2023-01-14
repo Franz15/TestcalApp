@@ -12,6 +12,7 @@ import { Radar } from "react-chartjs-2";
 import getLastResult from "../../hooks/test9c/getLastResult";
 import { Box } from "@mui/material";
 import getAvgResult from "../../hooks/test9c/getAvgResult";
+import { useAuth } from '../../hooks/useAuth';
 
 ChartJS.register(
   RadialLinearScale,
@@ -24,8 +25,27 @@ ChartJS.register(
 export function RadarChart() {
   let userResult = getLastResult();
   let avgResult = getAvgResult();
-  console.log("userResult", userResult);
-  console.log("avgResult", avgResult);
+  const { auth } = useAuth();
+
+
+  let test1avg;
+  let test2avg;
+  let test3avg;
+  let test4avg;
+  console.log (auth.grado);
+
+  if (avgResult == 0){
+    test1avg = 0;
+    test2avg = 0;
+    test3avg = 0;
+    test4avg = 0;
+  } else{
+    test1avg = avgResult[0].test1avg;
+    test2avg = avgResult[0].test2avg;
+    test3avg = avgResult[0].test3avg;
+    test4avg = avgResult[0].test4avg;
+  }
+
   const data = {
     labels: [
       "Fuerza de dedos",
@@ -35,19 +55,19 @@ export function RadarChart() {
     ],
     datasets: [
       {
-        label: "Media de escaladores",
+        label: "Media de escaladores que escalan "+ auth.grado,
         data: [
-          avgResult.test1avg,
-          avgResult.test2avg,
-          avgResult.test3avg,
-          avgResult.test4avg,
+          test1avg,
+          test2avg,
+          test3avg,
+          test4avg,
         ],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
       },
       {
-        label: "Usuario",
+        label: auth.nombre,
         data: [
           userResult.test1Punt,
           userResult.test2Punt,

@@ -26,9 +26,10 @@ export default function getLastResult() {
 
     const data = await request.json();
     if (data.status == "success") {
-      if (data.result == null) {
-        setResult(0);
+      if (data.result != null) {
+        setResult(data.result);
       } else {
+        etResult(0);
       }
     } else {
       console.log("errorrrr");

@@ -24,15 +24,15 @@ export default function getLastResult() {
 
     const data = await request.json();
     if (data.status == "success") {
-      if (data.result == null) {
-        setResult(0);
-      } else {
+      if (data.result != null) {
         setResult(data.result);
+      } else {
+        setResult(0);
       }
     } else {
       console.log("errorrrr");
     }
   };
-
+  console.log("Last Result", result);
   return result;
 }

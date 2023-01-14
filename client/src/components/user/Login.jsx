@@ -15,13 +15,15 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import AppThemeProvider from "../../assets/theme/Theme";
 import background from "../../assets/img/backgrounds/background3.jpg";
 import Note from "../accesories/Note";
+import Alert from '@mui/material/Alert';
 
 export const Login = () => {
   const { form, changed } = useForm({});
   const [saved, setSaved] = useState("not_sended");
-
+  const [message,setMessage] = useState("");
   const { setAuth } = useAuth();
 
   const theme = createTheme();
@@ -62,10 +64,13 @@ export const Login = () => {
 
       //Redirección
       window.location.reload();
-    } else setSaved("error");
+    } else {
+      setSaved("error");
+      setMessage(data.message);
+    };
   };
   return (
-    <ThemeProvider theme={theme}>
+    <AppThemeProvider>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
@@ -93,9 +98,10 @@ export const Login = () => {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "rgb(225,179,69)" }}>
-              <LockOutlinedIcon />
-            </Avatar>
+           <Avatar
+            src="../../../../testcalapp.png"
+            sx={{ width: 100, height: 100 }}
+          />
             <Typography component="h1" variant="h5">
               Login
             </Typography>
@@ -142,23 +148,18 @@ export const Login = () => {
 
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="#" variant="body2" color="secondary">
                     ¿Has olvidado tu contraseña?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/registro" variant="body2">
+                  <Link href="/registro" variant="body2" color="secondary">
                     {"¿No tienes cuenta?, regístrate aquí"}
                   </Link>
                 </Grid>
               </Grid>
               {saved == "error" ? (
-                <strong
-                  style={{ color: "#C04000" }}
-                  className="alert alert-error"
-                >
-                  Email o contraseña incorrectos
-                </strong>
+                <Alert severity="error">{message}</Alert>
               ) : (
                 ""
               )}
@@ -167,6 +168,6 @@ export const Login = () => {
           <Note />
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </AppThemeProvider>
   );
 };

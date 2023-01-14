@@ -11,6 +11,7 @@ import { Test9c } from "../components/tests/test9c/Test9c";
 import { Config } from "../components/user/Config";
 import DeleteTest9c from "../components/tests/test9c/DeleteTest9c";
 import Dashboard from "../components/layout/private/Dashboard";
+import Error404 from "../components/accesories/Error404";
 
 export const Routing = () => {
   return (
@@ -35,13 +36,8 @@ export const Routing = () => {
 
           <Route
             path="*"
-            element={
-              <>
-                <p>
-                  <h1> Error 404</h1>
-                  <Link to="/">Volver al inicio</Link>
-                </p>
-              </>
+            element={<Error404/>
+              
             }
           />
         </Routes>

@@ -17,7 +17,7 @@ import background from "../../assets/img/backgrounds/background2.jpg";
 import Note from "../accesories/Note";
 import MenuItem from "@mui/material/MenuItem";
 import Alert from '@mui/material/Alert';
-
+import AppThemeProvider from "../../assets/theme/Theme";
 export const Register = () => {
   const { form, changed } = useForm({});
   const [saved, setSaved] = useState("not_sended");
@@ -55,7 +55,7 @@ export const Register = () => {
     }
   };
   return (
-    <ThemeProvider theme={theme}>
+    <AppThemeProvider>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
@@ -76,16 +76,17 @@ export const Register = () => {
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
-              my: 3,
+              my: 0,
               mx: 4,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "rgb(225,179,69)" }}>
-              <LockOutlinedIcon />
-            </Avatar>
+            <Avatar
+            src="../../../../testcalapp.png"
+            sx={{ width: 100, height: 100 }}
+          />
             <Typography component="h1" variant="h5">
               Registro
             </Typography>
@@ -253,7 +254,7 @@ export const Register = () => {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link href="/login" variant="body2">
+                  <Link href="/login" variant="body2" color="secondary">
                     {"¿Ya tienes una cuenta? Haz login aqui"}
                   </Link>
                 </Grid>
@@ -263,6 +264,6 @@ export const Register = () => {
           <Note />
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </AppThemeProvider>
   );
 };

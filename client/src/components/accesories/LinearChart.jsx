@@ -80,28 +80,28 @@ export function LinearChart() {
           datasets: [
             {
               data: userData.map((item) => item.test1Peso),
-              label: "Test 1",
+              label: "Fuerza de Dedos",
               borderColor: "rgb(198, 33, 0)",
               backgroundColor: "rgb(198, 33, 0, 0.5)",
               fill: false,
             },
             {
               data: userData.map((item) => item.test2Peso),
-              label: "Test 2",
+              label: "Fuerza de Tracción",
               borderColor: "rgb(0, 66, 198)",
               backgroundColor: "rgba(0, 66, 198, 0.5)",
               fill: false,
             },
             {
               data: userData.map((item) => item.test3Tiempo),
-              label: "Test 3",
+              label: "Fuerza Abdominal",
               borderColor: "rgb(0, 158, 26)",
               backgroundColor: "rgba(0, 158, 26, 0.5)",
               fill: false,
             },
             {
               data: userData.map((item) => item.test4Tiempo),
-              label: "Test 4",
+              label: "Fuerza de agarre",
               borderColor: "rgb(105, 0, 158)",
               backgroundColor: "rgba(105, 0, 158, 0.5)",
               fill: false,
