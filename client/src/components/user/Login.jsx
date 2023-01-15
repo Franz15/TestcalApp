@@ -12,21 +12,17 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AppThemeProvider from "../../assets/theme/Theme";
 import background from "../../assets/img/backgrounds/background3.jpg";
 import Note from "../accesories/Note";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 
 export const Login = () => {
   const { form, changed } = useForm({});
   const [saved, setSaved] = useState("not_sended");
-  const [message,setMessage] = useState("");
+  const [message, setMessage] = useState("");
   const { setAuth } = useAuth();
-
-  const theme = createTheme();
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -67,7 +63,7 @@ export const Login = () => {
     } else {
       setSaved("error");
       setMessage(data.message);
-    };
+    }
   };
   return (
     <AppThemeProvider>
@@ -98,10 +94,10 @@ export const Login = () => {
               alignItems: "center",
             }}
           >
-           <Avatar
-            src="../../../../testcalapp.png"
-            sx={{ width: 100, height: 100 }}
-          />
+            <Avatar
+              src="../../../../testcalapp.png"
+              sx={{ width: 100, height: 100 }}
+            />
             <Typography component="h1" variant="h5">
               Login
             </Typography>

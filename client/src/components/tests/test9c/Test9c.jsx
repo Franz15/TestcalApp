@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
 import {
   Test1Test2,
   Test3,
@@ -54,8 +53,6 @@ export function Test9c() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
-
 
   const handleSubmit = async (e) => {
     let puntos1 = Test1Test2(test1Peso, pesoCorp);
@@ -156,12 +153,12 @@ export function Test9c() {
       padding={3}
       style={{ minHeight: "100vh" }}
     >
-      <Stepper activeStep={activeStep} >
+      <Stepper activeStep={activeStep}>
         {steps.map((label) => {
           const stepProps = {};
           const labelProps = {};
           return (
-            <Step key={label} {...stepProps} >
+            <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{label}</StepLabel>
             </Step>
           );
@@ -236,10 +233,12 @@ export function Test9c() {
                     20mm con el mayor lastre que puedas. Escribe aquí por favor
                     qué lastre has utilizado (si no pones nada serán 0kg)
                   </Typography>
-                  <Typography sx={{ml: 20, mt: 2, mb: 1 }} color="text.secondary">
-                  Introduce el peso de tu suspensión
+                  <Typography
+                    sx={{ ml: 20, mt: 2, mb: 1 }}
+                    color="text.secondary"
+                  >
+                    Introduce el peso de tu suspensión
                   </Typography>
-                  
 
                   <Input
                     sx={{ ml: 20, mt: 2, mb: 1 }}
@@ -303,7 +302,10 @@ export function Test9c() {
                     lastre que puedas. Escribe aquí por favor qué lastre has
                     utilizado (si no pones nada serán 0kg)
                   </Typography>
-                  <Typography sx={{ml: 20, mt: 2, mb: 1 }} color="text.secondary">
+                  <Typography
+                    sx={{ ml: 20, mt: 2, mb: 1 }}
+                    color="text.secondary"
+                  >
                     Introduce el resultado de tu dominada lastrada
                   </Typography>
 
@@ -380,15 +382,18 @@ export function Test9c() {
                     estiradas, o, si no puedes, con las piernas dobladas, no hay
                     problema.
                   </Typography>
-                  <Typography sx={{ ml: 20, mt: 2, mb: 1 }} color="text.secondary">
-                  Introduce el tiempo que has aguantado (en segundos)
+                  <Typography
+                    sx={{ ml: 20, mt: 2, mb: 1 }}
+                    color="text.secondary"
+                  >
+                    Introduce el tiempo que has aguantado (en segundos)
                   </Typography>
                   <Input
                     sx={{ ml: 20, mt: 2, mb: 1 }}
                     id="test3Tiempo"
                     onChange={handleChange3}
                     value={test3Tiempo}
-                    InputProps={{ inputProps: { min: 0} }}
+                    InputProps={{ inputProps: { min: 0 } }}
                     endAdornment={
                       <InputAdornment position="end">s</InputAdornment>
                     }
@@ -404,7 +409,7 @@ export function Test9c() {
                       name="controlled-radio-buttons-group"
                       value={variante}
                       onChange={handleChangeVariante}
-                      sx={{color:"text.secondary"}}
+                      sx={{ color: "text.secondary" }}
                     >
                       <FormControlLabel
                         value="Rodillas Dobladas"
@@ -469,10 +474,12 @@ export function Test9c() {
                   puedes liberar una o moverlas). Escribe aquí por favor cuál ha
                   sido tu tiempo
                 </Typography>
-                <Typography sx={{ml: 20, mt: 2, mb: 1 }} color="text.secondary">
-                Introduce el peso de tu suspensión
-                  </Typography>
-                
+                <Typography
+                  sx={{ ml: 20, mt: 2, mb: 1 }}
+                  color="text.secondary"
+                >
+                  Introduce el peso de tu suspensión
+                </Typography>
 
                 <Input
                   sx={{ ml: 20, mt: 2, mb: 1 }}
@@ -480,7 +487,7 @@ export function Test9c() {
                   id="test1Peso"
                   onChange={handleChange4}
                   value={test4Tiempo}
-                  InputProps={{ inputProps: { min: 0} }}
+                  InputProps={{ inputProps: { min: 0 } }}
                   endAdornment={
                     <InputAdornment position="end">s</InputAdornment>
                   }

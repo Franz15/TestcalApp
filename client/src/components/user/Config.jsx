@@ -8,12 +8,9 @@ import { Avatar, IconButton } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Note from "../accesories/Note";
 import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Alert from '@mui/material/Alert';
-import Link from "@mui/material/Link";
 
 export const Config = () => {
   const { auth, setAuth } = useAuth();

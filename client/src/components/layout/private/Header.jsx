@@ -1,9 +1,8 @@
 import React from "react";
-import { Nav } from "./Nav";
 import AppBar from "@mui/material/AppBar";
 import { Global } from "../../../helpers/Global";
 import Toolbar from "@mui/material/Toolbar";
-import { Avatar, Button, IconButton, Tooltip } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
 import { useAuth } from "../../../hooks/useAuth";
 
 export const Header = () => {

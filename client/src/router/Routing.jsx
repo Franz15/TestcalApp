@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, BrowserRouter, Navigate, Link } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { PrivateLayout } from "../components/layout/private/PrivateLayout";
 import { PublicLayout } from "../components/layout/public/PublicLayout";
 import { Login } from "../components/user/Login";
@@ -34,12 +34,7 @@ export const Routing = () => {
             <Route path="borrar9c" element={<DeleteTest9c />} />
           </Route>
 
-          <Route
-            path="*"
-            element={<Error404/>
-              
-            }
-          />
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

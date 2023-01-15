@@ -10,22 +10,17 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import background from "../../assets/img/backgrounds/background2.jpg";
 import Note from "../accesories/Note";
 import MenuItem from "@mui/material/MenuItem";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 import AppThemeProvider from "../../assets/theme/Theme";
 export const Register = () => {
   const { form, changed } = useForm({});
   const [saved, setSaved] = useState("not_sended");
-  const [message,setMessage] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
-
-  const theme = createTheme();
-  
 
   const saveUser = async (e) => {
     //Prevenir actualización de la pantalla
@@ -47,8 +42,8 @@ export const Register = () => {
     if (data.status == "success") {
       setSaved("saved");
       setMessage(data.message);
-       //Navigate al login
-    navigate("/login");
+      //Navigate al login
+      navigate("/login");
     } else {
       setSaved("error");
       setMessage(data.message);
@@ -84,9 +79,9 @@ export const Register = () => {
             }}
           >
             <Avatar
-            src="../../../../testcalapp.png"
-            sx={{ width: 100, height: 100 }}
-          />
+              src="../../../../testcalapp.png"
+              sx={{ width: 100, height: 100 }}
+            />
             <Typography component="h1" variant="h5">
               Registro
             </Typography>
@@ -146,47 +141,46 @@ export const Register = () => {
                 label="Contraseña"
                 type="password"
                 id="password"
-                
                 onChange={changed}
               />
 
-<TextField
-          required
-          fullWidth
-          margin="normal"
-          id="standard-select-currency"
-          select
-          label="Máximo grado encadenado en roca"
-          defaultValue="IV"
-        >
-                  <MenuItem value={"IV"}>IV</MenuItem>
-                  <MenuItem value={"V"}>V</MenuItem>
-                  <MenuItem value={"6a"}>6a</MenuItem>
-                  <MenuItem value={"6a+"}>6a+</MenuItem>
-                  <MenuItem value={"6b"}>6b</MenuItem>
-                  <MenuItem value={"6b+"}>6b+</MenuItem>
-                  <MenuItem value={"6c"}>6c</MenuItem>
-                  <MenuItem value={"6c+"}>6c+</MenuItem>
-                  <MenuItem value={"7a"}>7a</MenuItem>
-                  <MenuItem value={"7a+"}>7a+</MenuItem>
-                  <MenuItem value={"7b"}>7b</MenuItem>
-                  <MenuItem value={"7b+"}>7b+</MenuItem>
-                  <MenuItem value={"7c"}>7c</MenuItem>
-                  <MenuItem value={"7c+"}>7c+</MenuItem>
-                  <MenuItem value={"8a"}>8a</MenuItem>
-                  <MenuItem value={"8a+"}>8a+</MenuItem>
-                  <MenuItem value={"8b"}>8b</MenuItem>
-                  <MenuItem value={"8b+"}>8b+</MenuItem>
-                  <MenuItem value={"8c"}>8c</MenuItem>
-                  <MenuItem value={"8c+"}>8c+</MenuItem>
-                  <MenuItem value={"9a"}>9a</MenuItem>
-                  <MenuItem value={"9a+"}>9a+</MenuItem>
-                  <MenuItem value={"9b"}>9b</MenuItem>
-                  <MenuItem value={"9b+"}>9b+</MenuItem>
-                  <MenuItem value={"9c"}>9c</MenuItem>
-                
+              <TextField
+                required
+                fullWidth
+                margin="normal"
+                id="standard-select-currency"
+                select
+                label="Máximo grado encadenado en roca"
+                defaultValue="IV"
+              >
+                <MenuItem value={"IV"}>IV</MenuItem>
+                <MenuItem value={"V"}>V</MenuItem>
+                <MenuItem value={"6a"}>6a</MenuItem>
+                <MenuItem value={"6a+"}>6a+</MenuItem>
+                <MenuItem value={"6b"}>6b</MenuItem>
+                <MenuItem value={"6b+"}>6b+</MenuItem>
+                <MenuItem value={"6c"}>6c</MenuItem>
+                <MenuItem value={"6c+"}>6c+</MenuItem>
+                <MenuItem value={"7a"}>7a</MenuItem>
+                <MenuItem value={"7a+"}>7a+</MenuItem>
+                <MenuItem value={"7b"}>7b</MenuItem>
+                <MenuItem value={"7b+"}>7b+</MenuItem>
+                <MenuItem value={"7c"}>7c</MenuItem>
+                <MenuItem value={"7c+"}>7c+</MenuItem>
+                <MenuItem value={"8a"}>8a</MenuItem>
+                <MenuItem value={"8a+"}>8a+</MenuItem>
+                <MenuItem value={"8b"}>8b</MenuItem>
+                <MenuItem value={"8b+"}>8b+</MenuItem>
+                <MenuItem value={"8c"}>8c</MenuItem>
+                <MenuItem value={"8c+"}>8c+</MenuItem>
+                <MenuItem value={"9a"}>9a</MenuItem>
+                <MenuItem value={"9a+"}>9a+</MenuItem>
+                <MenuItem value={"9b"}>9b</MenuItem>
+                <MenuItem value={"9b+"}>9b+</MenuItem>
+                <MenuItem value={"9c"}>9c</MenuItem>
               </TextField>
-              <TextField sx={{ mt: 2 }}
+              <TextField
+                sx={{ mt: 2 }}
                 margin="normal"
                 required
                 fullWidth
@@ -196,7 +190,7 @@ export const Register = () => {
                 autoComplete="altura"
                 autoFocus
                 type="number"
-                InputProps={{ inputProps: { min: 0} }}
+                InputProps={{ inputProps: { min: 0 } }}
                 onChange={changed}
               />
               <TextField
@@ -208,9 +202,8 @@ export const Register = () => {
                 name="peso"
                 autoComplete="peso"
                 autoFocus
-                
                 type="number"
-                InputProps={{ inputProps: { min: 0} }}
+                InputProps={{ inputProps: { min: 0 } }}
                 onChange={changed}
               />
               <TextField
@@ -223,12 +216,11 @@ export const Register = () => {
                 autoComplete="envergadura"
                 type="number"
                 autoFocus
-                InputProps={{ inputProps: { min: 0} }}
+                InputProps={{ inputProps: { min: 0 } }}
                 onChange={changed}
               />
               {saved == "error" ? (
                 <Alert severity="error">{message}</Alert>
-               
               ) : (
                 ""
               )}
@@ -242,8 +234,9 @@ export const Register = () => {
               ) : (
                 ""
               )}
-              <Typography  variant = "body2" color="text.secondary"
-      >Los campos marcados con * son necesarios</Typography>
+              <Typography variant="body2" color="text.secondary">
+                Los campos marcados con * son necesarios
+              </Typography>
               <Button
                 type="submit"
                 fullWidth

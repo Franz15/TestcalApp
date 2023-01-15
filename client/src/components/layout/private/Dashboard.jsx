@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Box, Card, Grid, Typography } from "@mui/material";
+import React from "react";
+import { Box, Card, Grid } from "@mui/material";
 import { Table9c } from "../../accesories/Table9c";
 import Ratings from "../../accesories/Ratings";
 import { RadarChart } from "../../accesories/RadarChart";

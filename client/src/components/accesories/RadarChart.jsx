@@ -12,7 +12,7 @@ import { Radar } from "react-chartjs-2";
 import getLastResult from "../../hooks/test9c/getLastResult";
 import { Box } from "@mui/material";
 import getAvgResult from "../../hooks/test9c/getAvgResult";
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from "../../hooks/useAuth";
 
 ChartJS.register(
   RadialLinearScale,
@@ -27,19 +27,18 @@ export function RadarChart() {
   let avgResult = getAvgResult();
   const { auth } = useAuth();
 
-
   let test1avg;
   let test2avg;
   let test3avg;
   let test4avg;
-  console.log (auth.grado);
+  console.log(auth.grado);
 
-  if (avgResult == 0){
+  if (avgResult == 0) {
     test1avg = 0;
     test2avg = 0;
     test3avg = 0;
     test4avg = 0;
-  } else{
+  } else {
     test1avg = avgResult[0].test1avg;
     test2avg = avgResult[0].test2avg;
     test3avg = avgResult[0].test3avg;
@@ -55,13 +54,8 @@ export function RadarChart() {
     ],
     datasets: [
       {
-        label: "Media de escaladores que escalan "+ auth.grado,
-        data: [
-          test1avg,
-          test2avg,
-          test3avg,
-          test4avg,
-        ],
+        label: "Media de escaladores que escalan " + auth.grado,
+        data: [test1avg, test2avg, test3avg, test4avg],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
