@@ -57,16 +57,13 @@ const lastResult = (req, res) => {
 const saveResults = (req, res) => {
   //Recoger datos del body
   const params = req.body;
-  console.log("params", params);
   //Si no llegan datos, dar respuesta negativa
 
   //Crear y rellenar el objeto del modelo
   let newResult = new Result(params);
-  console.log("newResult", newResult);
   //Guardar objeto en BBDD
   newResult.save((error, resultStored) => {
     resultStored = newResult;
-    console.log("resultStored", resultStored);
     if (error || !resultStored)
       return res
         .status(500)
@@ -136,7 +133,6 @@ const remove = (req, res) => {
 const sameGrade = async (req, res) => {
   //Sacar el id de usuario
   const userGrade = req.user.grado;
-  console.log("Grado Api", userGrade);
 
   let grado = Result.find({ gradoDeclarado: userGrade });
 

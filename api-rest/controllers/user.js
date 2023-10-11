@@ -74,6 +74,7 @@ const register = (req, res) => {
     //Cifrar la contraseña
     let hashedPassword = await bcrypt.hash(params.password, 10);
     params.password = hashedPassword;
+    
     //Crear objeto de usuario
     let user_to_save = new User(params);
 

@@ -35,6 +35,7 @@ const UserSchema = Schema(
     },*/
     grado: {
       type: String,
+      required: true,
     },
     altura: {
       type: Number,

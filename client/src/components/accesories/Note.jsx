@@ -10,7 +10,7 @@ const Note = (props) => {
       align="center"
       {...props}
     >
-      {"-TestcalApp 1.0.0- "}
+      {"-TestcalApp 1.0.1- "}
       {"Javier Vallinas, TFG DAM ITEP "}
       {new Date().getFullYear()}
       {"."}

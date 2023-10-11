@@ -27,7 +27,6 @@ export const Register = () => {
     e.preventDefault();
     //recoger los datos del formulario
     let newUser = form;
-
     //Guardar usuario en el backend
     const request = await fetch(Global.url + "user/register", {
       method: "POST",
@@ -148,10 +147,12 @@ export const Register = () => {
                 required
                 fullWidth
                 margin="normal"
-                id="standard-select-currency"
+                id="grado"
+                name="grado"
                 select
                 label="Máximo grado encadenado en roca"
                 defaultValue="IV"
+                onChange={changed}
               >
                 <MenuItem value={"IV"}>IV</MenuItem>
                 <MenuItem value={"V"}>V</MenuItem>
