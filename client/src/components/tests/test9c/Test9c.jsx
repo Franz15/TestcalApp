@@ -478,7 +478,7 @@ export function Test9c() {
                   sx={{ ml: 20, mt: 2, mb: 1 }}
                   color="text.secondary"
                 >
-                  Introduce el peso de tu suspensión
+                  Introduce el tiempo que has aguantado (en segundos)
                 </Typography>
 
                 <Input
