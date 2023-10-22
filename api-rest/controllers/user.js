@@ -9,6 +9,9 @@ const User = require("../models/user");
 
 //Importar servicios
 const jwt = require("../services/jwt");
+const validate = require("../helpers/validate");
+const { v4: uuidv4 } = require("uuid");
+const { getTemplate, sendEmail } = require("../services/email");
 
 //Acciones de prueba
 const pruebaUser = (req, res) => {
@@ -22,6 +25,7 @@ const pruebaUser = (req, res) => {
 const register = (req, res) => {
   //Recoger Datos
   let params = req.body;
+
   //Comprobar que llegan (+validación)
   if (
     !params.nombre ||
@@ -35,68 +39,84 @@ const register = (req, res) => {
       message: "campos incompletos",
     });
   }
+  //Validación avanzada
+  validate(params);
 
   //Control usuarios duplicados
-  User.find(
-   
-      { email: params.email.toLowerCase() }
-    
-   
-  ).exec(async (error, users) => {
-    if (error)
-      return res
-        .status(500)
-        .json({ status: "error", message: "Error en la consulta" });
-
-    if (users && users.length >= 1) {
-      return res.status(412).send({
-        status: "error",
-        message: "El email introducido ya está registrado",
-      });
-      
-    }
-    User.find(
-        
-        { user: params.user.toLowerCase() },
-      ).exec(async (error, users) => {
+  User.find({ email: params.email.toLowerCase() }).exec(
+    async (error, users) => {
       if (error)
         return res
           .status(500)
           .json({ status: "error", message: "Error en la consulta" });
-  
+
       if (users && users.length >= 1) {
         return res.status(412).send({
           status: "error",
-          message: "El usuario ya existe",
-        });
-        
-      }
-    //Cifrar la contraseña
-    let hashedPassword = await bcrypt.hash(params.password, 10);
-    params.password = hashedPassword;
-    
-    //Crear objeto de usuario
-    let user_to_save = new User(params);
-
-    //Guardar usuario en la BBDD
-    user_to_save.save((error, userStored) => {
-      userStored = user_to_save;
-      if (error || !userStored)
-        return res
-          .status(500)
-          .send({ status: "error", message: "Error al guardar el usuario" });
-
-      if (userStored) {
-        //Devolver resultado
-        return res.status(200).json({
-          status: "success",
-          message: "Usuario registrado correctamente",
-          user: userStored,
+          message: "El email introducido ya está registrado",
         });
       }
-    });
-  });
-  })};
+      User.find({ user: params.user.toLowerCase() }).exec(
+        async (error, users) => {
+          if (error)
+            return res
+              .status(500)
+              .json({ status: "error", message: "Error en la consulta" });
+
+          if (users && users.length >= 1) {
+            return res.status(412).send({
+              status: "error",
+              message: "El usuario ya existe",
+            });
+          }
+
+          //Generar el código de usuario
+          const code = uuidv4();
+
+          //Cifrar la contraseña
+          let hashedPassword = await bcrypt.hash(params.password, 10);
+          params.password = hashedPassword;
+
+          //Crear objeto de usuario
+          let user_to_save = new User(params);
+          user_to_save.code = code;
+
+          //Guardar usuario en la BBDD
+          user_to_save.save((error, userStored) => {
+            userStored = user_to_save;
+
+            if (error || !userStored)
+              return res.status(500).send({
+                status: "error",
+                message: "Error al guardar el usuario",
+              });
+
+            if (userStored) {
+              let userCreated = userStored.toObject();
+              delete userCreated.password;
+
+              //Generar Token
+              const token = jwt.createToken({ userCreated });
+
+              //Obtener un template
+              const template = getTemplate({ userCreated, token });
+
+              //Enviar emali
+              sendEmail(userCreated, "Verificar email", template);
+
+              //Devolver resultado
+              return res.status(200).json({
+                status: "success",
+                message: "Usuario registrado correctamente",
+                user: userCreated,
+              });
+            }
+          });
+        }
+      );
+    }
+  );
+};
 
 //Login
 const login = (req, res) => {
@@ -303,10 +323,10 @@ const upload = (req, res) => {
 const avatar = (req, res) => {
   //Sacar el parámetro de la URL
   const file = req.params.file;
-  console.log(file);
+
   //Montar el path real de la imagen
   const filePath = "./uploads/avatars/" + file;
-  console.log(filePath);
+
   //Comprobar que existe
   fs.stat(filePath, (error, exists) => {
     if (!exists)

@@ -20,7 +20,7 @@ export default function Dashboard() {
             <RadarChart />{" "}
           </Card>
         </Grid>
-        <Grid item xs={8} sm={8} md={8}>
+        <Grid item xs={12} sm={8} md={8}>
           <Card sx={{ maxHeight: "475px", flexGrow: 1, p: 3 }}>
             <Table9c />{" "}
           </Card>
