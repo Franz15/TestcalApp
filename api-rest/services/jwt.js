@@ -28,7 +28,19 @@ const createToken = (user) => {
   return jwt.encode(payload, secret);
 };
 
+const getTokenData = (token) => {
+  let data = null;
+  jwt.verify(token, secret, (err, decoded) => {
+    if (err) {
+      console.log("Error al recuperar datos del token");
+    } else {
+      data = decoded;
+    }
+  });
+};
+
 module.exports = {
   secret,
   createToken,
+  getTokenData,
 };
