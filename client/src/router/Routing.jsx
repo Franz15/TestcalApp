@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { PrivateLayout } from "../components/layout/private/PrivateLayout";
 import { PublicLayout } from "../components/layout/public/PublicLayout";
 import { Login } from "../components/user/Login";
+import { Recover } from "../components/user/Recover";
 import { Logout } from "../components/user/Logout";
 import { Register } from "../components/user/Register";
 import { Results } from "../components/result/Results";
@@ -22,6 +23,7 @@ export const Routing = () => {
             <Route index element={<Login />} />
             <Route path="login" element={<Login />} />
             <Route path="registro" element={<Register />} />
+            <Route path="recuperacion" element={<Recover />} />
           </Route>
 
           <Route path="/social" element={<PrivateLayout />}>

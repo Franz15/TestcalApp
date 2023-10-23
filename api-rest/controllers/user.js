@@ -11,7 +11,11 @@ const User = require("../models/user");
 const jwt = require("../services/jwt");
 const validate = require("../helpers/validate");
 const { v4: uuidv4 } = require("uuid");
-const { getTemplate, sendEmail } = require("../services/email");
+const {
+  getTemplateVerificacion,
+  getTemplateRecover,
+  sendEmail,
+} = require("../services/email");
 
 //Acciones de prueba
 const pruebaUser = (req, res) => {
@@ -92,23 +96,20 @@ const register = (req, res) => {
               });
 
             if (userStored) {
-              let userCreated = userStored.toObject();
-              delete userCreated.password;
-
               //Generar Token
-              const token = jwt.createToken({ userCreated });
+              const token = jwt.createToken({ userStored });
 
               //Obtener un template
-              const template = getTemplate({ userCreated, token });
+              const template = getTemplateVerificacion({ userStored, token });
 
-              //Enviar emali
-              sendEmail(userCreated, "Verificar email", template);
+              //Enviar email
+              sendEmail(userStored, "Verificar email", template);
 
               //Devolver resultado
               return res.status(200).json({
                 status: "success",
                 message: "Usuario registrado correctamente",
-                user: userCreated,
+                user: userStored,
               });
             }
           });
@@ -116,6 +117,62 @@ const register = (req, res) => {
       );
     }
   );
+};
+
+//Confirmar email
+const confirm = async (req, res) => {
+  try {
+    //Obtener el token
+    const { token } = req.params;
+
+    //Verificar los datos
+    let data = jwt.getTokenData(token);
+
+    if (data === null) {
+      return res.json({
+        success: false,
+        msg: "Error al recuperar datos del usuario",
+      });
+    }
+
+    const { email, code } = data;
+
+    //Verificar que el usuario existe
+    const user = await User.findOne({ email });
+    console.log("USER ", user);
+    console.log("CODE ", code);
+
+    if (user === null) {
+      return res.json({
+        success: false,
+        msg: "Usuario no existe",
+      });
+    }
+
+    //Verificar el código del usuario
+    if (code !== user.code) {
+      // return res.redirect ()
+      return res.json({
+        success: false,
+        msg: "Error código usuario",
+      });
+    }
+
+  /*  //Verificar el código del usuario
+    if (user.status === "VERIFIED" ) {
+      return res.json({
+        success: false,
+        msg: "Usuario ya verificado",
+      });
+    }*/
+    //Actualizar el usuario
+    user.status = "VERIFIED";
+    await user.save();
+
+    //Redireccionar a la página de confirmación
+    console.log("EXITO");
+     res. send ('<h2>Email verificado con éxito</h2>')
+  } catch {}
 };
 
 //Login
@@ -145,6 +202,7 @@ const login = (req, res) => {
         message: "Contraseña incorrecta",
       });
     }
+    
     //Recuperar Token
     const token = jwt.createToken(user);
 
@@ -159,6 +217,38 @@ const login = (req, res) => {
       },
       token,
     });
+  });
+};
+
+//Recuperar contraseña
+const recover = (req, res) => {
+  let params = req.params;
+
+  if (!params.email) {
+    return res.status(400).send({
+      status: "error",
+      message: "Faltan datos ",
+    });
+  }
+
+  //Buscar si existe en BBDD
+  User.findOne({ email: params.email.toLowerCase() }).exec((error, user) => {
+    if (error || !user)
+      return res
+        .status(404)
+        .send({ status: "error", message: "No existe este usuario" });
+  });
+
+  //Obtener un template
+  const template = getTemplateRecover({ email: params.email.toLowerCase() });
+
+  //Enviar email
+  sendEmail(params, "Recuperar contraseña", template);
+
+  //Devolver resultado
+  return res.status(200).json({
+    status: "success",
+    message: "Email enviado correctamente",
   });
 };
 
@@ -342,6 +432,8 @@ const avatar = (req, res) => {
 module.exports = {
   pruebaUser,
   register,
+  confirm,
+  recover,
   login,
   profileUser,
   update,
