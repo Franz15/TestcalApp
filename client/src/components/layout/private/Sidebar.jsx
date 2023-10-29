@@ -1,5 +1,4 @@
 import React from "react";
-import { useAuth } from "../../../hooks/useAuth";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -12,13 +11,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 const drawerWidth = 240;
 
 const Sidebar = () => {
-  const { auth } = useAuth();
-
   return (
     <Drawer
       variant="permanent"
       sx={{
-        width: 120,
+        width: drawerWidth,
         flexShrink: 0,
       }}
     >

@@ -25,10 +25,8 @@ export function Puntuaciones(
     parseInt(puntuacion4);
   if (puntuacion === 40) {
     grado = "9c";
-    console.log(grado);
   } else if (puntuacion === 39) {
     grado = "9b+";
-    console.log(grado);
   } else if (puntuacion === 38 || puntuacion === 37) {
     grado = "9b";
   } else if (puntuacion === 36 || puntuacion === 35) {
@@ -70,7 +68,6 @@ export function Puntuaciones(
   } else {
     grado = "V";
   }
-  console.log("Puntuacion: ", puntuacion, "Grado: ", grado);
   return [puntuacion, grado];
 }
 
@@ -106,7 +103,6 @@ export function Test1Test2(kilos, pesoCorporal) {
   } else {
     puntos = 0;
   }
-  console.log("Test1/2: ", puntos);
   return puntos;
 }
 
@@ -148,7 +144,6 @@ export function Test3(tiempo, variante) {
       puntos = 10;
     }
   }
-  console.log("Test 3: ", puntos);
   return puntos;
 }
 
@@ -179,7 +174,6 @@ export function Test4(tiempo) {
   } else {
     puntos = 0;
   }
-  console.log("Test 4: ", puntos);
   return puntos;
   //console.log (x)
 }

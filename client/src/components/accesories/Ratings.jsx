@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Rating from "@mui/material/Rating";
 import getLastResult from "../../hooks/test9c/getLastResult";
 import Box from "@mui/material/Box";
 
-const Ratings = () => {
-  let result = getLastResult();
+function Ratings({ results }) {
+  const [result, setResult] = useState(results[0]);
+
+  useEffect(() => {
+    setResult(results[0]);
+  }, [results, result]);
   
   return (
     <Grid container spacing={2}>
@@ -95,6 +99,6 @@ const Ratings = () => {
       </Grid>
     </Grid>
   );
-};
+}
 
 export default Ratings;

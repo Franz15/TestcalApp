@@ -7,7 +7,7 @@ import { useAuth } from "../../../hooks/useAuth";
 
 export const Header = () => {
   const { auth } = useAuth();
-  console.log(Global.url + "user/avatar/" + auth.image);
+
   return (
     <AppBar
       position="fixed"

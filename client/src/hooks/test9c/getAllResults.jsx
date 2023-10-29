@@ -29,7 +29,5 @@ export function getAllResults() {
       setResults(data.results);
     }
   };
-  console.log("Results.fecha", results.fecha);
-  console.log("Data.status", results.status);
   return results;
 }
