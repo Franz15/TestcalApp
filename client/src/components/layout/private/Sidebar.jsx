@@ -14,13 +14,11 @@ const drawerWidth = 240;
 const Sidebar = () => {
   const { auth } = useAuth();
 
-  console.log("auth", auth);
-
   return (
     <Drawer
       variant="permanent"
       sx={{
-        width: drawerWidth,
+        width: 120,
         flexShrink: 0,
       }}
     >

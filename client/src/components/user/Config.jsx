@@ -21,7 +21,6 @@ export const Config = () => {
   useEffect(() => {
     if (selectedImage) {
       setImageUrl(URL.createObjectURL(selectedImage));
-      console.log ("imageUrl", imageUrl);
     }
   }, [selectedImage]);
 

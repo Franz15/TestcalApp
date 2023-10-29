@@ -35,7 +35,7 @@ const Result = (props) => (
         variant="outlined"
         color="secondary"
         onClick={() => {
-          props.deleteResult(props.result._id), window.location.reload(false);
+          props.deleteResult(props.result._id);
         }}
       >
         <DeleteIcon />
@@ -48,7 +48,7 @@ export function Table9c() {
   //Token de autenticación
   const token = localStorage.getItem("token");
 
-  let [results, setResults] = useState([]);
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
     async function getResults() {
@@ -68,8 +68,6 @@ export function Table9c() {
       setResults(results.results);
     }
     getResults();
-
-    return;
   }, [results.length]);
 
   const deleteResult = (id) => {

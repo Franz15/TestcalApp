@@ -9,6 +9,13 @@ const User = require("../models/user");
 
 //Importar servicios
 const jwt = require("../services/jwt");
+const validate = require("../helpers/validate");
+const { v4: uuidv4 } = require("uuid");
+const {
+  getTemplateVerificacion,
+  getTemplateRecover,
+  sendEmail,
+} = require("../services/email");
 
 //Acciones de prueba
 const pruebaUser = (req, res) => {
@@ -22,6 +29,7 @@ const pruebaUser = (req, res) => {
 const register = (req, res) => {
   //Recoger Datos
   let params = req.body;
+
   //Comprobar que llegan (+validación)
   if (
     !params.nombre ||
@@ -35,68 +43,137 @@ const register = (req, res) => {
       message: "campos incompletos",
     });
   }
+  //Validación avanzada
+  validate(params);
 
   //Control usuarios duplicados
-  User.find(
-   
-      { email: params.email.toLowerCase() }
-    
-   
-  ).exec(async (error, users) => {
-    if (error)
-      return res
-        .status(500)
-        .json({ status: "error", message: "Error en la consulta" });
-
-    if (users && users.length >= 1) {
-      return res.status(412).send({
-        status: "error",
-        message: "El email introducido ya está registrado",
-      });
-      
-    }
-    User.find(
-        
-        { user: params.user.toLowerCase() },
-      ).exec(async (error, users) => {
+  User.find({ email: params.email.toLowerCase() }).exec(
+    async (error, users) => {
       if (error)
         return res
           .status(500)
           .json({ status: "error", message: "Error en la consulta" });
-  
+
       if (users && users.length >= 1) {
         return res.status(412).send({
           status: "error",
-          message: "El usuario ya existe",
-        });
-        
-      }
-    //Cifrar la contraseña
-    let hashedPassword = await bcrypt.hash(params.password, 10);
-    params.password = hashedPassword;
-    
-    //Crear objeto de usuario
-    let user_to_save = new User(params);
-
-    //Guardar usuario en la BBDD
-    user_to_save.save((error, userStored) => {
-      userStored = user_to_save;
-      if (error || !userStored)
-        return res
-          .status(500)
-          .send({ status: "error", message: "Error al guardar el usuario" });
-
-      if (userStored) {
-        //Devolver resultado
-        return res.status(200).json({
-          status: "success",
-          message: "Usuario registrado correctamente",
-          user: userStored,
+          message: "El email introducido ya está registrado",
         });
       }
-    });
-  });
-  })};
+      User.find({ user: params.user.toLowerCase() }).exec(
+        async (error, users) => {
+          if (error)
+            return res
+              .status(500)
+              .json({ status: "error", message: "Error en la consulta" });
+
+          if (users && users.length >= 1) {
+            return res.status(412).send({
+              status: "error",
+              message: "El usuario ya existe",
+            });
+          }
+
+          //Generar el código de usuario
+          const code = uuidv4();
+
+          //Cifrar la contraseña
+          let hashedPassword = await bcrypt.hash(params.password, 10);
+          params.password = hashedPassword;
+
+          //Crear objeto de usuario
+          let user_to_save = new User(params);
+          user_to_save.code = code;
+
+          //Guardar usuario en la BBDD
+          user_to_save.save((error, userStored) => {
+            userStored = user_to_save;
+
+            if (error || !userStored)
+              return res.status(500).send({
+                status: "error",
+                message: "Error al guardar el usuario",
+              });
+
+            if (userStored) {
+              //Generar Token
+              const token = jwt.createToken({ userStored });
+
+              //Obtener un template
+              const template = getTemplateVerificacion({ userStored, token });
+
+              //Enviar email
+              sendEmail(userStored, "Verificar email", template);
+
+              //Devolver resultado
+              return res.status(200).json({
+                status: "success",
+                message: "Usuario registrado correctamente",
+                user: userStored,
+              });
+            }
+          });
+        }
+      );
+    }
+  );
+};
+
+//Confirmar email
+const confirm = async (req, res) => {
+  try {
+    //Obtener el token
+    const { token } = req.params;
+
+    //Verificar los datos
+    let data = jwt.getTokenData(token);
+
+    if (data === null) {
+      return res.json({
+        success: false,
+        msg: "Error al recuperar datos del usuario",
+      });
+    }
+
+    const { email, code } = data;
+
+    //Verificar que el usuario existe
+    const user = await User.findOne({ email });
+    console.log("USER ", user);
+    console.log("CODE ", code);
+
+    if (user === null) {
+      return res.json({
+        success: false,
+        msg: "Usuario no existe",
+      });
+    }
+
+    //Verificar el código del usuario
+    if (code !== user.code) {
+      // return res.redirect ()
+      return res.json({
+        success: false,
+        msg: "Error código usuario",
+      });
+    }
+
+  /*  //Verificar el código del usuario
+    if (user.status === "VERIFIED" ) {
+      return res.json({
+        success: false,
+        msg: "Usuario ya verificado",
+      });
+    }*/
+    //Actualizar el usuario
+    user.status = "VERIFIED";
+    await user.save();
+
+    //Redireccionar a la página de confirmación
+    console.log("EXITO");
+     res. send ('<h2>Email verificado con éxito</h2>')
+  } catch {}
+};
 
 //Login
 const login = (req, res) => {
@@ -125,6 +202,7 @@ const login = (req, res) => {
         message: "Contraseña incorrecta",
       });
     }
+    
     //Recuperar Token
     const token = jwt.createToken(user);
 
@@ -139,6 +217,38 @@ const login = (req, res) => {
       },
       token,
     });
+  });
+};
+
+//Recuperar contraseña
+const recover = (req, res) => {
+  let params = req.params;
+
+  if (!params.email) {
+    return res.status(400).send({
+      status: "error",
+      message: "Faltan datos ",
+    });
+  }
+
+  //Buscar si existe en BBDD
+  User.findOne({ email: params.email.toLowerCase() }).exec((error, user) => {
+    if (error || !user)
+      return res
+        .status(404)
+        .send({ status: "error", message: "No existe este usuario" });
+  });
+
+  //Obtener un template
+  const template = getTemplateRecover({ email: params.email.toLowerCase() });
+
+  //Enviar email
+  sendEmail(params, "Recuperar contraseña", template);
+
+  //Devolver resultado
+  return res.status(200).json({
+    status: "success",
+    message: "Email enviado correctamente",
   });
 };
 
@@ -303,10 +413,10 @@ const upload = (req, res) => {
 const avatar = (req, res) => {
   //Sacar el parámetro de la URL
   const file = req.params.file;
-  console.log(file);
+
   //Montar el path real de la imagen
   const filePath = "./uploads/avatars/" + file;
-  console.log(filePath);
+
   //Comprobar que existe
   fs.stat(filePath, (error, exists) => {
     if (!exists)
@@ -322,6 +432,8 @@ const avatar = (req, res) => {
 module.exports = {
   pruebaUser,
   register,
+  confirm,
+  recover,
   login,
   profileUser,
   update,

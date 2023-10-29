@@ -14,7 +14,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AppThemeProvider from "../../assets/theme/Theme";
-import background from "../../assets/img/backgrounds/background3.jpg";
+import background from "../../assets/img/backgrounds/background5.jpg";
 import Note from "../accesories/Note";
 import Alert from "@mui/material/Alert";
 
@@ -72,8 +72,8 @@ export const Login = () => {
         <Grid
           item
           xs={false}
-          sm={4}
-          md={7}
+          sm={12}
+          md={12}
           sx={{
             backgroundImage: `url(${background})`,
             backgroundColor: (t) =>
@@ -83,85 +83,100 @@ export const Login = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-        />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
+        >
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={5}
+            sx={{ margin: "auto", marginTop: "22vh" }}
+            component={Paper}
+            elevation={6}
           >
-            <Avatar
-              src="../../../../testcalapp.png"
-              sx={{ width: 100, height: 100 }}
-            />
-            <Typography component="h1" variant="h5">
-              Login
-            </Typography>
             <Box
-              component="form"
-              noValidate
-              onSubmit={loginUser}
-              sx={{ mt: 1 }}
+              sx={{
+                py: 6,
+                my: 8,
+                mx: 4,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
             >
-              <TextField
+              <Avatar
                 margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                onChange={changed}
+                src="../../../../testcalapp.png"
+                sx={{ width: 100, height: 100 }}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={changed}
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Recuérdame"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
+              <Typography component="h1" variant="h5">
                 Login
-              </Button>
+              </Typography>
+              <Box
+                component="form"
+                noValidate
+                onSubmit={loginUser}
+                sx={{ mt: 1 }}
+              >
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  onChange={changed}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  onChange={changed}
+                />
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Recuérdame"
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Login
+                </Button>
 
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2" color="secondary">
-                    ¿Has olvidado tu contraseña?
-                  </Link>
+                <Grid container>
+                  <Grid item xs>
+                    <Link
+                      href="/recuperacion"
+                      variant="body2"
+                      color="secondary"
+                    >
+                      {"¿Has olvidado tu contraseña?"}
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link href="/registro" variant="body2" color="secondary">
+                      {"¿No tienes cuenta?, regístrate aquí"}
+                    </Link>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Link href="/registro" variant="body2" color="secondary">
-                    {"¿No tienes cuenta?, regístrate aquí"}
-                  </Link>
-                </Grid>
-              </Grid>
-              {saved == "error" ? (
-                <Alert severity="error">{message}</Alert>
-              ) : (
-                ""
-              )}
+                {saved == "error" ? (
+                  <Alert severity="error">{message}</Alert>
+                ) : (
+                  ""
+                )}
+              </Box>
             </Box>
-          </Box>
-          <Note />
+          </Grid>
+          <Note sx={{ color: "#FFFF", fontSize: "16px" }}> </Note>
         </Grid>
       </Grid>
     </AppThemeProvider>

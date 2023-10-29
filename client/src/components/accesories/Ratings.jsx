@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 
 const Ratings = () => {
   let result = getLastResult();
-
+  
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6} md={3}>
