@@ -85,7 +85,6 @@ export function Test9c() {
       gradoTeorico: grado,
     };
     let newRecord = form;
-    console.log("form", form);
     // ??????????????????????????????????????????
     const request = await fetch(Global.url + "results/save", {
       method: "POST",
@@ -98,10 +97,8 @@ export function Test9c() {
     const data = await request.json();
 
     if (data.status == "success") {
-      console.log("result", data.result);
     } else {
     }
-    console.log(resultados, grado);
     setGrade(grado);
     handleNext();
     return { puntos1, puntos2, puntos3, puntos4, resultados, grado };
@@ -141,7 +138,6 @@ export function Test9c() {
     setVariante("");
     setTest4("");
   };
-  console.log(activeStep);
 
   return (
     <Grid

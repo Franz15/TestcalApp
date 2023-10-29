@@ -44,11 +44,10 @@ const Result = (props) => (
   </TableRow>
 );
 
-export function Table9c() {
+export function Table9c({ results, handleResults }) {
   //Token de autenticación
   const token = localStorage.getItem("token");
-
-  const [results, setResults] = useState([]);
+  const [resultados, setResultados] = useState(results);
 
   useEffect(() => {
     async function getResults() {
@@ -65,29 +64,42 @@ export function Table9c() {
         return;
       }
       const results = await response.json();
-      setResults(results.results);
+
+      if (handleResults) {
+        handleResults(results.results);
+        setResultados(results.results);
+      } else {
+        setResultados(results.results);
+      }
     }
     getResults();
-  }, [results.length]);
+  }, []);
 
   const deleteResult = (id) => {
     DeleteTest9c(id);
-    const newResults = results.filter((el) => el._id !== id);
-    setResults(newResults);
+    const newResults = resultados.filter((el) => el._id !== id);
+
+    if (handleResults) {
+      handleResults(newResults);
+      setResultados(newResults);
+    } else {
+      setResultados(newResults);
+    }
   };
 
   function resultList() {
-    return results.map((result) => {
-      return (
-        <Result
-          result={result}
-          deleteResult={() => deleteResult(result._id)}
-          key={result._id}
-        />
-      );
-    });
+    if (resultados) {
+      return resultados.map((result) => {
+        return (
+          <Result
+            result={result}
+            deleteResult={() => deleteResult(result._id)}
+            key={result._id}
+          />
+        );
+      });
+    }
   }
-
   return (
     <TableContainer>
       <Table stickyHeader aria-label="simple table">

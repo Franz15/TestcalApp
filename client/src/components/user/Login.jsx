@@ -27,9 +27,6 @@ export const Login = () => {
   const loginUser = async (e) => {
     e.preventDefault();
 
-    console.log("form", form);
-    console.log("saved", saved);
-
     //Datos del usuario
     let userToLogin = form;
 
@@ -43,7 +40,6 @@ export const Login = () => {
     });
 
     const data = await request.json();
-    console.log("login data", data);
 
     if (data.status == "success") {
       //Persistir los datos en el navegador
@@ -53,10 +49,6 @@ export const Login = () => {
 
       //Setear datos en el auth
       setAuth(data.user);
-      console.log("data user", data.user);
-      console.log("Local Storage", localStorage);
-      console.log("Local Storage token", localStorage.token);
-      console.log("Local Storage user", localStorage.user);
 
       //Redirección
       window.location.reload();

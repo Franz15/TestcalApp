@@ -14,8 +14,6 @@ export default function getLastResult() {
   }, [params]);
 
   const getResult = async () => {
-    console.log("userGrade", auth._id);
-
     const request = await fetch(Global.url + "results/grade/" + auth._id, {
       method: "GET",
       headers: {
@@ -32,7 +30,6 @@ export default function getLastResult() {
         etResult(0);
       }
     } else {
-      console.log("errorrrr");
     }
   };
   return result;
