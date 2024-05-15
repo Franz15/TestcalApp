@@ -72,7 +72,10 @@ export function Puntuaciones(
 }
 
 export function Porcentaje(a, b) {
-  let porcentaje = (100 * parseInt(a)) / parseInt(b) + 100;
+  let porcentaje = null;
+  if (a !== null && b !== null) {
+    porcentaje = (100 * parseInt(a)) / parseInt(b) + 100;
+  }
   return porcentaje;
 }
 
@@ -175,5 +178,4 @@ export function Test4(tiempo) {
     puntos = 0;
   }
   return puntos;
-  //console.log (x)
 }

@@ -27,6 +27,8 @@ import FormLabel from "@mui/material/FormLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import Input from "@mui/material/Input";
 import Note from "../../../components/accesories/Note";
+import background from "../../../assets/img/backgrounds/background2.jpg";
+
 export function Test9c() {
   //Token de autenticación
   const token = localStorage.getItem("token");
@@ -58,7 +60,7 @@ export function Test9c() {
     let puntos1 = Test1Test2(test1Peso, pesoCorp);
     let test1Porcent = Porcentaje(test1Peso, pesoCorp);
     let puntos2 = Test1Test2(test2Peso, pesoCorp);
-    let test2Porcent = Porcentaje(test1Peso, pesoCorp);
+    let test2Porcent = Porcentaje(test2Peso, pesoCorp);
     let puntos3 = Test3(test3Tiempo, variante);
     let puntos4 = Test4(test4Tiempo);
     [resultados, grado] = Puntuaciones(puntos1, puntos2, puntos3, puntos4);
@@ -83,10 +85,23 @@ export function Test9c() {
       test4Tiempo: test4Tiempo,
       test4Punt: puntos4,
       gradoTeorico: grado,
+      _type: "test9c",
     };
     let newRecord = form;
-    // ??????????????????????????????????????????
-    const request = await fetch(Global.url + "results/save", {
+
+    const form20mm = {
+      fecha: new Date(),
+      userId: auth._id,
+      gradoDeclarado: auth.grado,
+      max20mmPeso: test1Peso,
+      max20mmPorcent: Porcentaje(test1Peso, auth.peso),
+      pesoCorp: auth.peso,
+      _type: "max20mm",
+    };
+
+    const formMaxPullUp = {};
+
+    var request = await fetch(Global.url + "results/save", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -97,6 +112,14 @@ export function Test9c() {
     const data = await request.json();
 
     if (data.status == "success") {
+      request = await fetch(Global.url + "results/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(form20mm),
+      });
     } else {
     }
     setGrade(grado);
@@ -174,12 +197,6 @@ export function Test9c() {
                   pt: 2,
                 }}
               >
-                <CardMedia
-                  height={400}
-                  component="iframe"
-                  alt="Resultados"
-                  src="../../../assets/img/backgrounds/background2.jpg"
-                />
                 <CardContent>
                   <Typography gutterBottom variant="h5">
                     Resultado de tu test:

@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 import { Global } from "../../helpers/Global";
 import { useAuth } from "../useAuth";
 
-export default function getAvgResult(opt) {
+export default function getAllResultsGrade() {
   //Token de autenticación
   const token = localStorage.getItem("token");
   const { auth } = useAuth();
   const [result, setResult] = useState([]);
   const params = useParams();
-  const option = opt;
+
   useEffect(() => {
     getResult();
   }, [params]);
@@ -22,8 +22,9 @@ export default function getAvgResult(opt) {
         "Content-Type": "application/json",
         Authorization: token,
       },
-      body: JSON.stringify({opt: option})
+      body: JSON.stringify({opt: "push"})
     });
+
     const data = await request.json();
     if (data.status == "success") {
       if (data.result != null) {

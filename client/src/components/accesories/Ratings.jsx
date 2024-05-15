@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Rating from "@mui/material/Rating";
-import getLastResult from "../../hooks/test9c/getLastResult";
 import Box from "@mui/material/Box";
 
 function Ratings({ results }) {
   const [result, setResult] = useState(results[0]);
 
   useEffect(() => {
-    setResult(results[0]);
+    for (let i = 0; i < results.length; i++ ){
+      if (results[i]._type === "test9c"){
+        setResult(results[i]);
+        break;
+      }else{
+      }
+    }
+    
   }, [results, result]);
-  
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6} md={3}>

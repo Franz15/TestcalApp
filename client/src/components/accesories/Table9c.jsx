@@ -20,7 +20,12 @@ const Result = (props) => (
     </TableCell>
     <TableCell align="center">{props.result.test1Peso}</TableCell>
     <TableCell align="center">
-      {Math.trunc(props.result.test1Porcent)}
+    {props.result.test1Porcent !== null ? (
+       <> {Math.trunc(props.result.test1Porcent)}
+       </>
+          ) : (
+            ""
+          )}
     </TableCell>
     <TableCell align="center">{props.result.test2Peso}</TableCell>
     <TableCell align="center">
@@ -51,12 +56,13 @@ export function Table9c({ results, handleResults }) {
 
   useEffect(() => {
     async function getResults() {
-      const response = await await fetch(Global.url + "results/list", {
-        method: "GET",
+      const response = await fetch(Global.url + "results/list", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
         },
+        body: JSON.stringify({_type:"test9c"}),
       });
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -64,7 +70,6 @@ export function Table9c({ results, handleResults }) {
         return;
       }
       const results = await response.json();
-
       if (handleResults) {
         handleResults(results.results);
         setResultados(results.results);
@@ -90,6 +95,7 @@ export function Table9c({ results, handleResults }) {
   function resultList() {
     if (resultados) {
       return resultados.map((result) => {
+        if (result._type == "test9c"){
         return (
           <Result
             result={result}
@@ -97,6 +103,7 @@ export function Table9c({ results, handleResults }) {
             key={result._id}
           />
         );
+      }
       });
     }
   }

@@ -27,11 +27,13 @@ const Sidebar = () => {
               <ListItemText primary="Resultados Test 9C" />
             </ListItemButton>
           </ListItem>
+
           <ListItem disablePadding>
-            <ListItemButton to="/social/test9c">
-              <ListItemText primary="Nuevo Test 9C" />
+            <ListItemButton to="/social/tests">
+              <ListItemText primary="Nuevo Test" />
             </ListItemButton>
           </ListItem>
+          
         </List>
       </Box>
       <Box sx={{ position: "absolute", width: "240", bottom: 0 }}>
