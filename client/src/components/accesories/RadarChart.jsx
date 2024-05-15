@@ -36,8 +36,8 @@ export function RadarChart({ results }) {
       setIsMobile(window.innerWidth < 768);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Set the latest result when results change
@@ -62,19 +62,23 @@ export function RadarChart({ results }) {
   }
 
   // Get user values and format to 2 decimal places
-  const userValues = latestResult ? [
-    latestResult.test1Punt ? Number(latestResult.test1Punt).toFixed(2) : 0,
-    latestResult.test2Punt ? Number(latestResult.test2Punt).toFixed(2) : 0,
-    latestResult.test3Punt ? Number(latestResult.test3Punt).toFixed(2) : 0,
-    latestResult.test4Punt ? Number(latestResult.test4Punt).toFixed(2) : 0,
-  ] : [0, 0, 0, 0];
+  const userValues = latestResult
+    ? [
+        latestResult.test1Punt ? Number(latestResult.test1Punt).toFixed(2) : 0,
+        latestResult.test2Punt ? Number(latestResult.test2Punt).toFixed(2) : 0,
+        latestResult.test3Punt ? Number(latestResult.test3Punt).toFixed(2) : 0,
+        latestResult.test4Punt ? Number(latestResult.test4Punt).toFixed(2) : 0,
+      ]
+    : [0, 0, 0, 0];
 
   // Calculate the maximum value for dynamic scaling
-  const allValues = [...userValues, test1avg, test2avg, test3avg, test4avg].map(val => parseFloat(val));
+  const allValues = [...userValues, test1avg, test2avg, test3avg, test4avg].map(
+    (val) => parseFloat(val)
+  );
   const maxValue = useMemo(() => {
     return Math.max(...allValues) * 1.2; // Add 20% buffer for better visualization
   }, [allValues]);
-  
+
   // Determine appropriate step size based on maxValue
   const getStepSize = () => {
     if (maxValue <= 5) return 1;
@@ -89,39 +93,39 @@ export function RadarChart({ results }) {
     maintainAspectRatio: false,
     animation: {
       duration: 2000,
-      easing: 'easeOutQuart',
-      onComplete: () => setAnimationComplete(true)
+      easing: "easeOutQuart",
+      onComplete: () => setAnimationComplete(true),
     },
     scales: {
       r: {
         angleLines: {
           display: true,
-          color: 'rgba(150, 150, 150, 0.3)',
-          lineWidth: 1
+          color: "rgba(150, 150, 150, 0.3)",
+          lineWidth: 1,
         },
         grid: {
-          color: 'rgba(150, 150, 150, 0.2)',
+          color: "rgba(150, 150, 150, 0.2)",
         },
         suggestedMin: 0,
         suggestedMax: maxValue,
         ticks: {
           stepSize: getStepSize(),
-          backdropColor: 'rgba(0, 0, 0, 0)',
+          backdropColor: "rgba(0, 0, 0, 0)",
           font: {
-            size: isMobile ? 8 : 10
+            size: isMobile ? 8 : 10,
           },
-          callback: function(value) {
+          callback: function (value) {
             return Number(value).toFixed(1);
-          }
+          },
         },
         pointLabels: {
           font: {
             size: isMobile ? 9 : 12,
-            weight: 'bold'
+            weight: "bold",
           },
-          color: 'rgba(50, 50, 50, 0.9)'
-        }
-      }
+          color: "rgba(50, 50, 50, 0.9)",
+        },
+      },
     },
     plugins: {
       legend: {
@@ -131,37 +135,39 @@ export function RadarChart({ results }) {
           boxWidth: isMobile ? 8 : 12,
           padding: isMobile ? 10 : 15,
           font: {
-            size: isMobile ? 9 : 11
+            size: isMobile ? 9 : 11,
           },
           usePointStyle: true,
-          pointStyle: 'circle'
-        }
+          pointStyle: "circle",
+        },
       },
       tooltip: {
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        titleColor: '#333',
-        bodyColor: '#666',
-        borderColor: 'rgba(200, 200, 200, 0.5)',
+        backgroundColor: "rgba(255, 255, 255, 0.9)",
+        titleColor: "#333",
+        bodyColor: "#666",
+        borderColor: "rgba(200, 200, 200, 0.5)",
         borderWidth: 1,
         displayColors: true,
         padding: 10,
         titleFont: {
           size: isMobile ? 10 : 12,
-          weight: 'bold'
+          weight: "bold",
         },
         bodyFont: {
-          size: isMobile ? 9 : 11
+          size: isMobile ? 9 : 11,
         },
         callbacks: {
-          title: function(tooltipItems) {
+          title: function (tooltipItems) {
             return tooltipItems[0].label;
           },
-          label: function(context) {
-            return `${context.dataset.label}: ${parseFloat(context.raw).toFixed(2)}`;
-          }
-        }
-      }
-    }
+          label: function (context) {
+            return `${context.dataset.label}: ${parseFloat(context.raw).toFixed(
+              2
+            )}`;
+          },
+        },
+      },
+    },
   };
 
   // Enhanced data with improved colors and presentation
@@ -201,14 +207,20 @@ export function RadarChart({ results }) {
       },
     ],
   };
-  
+
   // Add performance indicators
   const getPerformanceText = () => {
     if (!latestResult) return "";
-    
-    const userAvg = userValues.reduce((a, b) => parseFloat(a) + parseFloat(b), 0) / userValues.length;
-    const avgStandard = [test1avg, test2avg, test3avg, test4avg].reduce((a, b) => parseFloat(a) + parseFloat(b), 0) / 4;
-    
+
+    const userAvg =
+      userValues.reduce((a, b) => parseFloat(a) + parseFloat(b), 0) /
+      userValues.length;
+    const avgStandard =
+      [test1avg, test2avg, test3avg, test4avg].reduce(
+        (a, b) => parseFloat(a) + parseFloat(b),
+        0
+      ) / 4;
+
     if (userAvg >= avgStandard * 1.2) {
       return "¡Excelente! Tu rendimiento está por encima de la media.";
     } else if (userAvg >= avgStandard * 0.9) {
@@ -221,16 +233,12 @@ export function RadarChart({ results }) {
   // Render chart with enhanced container and optional performance text
   return (
     <div className="radar-chart-wrapper">
-      <div className="radar-chart-title">
-        Comparación de Rendimiento
-      </div>
+      <div className="radar-chart-title">Comparación de Rendimiento</div>
       <div className="radar-chart-container">
         <Radar data={data} options={options} />
       </div>
       {animationComplete && latestResult && (
-        <div className="radar-chart-insights">
-          {getPerformanceText()}
-        </div>
+        <div className="radar-chart-insights">{getPerformanceText()}</div>
       )}
     </div>
   );

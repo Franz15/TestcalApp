@@ -32,9 +32,9 @@ import "./test9c.css";
 export function Test9c() {
   // Theme and responsive breakpoints
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
-  
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+
   // Auth and state
   const token = localStorage.getItem("token");
   const { auth } = useAuth();
@@ -54,7 +54,7 @@ export function Test9c() {
     "Fuerza Abdominal",
     "Fuerza de Agarre",
   ];
-  
+
   const settings = {
     dots: true,
     infinite: true,
@@ -67,18 +67,18 @@ export function Test9c() {
         breakpoint: 600,
         settings: {
           arrows: false,
-        }
-      }
-    ]
+        },
+      },
+    ],
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     let puntos1 = Test1Test2(test1Peso, pesoCorp);
     let test1Porcent = Porcentaje(test1Peso, pesoCorp);
     let puntos2 = Test1Test2(test2Peso, pesoCorp);
-    let test2Porcent = Porcentaje(test1Peso, pesoCorp);
+    let test2Porcent = Porcentaje(test2Peso, pesoCorp);
     let puntos3 = Test3(test3Tiempo, variante);
     let puntos4 = Test4(test4Tiempo);
     [resultados, grado] = Puntuaciones(puntos1, puntos2, puntos3, puntos4);
@@ -100,6 +100,7 @@ export function Test9c() {
       test4Tiempo: test4Tiempo,
       test4Punt: puntos4,
       gradoTeorico: grado,
+      _type: "test9c",
     };
 
     try {
@@ -112,7 +113,7 @@ export function Test9c() {
         body: JSON.stringify(form),
       });
       const data = await request.json();
-      
+
       if (data.status === "success") {
         setGrade(grado);
         handleNext();
@@ -148,13 +149,13 @@ export function Test9c() {
 
   // Common styles for input sections
   const inputSectionStyle = {
-    display: 'flex', 
-    flexDirection: 'column', 
-    alignItems: isMobile ? 'flex-start' : 'center',
-    width: '100%',
-    mt: 2, 
+    display: "flex",
+    flexDirection: "column",
+    alignItems: isMobile ? "flex-start" : "center",
+    width: "100%",
+    mt: 2,
     mb: 1,
-    ml: isMobile ? 0 : 2
+    ml: isMobile ? 0 : 2,
   };
 
   // Render test content based on active step
@@ -167,15 +168,15 @@ export function Test9c() {
             Con tus condiciones físicas actuales podrías llegar a escalar hasta
           </p>
           <span className="test-results-grade">{grade}</span>
-          
+
           <div className="test-results-buttons">
-            <button 
-              className="test-button test-button-secondary" 
+            <button
+              className="test-button test-button-secondary"
               onClick={handleReset}
             >
               Volver a hacer el Test
             </button>
-            
+
             <a href="/social" className="test-button test-button-primary">
               Ir al Dashboard
             </a>
@@ -188,11 +189,11 @@ export function Test9c() {
     const cardProps = {
       className: "test-card",
       sx: {
-        width: '100%',
+        width: "100%",
         maxWidth: 700,
         boxShadow: 3,
         borderRadius: 2,
-      }
+      },
     };
 
     if (activeStep === 0) {
@@ -208,20 +209,24 @@ export function Test9c() {
               />
             </div>
             <CardContent className="test-card-content">
-              <Typography variant="h5" component="h2" className="test-card-title">
+              <Typography
+                variant="h5"
+                component="h2"
+                className="test-card-title"
+              >
                 Test 1: Fuerza de dedos
               </Typography>
               <Typography className="test-card-description">
-                Realiza una suspensión durante 5 segundos en una regleta de
-                20mm con el mayor lastre que puedas. Escribe aquí por favor
-                qué lastre has utilizado (si no pones nada serán 0kg)
+                Realiza una suspensión durante 5 segundos en una regleta de 20mm
+                con el mayor lastre que puedas. Escribe aquí por favor qué
+                lastre has utilizado (si no pones nada serán 0kg)
               </Typography>
-              
+
               <div className="test-input-group">
                 <label className="test-input-label">
                   Introduce el peso de tu suspensión
                 </label>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
                   <input
                     className="test-input-field"
                     type="number"
@@ -263,7 +268,11 @@ export function Test9c() {
               />
             </div>
             <CardContent className="test-card-content">
-              <Typography variant="h5" component="h2" className="test-card-title">
+              <Typography
+                variant="h5"
+                component="h2"
+                className="test-card-title"
+              >
                 Test 2: Fuerza de tracción
               </Typography>
               <Typography className="test-card-description">
@@ -271,12 +280,12 @@ export function Test9c() {
                 lastre que puedas. Escribe aquí por favor qué lastre has
                 utilizado (si no pones nada serán 0kg)
               </Typography>
-              
+
               <div className="test-input-group">
                 <label className="test-input-label">
                   Introduce el resultado de tu dominada lastrada
                 </label>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
                   <input
                     className="test-input-field"
                     type="number"
@@ -352,7 +361,11 @@ export function Test9c() {
               </Slider>
             </div>
             <CardContent className="test-card-content">
-              <Typography variant="h5" component="h2" className="test-card-title">
+              <Typography
+                variant="h5"
+                component="h2"
+                className="test-card-title"
+              >
                 Test 3: Fuerza abdominal
               </Typography>
               <Typography className="test-card-description">
@@ -361,12 +374,12 @@ export function Test9c() {
                 estiradas, o, si no puedes, con las piernas dobladas, no hay
                 problema.
               </Typography>
-              
+
               <div className="test-input-group">
                 <label className="test-input-label">
                   Introduce el tiempo que has aguantado (en segundos)
                 </label>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
                   <input
                     className="test-input-field"
                     type="number"
@@ -393,7 +406,10 @@ export function Test9c() {
                       checked={variante === "Rodillas Dobladas"}
                       onChange={handleChangeVariante}
                     />
-                    <label htmlFor="rodillasDobladas" className="test-radio-label">
+                    <label
+                      htmlFor="rodillasDobladas"
+                      className="test-radio-label"
+                    >
                       Rodillas Dobladas
                     </label>
                   </div>
@@ -467,17 +483,17 @@ export function Test9c() {
               Test 4: Fuerza de agarre
             </Typography>
             <Typography className="test-card-description">
-              Cuélgate de una barra, relajado, todo el tiempo que puedas
-              (las manos tienen que estar todo el tiempo en la barra, no
-              puedes liberar una o moverlas). Escribe aquí por favor cuál ha
-              sido tu tiempo
+              Cuélgate de una barra, relajado, todo el tiempo que puedas (las
+              manos tienen que estar todo el tiempo en la barra, no puedes
+              liberar una o moverlas). Escribe aquí por favor cuál ha sido tu
+              tiempo
             </Typography>
-            
+
             <div className="test-input-group">
               <label className="test-input-label">
                 Introduce el tiempo que has aguantado (en segundos)
               </label>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <input
                   className="test-input-field"
                   type="number"
@@ -517,14 +533,14 @@ export function Test9c() {
   return (
     <div className="test-container">
       <div className="test-stepper">
-        <Stepper 
-          activeStep={activeStep} 
+        <Stepper
+          activeStep={activeStep}
           alternativeLabel={isMobile}
-          sx={{ 
-            overflowX: 'auto',
-            '& .MuiStepLabel-label': {
-              fontSize: isMobile ? '0.75rem' : '0.875rem',
-            }
+          sx={{
+            overflowX: "auto",
+            "& .MuiStepLabel-label": {
+              fontSize: isMobile ? "0.75rem" : "0.875rem",
+            },
           }}
         >
           {steps.map((label) => (
@@ -534,7 +550,7 @@ export function Test9c() {
           ))}
         </Stepper>
       </div>
-      
+
       {renderTestContent()}
     </div>
   );

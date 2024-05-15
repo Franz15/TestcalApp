@@ -10,13 +10,13 @@
  */
 function convertToSeconds(str) {
   if (!str) return 0;
-  
+
   // Handle MM:SS format
-  if (typeof str === 'string' && str.includes(':')) {
-    const [minutes, seconds] = str.split(':').map(Number);
+  if (typeof str === "string" && str.includes(":")) {
+    const [minutes, seconds] = str.split(":").map(Number);
     return Number((minutes * 60 + seconds).toFixed(3));
   }
-  
+
   // Handle direct seconds input
   return Number(str) || 0;
 }
@@ -31,7 +31,7 @@ export function Porcentaje(additionalWeight, bodyWeight) {
   // Ensure we're working with numbers
   const weight = Number(additionalWeight) || 0;
   const body = Number(bodyWeight) || 1; // Prevent division by zero
-  
+
   // Calculate percentage (100% = body weight)
   return (100 * weight) / body + 100;
 }
@@ -45,7 +45,7 @@ export function Porcentaje(additionalWeight, bodyWeight) {
 export function Test1Test2(kilos, bodyWeight) {
   // Calculate percentage of body weight
   const percentage = Porcentaje(kilos, bodyWeight);
-  
+
   // Determine points based on percentage ranges
   if (percentage < 100) return 0;
   if (percentage < 110) return 1;
@@ -68,10 +68,10 @@ export function Test1Test2(kilos, bodyWeight) {
  */
 export function Test3(tiempo, variante) {
   const seconds = convertToSeconds(tiempo);
-  
+
   // Return 0 if time is less than minimum threshold
   if (seconds < 5) return 0;
-  
+
   // Calculate points based on variant and time
   switch (variante) {
     case "Rodillas Dobladas":
@@ -79,20 +79,20 @@ export function Test3(tiempo, variante) {
       if (seconds < 20) return 1;
       if (seconds < 30) return 2;
       return 3;
-      
+
     case "L-Sit":
       if (seconds < 10) return 0;
       if (seconds < 15) return 4;
       if (seconds < 20) return 5;
       return 6;
-      
+
     case "Front Lever":
       if (seconds < 5) return 0;
       if (seconds < 10) return 7;
       if (seconds < 20) return 8;
       if (seconds < 30) return 9;
       return 10;
-      
+
     default:
       return 0; // No variant selected
   }
@@ -105,7 +105,7 @@ export function Test3(tiempo, variante) {
  */
 export function Test4(tiempo) {
   const seconds = convertToSeconds(tiempo);
-  
+
   // Determine points based on time ranges
   if (seconds < 30) return 0;
   if (seconds < 60) return 1;
@@ -126,26 +126,45 @@ export function Test4(tiempo) {
 const GRADE_MAP = {
   40: "9c",
   39: "9b+",
-  38: "9b", 37: "9b",
-  36: "9a+", 35: "9a+",
-  34: "9a", 33: "9a",
-  32: "8c+", 31: "8c+",
-  30: "8c", 29: "8c",
-  28: "8b+", 27: "8b+",
-  26: "8b", 25: "8b",
-  24: "8a+", 23: "8a+",
-  22: "8a", 21: "8a",
-  20: "7c+", 19: "7c+",
-  18: "7c", 17: "7c",
-  16: "7b+", 15: "7b+",
-  14: "7b", 13: "7b",
-  12: "7a+", 11: "7a+",
-  10: "7a", 9: "7a",
-  8: "6c+", 7: "6c+",
-  6: "6c", 5: "6c",
-  4: "6b", 3: "6b",
-  2: "6a", 1: "6a",
-  0: "V"
+  38: "9b",
+  37: "9b",
+  36: "9a+",
+  35: "9a+",
+  34: "9a",
+  33: "9a",
+  32: "8c+",
+  31: "8c+",
+  30: "8c",
+  29: "8c",
+  28: "8b+",
+  27: "8b+",
+  26: "8b",
+  25: "8b",
+  24: "8a+",
+  23: "8a+",
+  22: "8a",
+  21: "8a",
+  20: "7c+",
+  19: "7c+",
+  18: "7c",
+  17: "7c",
+  16: "7b+",
+  15: "7b+",
+  14: "7b",
+  13: "7b",
+  12: "7a+",
+  11: "7a+",
+  10: "7a",
+  9: "7a",
+  8: "6c+",
+  7: "6c+",
+  6: "6c",
+  5: "6c",
+  4: "6b",
+  3: "6b",
+  2: "6a",
+  1: "6a",
+  0: "V",
 };
 
 /**
@@ -156,13 +175,20 @@ const GRADE_MAP = {
  * @param {number} puntuacion4 - Points from Test 4
  * @returns {[number, string]} - [Total score, Climbing grade]
  */
-export function Puntuaciones(puntuacion1, puntuacion2, puntuacion3, puntuacion4) {
+export function Puntuaciones(
+  puntuacion1,
+  puntuacion2,
+  puntuacion3,
+  puntuacion4
+) {
   // Ensure we're working with numbers and calculate total
-  const total = [puntuacion1, puntuacion2, puntuacion3, puntuacion4]
-    .reduce((sum, score) => sum + (Number(score) || 0), 0);
-  
+  const total = [puntuacion1, puntuacion2, puntuacion3, puntuacion4].reduce(
+    (sum, score) => sum + (Number(score) || 0),
+    0
+  );
+
   // Look up grade from mapping table
   const grade = GRADE_MAP[total] || "V";
-  
+
   return [total, grade];
 }

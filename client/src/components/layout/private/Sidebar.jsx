@@ -37,6 +37,7 @@ const Sidebar = () => {
     { text: "Dashboard", icon: <DashboardIcon />, href: "/social/" },
     { text: "Resultados", icon: <EqualizerIcon />, href: "/social/results" },
     { text: "Nuevo Test 9c", icon: <AssignmentIcon />, href: "/social/test9c" },
+    { text: "Nuevo Test 9c", icon: <AssignmentIcon />, href: "/social/tests" },
   ];
 
   return (

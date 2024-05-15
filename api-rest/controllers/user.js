@@ -209,7 +209,7 @@ const confirm = async (req, res) => {
 const login = (req, res) => {
   //Recoger parámetros
   let params = req.body;
-
+  
   if (!params.email || !params.password) {
     return res.status(400).send({
       status: "error",
