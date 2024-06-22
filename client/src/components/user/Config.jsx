@@ -6,8 +6,6 @@ import { useAuth } from "../../hooks/useAuth";
 import Box from "@mui/material/Box";
 import { Avatar, IconButton } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import Note from "../accesories/Note";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Alert from "@mui/material/Alert";
@@ -248,19 +246,19 @@ export const Config = () => {
           ) : (
             ""
           )}
-          <Button
+          <div>
+          <button
+          className=" button_config edit"
             type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
           >
             Actualizar
-          </Button>
+          </button>
+          </div>
+        
           <Grid container>
             <Grid item></Grid>
           </Grid>
         </Box>
-        <Note />
       </Box>
     </Grid>
   );

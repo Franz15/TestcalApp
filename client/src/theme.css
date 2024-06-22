@@ -1,0 +1,21 @@
+/* DEFINICION VARIABLES */
+:root {
+    --fondo-contenido: rgba(246, 247, 249, 1);
+    --fondo-resalte: rgba(236, 237, 239, 1);
+    --color-principal: rgba(232, 191, 86, 1);
+    --color-secundario: rgba(232, 156, 86, 1);
+    --color-alerta: rgba(255, 0, 0, 0.5);
+    --color-success: rgba(58, 124, 71, 0.8);
+    --color-editar: #e77b00;
+    --color-borrar: #9b0202;
+    --letra-gris: #454545;
+  }
+  
+/* FOOTER */
+.footer {
+    grid-area: footer;
+    font-size: 17px;
+    background: var(--fondo-contenido);
+    color: var(--letra-gris);
+    padding: 2px;
+  }

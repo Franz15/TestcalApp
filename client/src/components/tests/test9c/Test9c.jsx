@@ -26,7 +26,6 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import Input from "@mui/material/Input";
-import Note from "../../../components/accesories/Note";
 export function Test9c() {
   //Token de autenticación
   const token = localStorage.getItem("token");
@@ -147,7 +146,6 @@ export function Test9c() {
       alignItems="center"
       justify="center"
       padding={3}
-      style={{ minHeight: "100vh" }}
     >
       <Stepper activeStep={activeStep}>
         {steps.map((label) => {
@@ -506,7 +504,6 @@ export function Test9c() {
           </React.Fragment>
         );
       })()}
-      <Note />
     </Grid>
   );
 }

@@ -1,0 +1,54 @@
+/* DASHBOARD */
+.content {
+    grid-area: content;
+    background: var(--fondo-contenido);
+    display: flex;
+    flex-flow: row wrap;
+    /* Asegura que el content no colapse su altura */
+  }
+  
+  .ratings {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 6px #ddd;
+    padding: 60px 25px;
+    margin: 10px;
+  }
+  
+  .radar-chart {
+    flex-grow: 1;
+    max-width: 30%;
+    max-height: 475px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 6px #ddd;
+    padding: 60px 25px;
+    margin: 0 10px 10px 10px;
+  }
+  
+  .radar-chart__content {
+    display: block;
+    box-sizing: border-box;
+     max-width: 475px;
+      max-height: 475px;
+  }
+  
+  .table {
+    flex-grow: 1;
+    max-height: 475px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 6px #ddd;
+    padding: 60px 25px;
+    margin: 0 10px 10px 5px;
+  }
+  
+  .linear-chart {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 6px #ddd;
+    margin: 0 10px 10px 10px;
+    padding: 60px 25px;
+  }

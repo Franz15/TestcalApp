@@ -12,7 +12,6 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import background from "../../assets/img/backgrounds/background6.jpg";
-import Note from "../accesories/Note";
 import MenuItem from "@mui/material/MenuItem";
 import Alert from "@mui/material/Alert";
 import AppThemeProvider from "../../assets/theme/Theme";
@@ -267,7 +266,6 @@ export const Register = () => {
               </Box>
             </Box>
           </Grid>
-          <Note sx={{ color: "#FFFF", fontSize: "16px" }}> </Note>
         </Grid>
       </Grid>
     </AppThemeProvider>

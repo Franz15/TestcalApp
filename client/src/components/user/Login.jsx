@@ -15,7 +15,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AppThemeProvider from "../../assets/theme/Theme";
 import background from "../../assets/img/backgrounds/background5.jpg";
-import Note from "../accesories/Note";
+
 import Alert from "@mui/material/Alert";
 
 export const Login = () => {
@@ -59,7 +59,7 @@ export const Login = () => {
   };
   return (
     <AppThemeProvider>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" sx={{ height: "97.5vh" }}>
         <CssBaseline />
         <Grid
           item
@@ -168,7 +168,6 @@ export const Login = () => {
               </Box>
             </Box>
           </Grid>
-          <Note sx={{ color: "#FFFF", fontSize: "16px" }}> </Note>
         </Grid>
       </Grid>
     </AppThemeProvider>
