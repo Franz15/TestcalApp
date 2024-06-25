@@ -4,6 +4,7 @@
     background: var(--fondo-contenido);
     display: flex;
     flex-flow: row wrap;
+    width: 100%;
     /* Asegura que el content no colapse su altura */
   }
   
@@ -17,9 +18,9 @@
   }
   
   .radar-chart {
-    flex-grow: 1;
-    max-width: 30%;
-    max-height: 475px;
+    flex: 1 1 23%;
+    max-width: 23%;
+    max-height: 550px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 0 6px #ddd;
@@ -30,22 +31,23 @@
   .radar-chart__content {
     display: block;
     box-sizing: border-box;
-     max-width: 475px;
-      max-height: 475px;
+    width: 100%;
   }
   
   .table {
-    flex-grow: 1;
-    max-height: 475px;
+    flex: 1 1 44%;
+    max-height: 550px;
+    max-width: 44%;
     background: white;
     border-radius: 10px;
     box-shadow: 0 0 6px #ddd;
-    padding: 60px 25px;
-    margin: 0 10px 10px 5px;
+    padding: 65px 25px;
+    margin: 0 10px 10px 10px;
   }
   
   .linear-chart {
     width: 100%;
+    max-height: 550px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 0 6px #ddd;

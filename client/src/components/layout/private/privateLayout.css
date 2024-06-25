@@ -18,7 +18,7 @@
     "alert alert"
     "lateral content"
     "lateral footer";
-  grid-template-rows: 80px 50px 1fr 30px;
+  grid-template-rows: 85px 50px 1fr 30px;
   grid-template-columns: 230px 1fr;
   overflow-x: hidden;
 }
