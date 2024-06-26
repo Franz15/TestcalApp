@@ -1,11 +1,11 @@
- /* ESTILOS GENERALES */
-  body {
-    font-family: "roboto", Courier, monospace;
-    text-align: center;
-    height: 100vh;
-    padding: 0px;
-    margin: 0px;
-  }
+/* ESTILOS GENERALES */
+body {
+  font-family: "roboto", Courier, monospace;
+  text-align: center;
+  height: 100vh;
+  padding: 0px;
+  margin: 0px;
+}
 
 /* LAYOUT PRIVADO */
 .private-layout {

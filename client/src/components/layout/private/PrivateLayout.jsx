@@ -23,11 +23,14 @@ export const PrivateLayout = () => {
     return <CircularProgress color="inherit" />;
   } else {
     return (
-      <div className={`private-layout ${!alertVisible ? "private-layout-no-alert" : ""}`}>
+      <div
+        className={`private-layout ${
+          !alertVisible ? "private-layout-no-alert" : ""
+        }`}
+      >
         {/* Cabecera */}
         <Header></Header>
 
-        {/* Alerta */}
         {/* Alerta */}
         <nav className={`alert ${!alertVisible ? "alert-hidden" : ""}`}>
           <div className="alert_message">

@@ -2,7 +2,7 @@
 body {
   font-family: "roboto", Courier, monospace;
   text-align: center;
-  height: 100vh;
+  height: 96.5vh;
   padding: 0px;
   margin: 0px;
   display: flex;
@@ -10,7 +10,7 @@ body {
 }
 /* LAYOUT */
 .public-layout {
-  background: transparent;
+  
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -26,6 +26,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent;
 }
 
 /* TARJETA */

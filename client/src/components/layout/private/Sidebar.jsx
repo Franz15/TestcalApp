@@ -14,11 +14,21 @@ const Sidebar = () => {
   return (
     <aside className="lateral">
       <ul>
-          <li><a href="/social/results"><span>Resultados</span></a></li>
-          <li><a href="/social/test9c"> Nuevo Test 9c</a></li>       
-          <li><a href="/social/logout">
-          <LogoutIcon></LogoutIcon> <span className="logout_text"> Cerrar Sesión</span></a></li>
-        </ul>
+        <li>
+          <a href="/social/results">
+            <span>Resultados</span>
+          </a>
+        </li>
+        <li>
+          <a href="/social/test9c"> Nuevo Test 9c</a>
+        </li>
+        <li>
+          <a href="/social/logout">
+            <LogoutIcon></LogoutIcon>{" "}
+            <span className="logout_text"> Cerrar Sesión</span>
+          </a>
+        </li>
+      </ul>
     </aside>
   );
 };

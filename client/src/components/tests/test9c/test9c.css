@@ -1,0 +1,72 @@
+.prueba {
+  max-width: 700px;
+  max-height: 900px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px; /* pt-2 */
+  margin: 0 auto; /* Center the container */
+}
+
+.card {
+  width: 90%;
+  max-width: 700px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 6px #ddd;
+  padding: 60px 25px;
+}
+
+.card-media {
+  height: 400px;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-content h5 {
+  margin-bottom: 16px;
+}
+
+.card-content p {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Asegura que los botones estén alineados verticalmente */
+  width: 100%; /* Ensure it takes up the full width of the container */
+  max-width: 600px; /* Same as the card's max-width */
+  margin: 19px 10px 0 0; /* Center the buttons and add space above */
+}
+
+.button_test {
+  background: var(--fondo-resalte);   
+  width: 160px;
+  min-height: 56px;
+  color: var(--letra-gris);
+  border: none;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.button_return {
+  background: var(--fondo-resalte);
+  margin-right: 3px;
+  width: 160px;
+  min-height: 56px;
+  color: var(--letra-gris);
+  border: none;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 300ms;
+}

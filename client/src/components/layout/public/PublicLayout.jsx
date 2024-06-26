@@ -8,7 +8,8 @@ export const PublicLayout = () => {
   const { auth } = useAuth();
 
   return (
-    <div className="public-layout">
+    <body>
+ <div className="public-layout">
       {/* Contenido Principal */}
       <section className="public__content">
         {!auth._id ? <Outlet /> : <Navigate to="/social/" />}
@@ -16,5 +17,7 @@ export const PublicLayout = () => {
        {/* Pie de página */}
        <Footer />
     </div>
+    </body>
+   
   );
 };

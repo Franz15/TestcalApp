@@ -1,7 +1,7 @@
 /* DASHBOARD */
 .content {
     grid-area: content;
-    background: var(--fondo-contenido);
+    background:transparent;
     display: flex;
     flex-flow: row wrap;
     width: 100%;
@@ -17,9 +17,15 @@
     margin: 10px;
   }
   
+  .noflex-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+}
+
   .radar-chart {
-    flex: 1 1 23%;
-    max-width: 23%;
+    flex: 1 1 22%;
+    max-width: 22%;
     max-height: 550px;
     background: white;
     border-radius: 10px;
@@ -35,9 +41,8 @@
   }
   
   .table {
-    flex: 1 1 44%;
+    flex: 1 1 40%;
     max-height: 550px;
-    max-width: 44%;
     background: white;
     border-radius: 10px;
     box-shadow: 0 0 6px #ddd;

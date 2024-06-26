@@ -69,22 +69,23 @@ export default function Dashboard() {
           <Ratings results={results} />
         </article>
 
-        <article className="radar-chart">
-          <div>
-            <RadarChart results={results} />
-          </div>
-        </article>
-        <article className="radar-chart">
-          <div>
-            <RadarChart results={results} />
-          </div>
-        </article>
-        <article className="table">
-        <LinearChart results={results} />
-        </article>
-
+        <div className="noflex-wrap">
+          <article className="radar-chart">
+            <div>
+              <RadarChart results={results} />
+            </div>
+          </article>
+          <article className="radar-chart">
+            <div>
+              <RadarChart results={results} />
+            </div>
+          </article>
+          <article className="table">
+            <LinearChart results={results} />
+          </article>
+        </div>
         <article className="linear-chart">
-        <Table9c results={results} handleResults={handleResults} />
+          <Table9c results={results} handleResults={handleResults} />
         </article>
       </section>
     </>
