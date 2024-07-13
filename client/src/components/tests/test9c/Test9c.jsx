@@ -26,7 +26,7 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import Input from "@mui/material/Input";
-import './test9c.css';
+import "./test9c.css";
 
 export function Test9c() {
   //Token de autenticación
@@ -202,30 +202,30 @@ export function Test9c() {
               </Box>
             </React.Fragment>*/
             <>
-  <div className="prueba">
-    <div className="card">
-      <div className="card-content">
-        <h5>Resultado de tu test:</h5>
-        <p>
-          Con tus condiciones físicas actuales podrías llegar a
-          escalar hasta <br/>{grade}
-          <span id="grade"> </span>
-        </p>
-      </div>
-    </div>
+              <div className="prueba">
+                <div className="card">
+                  <div className="card-content">
+                    <h5>Resultado de tu test:</h5>
+                    <p>
+                      Con tus condiciones físicas actuales podrías llegar a
+                      escalar hasta <br />
+                      {grade}
+                      <span id="grade"> </span>
+                    </p>
+                  </div>
+                </div>
 
-    <div className="buttons">
-      <button className="button_test edit" onclick="handleReset()">
-        Volver a hacer el Test
-      </button>
+                <div className="buttons">
+                  <button className="button_test edit" oncClick="handleReset()">
+                    Volver a hacer el Test
+                  </button>
 
-      <button href="/social" className="button_return edit">
-        Ir al Dashboard
-      </button>
-    </div>
-  </div>
-</>
-
+                  <Button href="/social" className="button_return edit">
+                    Ir al Dashboard
+                  </Button>
+                </div>
+              </div>
+            </>
           );
         if (activeStep === 0)
           return (

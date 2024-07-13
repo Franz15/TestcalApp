@@ -1,147 +1,138 @@
 /* LAYOUT */
 .layout {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-   background-image: url('../../assets/img/backgrounds/background5.jpg'); /* Ruta de tu imagen */
-   background-size: cover;
-   background-position: center; /* Centra la imagen */
-   background-repeat: no-repeat; /* Evita que la imagen se repita */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-image: url("../../assets/img/backgrounds/background5.jpg"); /* Ruta de tu imagen */
+  background-size: cover;
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
 
 /* CONTENIDO PRINCIPAL */
 .content {
-    text-align: center;
-    height: 100vh;
-    padding: 0px;
-    margin: 0px;
-    grid-area: content;
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    /* Asegura que el content no colapse su altura */
-  }
+  text-align: center;
+  /*height: 100vh;*/
+  padding: 0px;
+  margin: 0px;
+  grid-area: content;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  /* Asegura que el content no colapse su altura */
+}
 
 /* TARJETA */
 .card {
-    width: 35%;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 6px #ddd;
-    padding: 60px 25px;
+  width: 35%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 6px #ddd;
+  padding: 60px 25px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra horizontalmente los elementos dentro de la tarjeta */
-
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente los elementos dentro de la tarjeta */
 }
 
 .title__img {
-    background-image: url('../koala-profile.jpg'); /* Ruta de tu imagen */
-    background-size: cover; /* Ajusta el tamaÃ±o de la imagen para cubrir el contenedor */
-    background-position: center; /* Centra la imagen en el contenedor */
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+  background-image: url("../koala-profile.jpg"); /* Ruta de tu imagen */
+  background-size: cover; /* Ajusta el tamaÃ±o de la imagen para cubrir el contenedor */
+  background-position: center; /* Centra la imagen en el contenedor */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
 
 .login__form {
-    width: 100%; /* Asegura que el formulario ocupe el ancho de la tarjeta */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra horizontalmente los elementos dentro del formulario */
+  width: 100%; /* Asegura que el formulario ocupe el ancho de la tarjeta */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente los elementos dentro del formulario */
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    width: 80%; /* Ajusta el ancho de los inputs y el botÃ³n */
-    gap: 15px; /* Espacio entre elementos */
+  display: flex;
+  flex-direction: column;
+  width: 80%; /* Ajusta el ancho de los inputs y el botÃ³n */
+  gap: 15px; /* Espacio entre elementos */
 }
 
 .form input {
-    width: 100%;
-    padding: 15px 10px;
-    margin-bottom: 10px; /* Espacio inferior */
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    box-sizing: border-box; /* Incluye el padding y borde en el ancho y alto */
+  width: 100%;
+  padding: 15px 10px;
+  margin-bottom: 10px; /* Espacio inferior */
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-sizing: border-box; /* Incluye el padding y borde en el ancho y alto */
 }
 
 .remember-me {
-    padding: 15px 0;
-    display: flex;
+  padding: 15px 0;
+  display: flex;
 }
 
-.form__submit, .form__actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px; /* Espacio entre elementos */
-    width: 100%;
+.form__submit,
+.form__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px; /* Espacio entre elementos */
+  width: 100%;
 }
 
-.forgot-password, .register {
-    margin: 10px 0 0 0;
-    font-size: 14px;
-    color: var(--letra-gris);
+.forgot-password,
+.register {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  color: var(--letra-gris);
 }
 
 .register a {
-    color: var(--azul-claro);
-    text-decoration: none;
+  color: var(--azul-claro);
+  text-decoration: none;
 }
 
 .register a:hover {
-    text-decoration: underline;
-}
-
-/* FOOTER */
-.footer {
-    height: 30px;
-    background: var(--fondo-contenido);
-    color: var(--letra-gris);
-    border-top: 1px solid white;
-    text-align: center;
-    line-height: 30px; /* Centrar el texto verticalmente */
+  text-decoration: underline;
 }
 
 /* BOTONES */
 button,
 input[type="submit"],
 input[type="button"] {
-    background: #0b70e1;
-    width: 100px;
-    color: white;
-    border: none;
-    padding: 15px;
-    border-radius: 3px;
-    text-transform: capitalize;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 300ms;
+  background: #0b70e1;
+  width: 100px;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 3px;
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 300ms;
 }
 
 button.login:hover,
 input[type="submit"].login:hover,
 input[type="button"].login:hover {
-    background: var(--color-editar);
+  background: var(--color-editar);
 }
 
 button.delete:hover,
 input[type="submit"].delete:hover,
 input[type="button"].delete:hover {
-    background: var(--color-borrar);
+  background: var(--color-borrar);
 }
 
 /* MEDIA QUERIES */
 @media (max-width: 1085px) {
-    .content {
-        flex-direction: column;
-    }
+  .content {
+    flex-direction: column;
+  }
 
-    .card {
-        width: 80%;
-    }
+  .card {
+    width: 80%;
+  }
 }

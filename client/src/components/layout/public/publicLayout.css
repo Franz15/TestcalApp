@@ -10,14 +10,13 @@ body {
 }
 /* LAYOUT */
 .public-layout {
-  
   display: flex;
   flex-direction: column;
   flex: 1;
- background-image: url('../../assets/img/backgrounds/background5.jpg'); /* Ruta de tu imagen */
- background-size: cover; /* Ajusta el tamaño de la imagen */
- background-position: center; /* Centra la imagen */
- background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-image: url("../../assets/img/backgrounds/background5.jpg"); /* Ruta de tu imagen */
+  background-size: cover; /* Ajusta el tamaño de la imagen */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
 
 /* CONTENIDO PRINCIPAL */
@@ -40,11 +39,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; /* Centra horizontalmente los elementos dentro de la tarjeta */
-
 }
 
 .title__img {
-  background-image: url('../koala-profile.jpg'); /* Ruta de tu imagen */
+  background-image: url("../koala-profile.jpg"); /* Ruta de tu imagen */
   background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el contenedor */
   background-position: center; /* Centra la imagen en el contenedor */
   width: 100px;
@@ -80,7 +78,8 @@ body {
   display: flex;
 }
 
-.form__submit, .form__actions {
+.form__submit,
+.form__actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -88,7 +87,8 @@ body {
   width: 100%;
 }
 
-.forgot-password, .register {
+.forgot-password,
+.register {
   margin: 10px 0 0 0;
   font-size: 14px;
   color: var(--letra-gris);
@@ -145,10 +145,10 @@ input[type="button"].delete:hover {
 /* MEDIA QUERIES */
 @media (max-width: 1085px) {
   .content {
-      flex-direction: column;
+    flex-direction: column;
   }
 
   .card {
-      width: 80%;
+    width: 80%;
   }
 }

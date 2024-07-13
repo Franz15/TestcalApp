@@ -1,0 +1,8 @@
+/* FOOTER */
+.footer {
+  grid-area: footer;
+  font-size: 17px;
+  background: var(--fondo-contenido);
+  color: var(--letra-gris);
+  padding: 2px;
+}

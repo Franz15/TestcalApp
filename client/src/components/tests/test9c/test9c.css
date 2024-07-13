@@ -43,7 +43,7 @@
 }
 
 .button_test {
-  background: var(--fondo-resalte);   
+  background: var(--fondo-resalte);
   width: 160px;
   min-height: 56px;
   color: var(--letra-gris);

@@ -60,6 +60,17 @@ body {
   align-content: center;
 }
 
+/* FOOTER */
+.footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: space-around;
+  font-size: 17px;
+  background: var(--fondo-contenido);
+  color: var(--letra-gris);
+  padding: 2px;
+}
+
 /* ALERTA */
 .alert {
   grid-area: alert;

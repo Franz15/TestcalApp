@@ -80,11 +80,11 @@ export default function Dashboard() {
               <RadarChart results={results} />
             </div>
           </article>
-          <article className="table">
+          <article className="linear-chart">
             <LinearChart results={results} />
           </article>
         </div>
-        <article className="linear-chart">
+        <article className="table">
           <Table9c results={results} handleResults={handleResults} />
         </article>
       </section>
