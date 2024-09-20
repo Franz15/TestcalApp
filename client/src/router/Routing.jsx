@@ -13,6 +13,7 @@ import { Config } from "../components/user/Config";
 import DeleteTest9c from "../components/tests/test9c/DeleteTest9c";
 import Dashboard from "../components/layout/private/Dashboard";
 import Error404 from "../components/accesories/Error404";
+import ResetPswrd from "../components/user/ResetPswrd";
 
 export const Routing = () => {
   return (
@@ -24,6 +25,7 @@ export const Routing = () => {
             <Route path="login" element={<Login />} />
             <Route path="registro" element={<Register />} />
             <Route path="recuperacion" element={<Recover />} />
+            <Route path="cambiar-contrasena/:token" element={<ResetPswrd />} />
           </Route>
 
           <Route path="/social" element={<PrivateLayout />}>

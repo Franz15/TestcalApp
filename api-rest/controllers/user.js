@@ -119,6 +119,39 @@ const register = (req, res) => {
   );
 };
 
+const sendVerifEmail = async (req, res) => {
+  // Obtener el token
+  const { token } = req.params;
+  // Verificar los datos
+  let data = jwt.getTokenData(token);
+
+  if (data === null) {
+    return res.json({
+      success: false,
+      msg: "Error al recuperar datos del usuario",
+    });
+  }
+
+  const { email, code } = data;
+
+  // Verificar que el usuario existe
+  const user = await User.findOne({ email });
+
+  if (user === null) {
+    return res.json({
+      success: false,
+      msg: "Usuario no existe",
+    });
+  }
+
+  // Obtener la plantilla de verificación
+  const emailTemplate = getTemplateVerificacion(user, token);
+
+  // Enviar el correo
+  await sendEmail(user, "Verificación de Correo Electrónico", emailTemplate);
+  res.send("success");
+};
+
 //Confirmar email
 const confirm = async (req, res) => {
   try {
@@ -139,8 +172,6 @@ const confirm = async (req, res) => {
 
     //Verificar que el usuario existe
     const user = await User.findOne({ email });
-    console.log("USER ", user);
-    console.log("CODE ", code);
 
     if (user === null) {
       return res.json({
@@ -158,7 +189,7 @@ const confirm = async (req, res) => {
       });
     }
 
-  /*  //Verificar el código del usuario
+    /*  //Verificar el código del usuario
     if (user.status === "VERIFIED" ) {
       return res.json({
         success: false,
@@ -170,8 +201,7 @@ const confirm = async (req, res) => {
     await user.save();
 
     //Redireccionar a la página de confirmación
-    console.log("EXITO");
-     res. send ('<h2>Email verificado con éxito</h2>')
+    res.send("<h2>Email verificado con éxito</h2>");
   } catch {}
 };
 
@@ -202,7 +232,7 @@ const login = (req, res) => {
         message: "Contraseña incorrecta",
       });
     }
-    
+
     //Recuperar Token
     const token = jwt.createToken(user);
 
@@ -221,34 +251,85 @@ const login = (req, res) => {
 };
 
 //Recuperar contraseña
-const recover = (req, res) => {
-  let params = req.params;
+const recover = async (req, res) => {
+  let params = req.params; // Cambié de req.params a req.body, ya que el email debería venir en el cuerpo de la solicitud
 
   if (!params.email) {
     return res.status(400).send({
       status: "error",
-      message: "Faltan datos ",
+      message: "Faltan datos",
     });
   }
 
-  //Buscar si existe en BBDD
-  User.findOne({ email: params.email.toLowerCase() }).exec((error, user) => {
-    if (error || !user)
-      return res
-        .status(404)
-        .send({ status: "error", message: "No existe este usuario" });
-  });
+  try {
+    console.log("PARAMS", params.email);
+    // Buscar si el usuario existe en la BBDD
+    const user = await User.findOne({ email: params.email.toLowerCase() });
+    console.log("ÑE", user._id);
+    if (!user) {
+      return res.status(404).send({
+        status: "error",
+        message: "No existe este usuario",
+      });
+    }
 
-  //Obtener un template
-  const template = getTemplateRecover({ email: params.email.toLowerCase() });
+    // Generar un token con expiración corta (ej. 1 hora)
+    const token = jwt.createToken(user);
 
-  //Enviar email
-  sendEmail(params, "Recuperar contraseña", template);
+    // Obtener un template de recuperación con el token
+    const template = getTemplateRecover(params.email, token);
 
-  //Devolver resultado
+    // Enviar email
+    await sendEmail({ email: params.email }, "Recuperar contraseña", template);
+
+    // Devolver resultado
+    return res.status(200).json({
+      status: "success",
+      message: "Email enviado correctamente",
+    });
+  } catch (error) {
+    return res.status(500).send({
+      status: "error",
+      message: "Error en el proceso de recuperación",
+    });
+  }
+};
+
+const changePassword = async (req, res) => {
+  const { token, newPassword } = req.body;
+
+  // Verificar el token
+  const data = jwt.getTokenData(token);
+
+  if (!data) {
+    return res.status(400).json({
+      status: "error",
+      message: "Token inválido o expirado",
+    });
+  }
+
+  const { email } = data;
+
+  // Buscar usuario por email
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(404).json({
+      status: "error",
+      message: "Usuario no encontrado",
+    });
+  }
+
+  // Cifrar la nueva contraseña
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+  // Actualizar la contraseña en la base de datos
+  user.password = hashedPassword;
+  await user.save();
+
   return res.status(200).json({
     status: "success",
-    message: "Email enviado correctamente",
+    message: "Contraseña cambiada correctamente",
   });
 };
 
@@ -439,4 +520,6 @@ module.exports = {
   update,
   upload,
   avatar,
+  sendVerifEmail,
+  changePassword,
 };
