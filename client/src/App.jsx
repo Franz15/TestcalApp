@@ -1,5 +1,6 @@
 import { Routing } from "./router/Routing";
 import AppThemeProvider from "./assets/theme/Theme";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
