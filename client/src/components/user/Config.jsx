@@ -10,13 +10,15 @@ import Note from "../accesories/Note";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 
 export const Config = () => {
   const { auth, setAuth } = useAuth();
   const [selectedImage, setSelectedImage] = useState(null);
   const [saved, setSaved] = useState("not_saved");
-  const [imageUrl, setImageUrl] = useState(Global.url + "user/avatar/" + auth.image);
+  const [imageUrl, setImageUrl] = useState(
+    Global.url + "user/avatar/" + auth.image
+  );
 
   useEffect(() => {
     if (selectedImage) {
@@ -88,207 +90,181 @@ export const Config = () => {
   };
 
   return (
-<Grid container
+    <Grid
+      container
       spacing={0}
       direction="column"
       alignItems="center"
       justify="center"
       padding={3}
-      style={{ minHeight: "100vh" }}>
-        <IconButton aria-label="upload picture" component="label" sx={{ m: 1, width: 125, height: 125 }} >
-        <input hidden accept="image/*" type="file" name="file0" id="file" onChange={(e) => setSelectedImage(e.target.files[0])}/>
-        <Avatar
-            src={imageUrl}
-            sx={{ m: 1, width: 125, height: 125 }}
-          />
+      style={{ minHeight: "100vh" }}
+    >
+      <IconButton
+        aria-label="upload picture"
+        component="label"
+        sx={{ m: 1, width: 125, height: 125 }}
+      >
+        <input
+          hidden
+          accept="image/*"
+          type="file"
+          name="file0"
+          id="file"
+          onChange={(e) => setSelectedImage(e.target.files[0])}
+        />
+        <Avatar src={imageUrl} sx={{ m: 1, width: 125, height: 125 }} />
       </IconButton>
-          <Box
-            sx={{
-              maxWidth: 700,
-              maxHeight: 900,
-              display: "flex",
-              flexDirection: "column",
-              pt: 2,
-            }}
+      <Box
+        sx={{
+          maxWidth: 700,
+          maxHeight: 900,
+          display: "flex",
+          flexDirection: "column",
+          pt: 2,
+        }}
+      >
+        <Box component="form" onSubmit={updateUser} sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            fullWidth
+            id="nombre"
+            label="Nombre"
+            name="nombre"
+            defaultValue={auth.nombre}
+            type="text"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            id="apellido"
+            label="Apellido"
+            name="apellido"
+            defaultValue={auth.apellido}
+            type="text"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Dirección de correo electrónico"
+            name="email"
+            defaultValue={auth.email}
+            type="email"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            id="user"
+            label="Nombre de Usuario"
+            name="user"
+            defaultValue={auth.user}
+            type="text"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            name="password"
+            label="Contraseña"
+            type="password"
+            id="password"
+          />
+
+          <TextField
+            fullWidth
+            margin="normal"
+            id="standard-select-currency"
+            select
+            label="Máximo grado encadenado en roca"
+            defaultValue={auth.grado}
           >
-            
-      
-            
-          
-            <Box component="form" onSubmit={updateUser} sx={{ mt: 1 }}>
-           
-              <TextField
-                margin="normal"
-               
-                fullWidth
-                id="nombre"
-                label="Nombre"
-                name="nombre"
-                defaultValue={auth.nombre}
-                type="text"
-                autoFocus
-                
-              />
-              <TextField
-                margin="normal"
-                
-                fullWidth
-                id="apellido"
-                label="Apellido"
-                name="apellido"
-                defaultValue={auth.apellido}
-                type="text"
-                autoFocus
-                
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Dirección de correo electrónico"
-                name="email"
-                defaultValue={auth.email}
-                type="email"
-                autoFocus
-                
-              />
-              <TextField
-                margin="normal"
-                
-                fullWidth
-                id="user"
-                label="Nombre de Usuario"
-                name="user"
-                defaultValue={auth.user}
-                type="text"
-                autoFocus
-               
-              />
-              <TextField
-                margin="normal"
-                
-                fullWidth
-                name="password"
-                label="Contraseña"
-                type="password"
-                id="password"
-                
-               
-              />
-
-<TextField
-          
-          fullWidth
-          margin="normal"
-          id="standard-select-currency"
-          select
-          label="Máximo grado encadenado en roca"
-          defaultValue={auth.grado}
-        >
-                  <MenuItem value={"IV"}>IV</MenuItem>
-                  <MenuItem value={"V"}>V</MenuItem>
-                  <MenuItem value={"6a"}>6a</MenuItem>
-                  <MenuItem value={"6a+"}>6a+</MenuItem>
-                  <MenuItem value={"6b"}>6b</MenuItem>
-                  <MenuItem value={"6b+"}>6b+</MenuItem>
-                  <MenuItem value={"6c"}>6c</MenuItem>
-                  <MenuItem value={"6c+"}>6c+</MenuItem>
-                  <MenuItem value={"7a"}>7a</MenuItem>
-                  <MenuItem value={"7a+"}>7a+</MenuItem>
-                  <MenuItem value={"7b"}>7b</MenuItem>
-                  <MenuItem value={"7b+"}>7b+</MenuItem>
-                  <MenuItem value={"7c"}>7c</MenuItem>
-                  <MenuItem value={"7c+"}>7c+</MenuItem>
-                  <MenuItem value={"8a"}>8a</MenuItem>
-                  <MenuItem value={"8a+"}>8a+</MenuItem>
-                  <MenuItem value={"8b"}>8b</MenuItem>
-                  <MenuItem value={"8b+"}>8b+</MenuItem>
-                  <MenuItem value={"8c"}>8c</MenuItem>
-                  <MenuItem value={"8c+"}>8c+</MenuItem>
-                  <MenuItem value={"9a"}>9a</MenuItem>
-                  <MenuItem value={"9a+"}>9a+</MenuItem>
-                  <MenuItem value={"9b"}>9b</MenuItem>
-                  <MenuItem value={"9b+"}>9b+</MenuItem>
-                  <MenuItem value={"9c"}>9c</MenuItem>
-                
-              </TextField>
-              <TextField sx={{ mt: 2 }}
-                margin="normal"
-               
-                fullWidth
-                id="altura"
-                label="Altura (en cm)"
-                name="altura"
-                defaultValue={auth.altura}
-                autoFocus
-                type="number"
-                InputProps={{ inputProps: { min: 0} }}
-               
-              />
-              <TextField
-                margin="normal"
-                
-                fullWidth
-                id="peso"
-                label="Peso (en kg)"
-                name="peso"
-                defaultValue={auth.peso}
-                autoFocus
-                
-                type="number"
-                InputProps={{ inputProps: { min: 0} }}
-               
-              />
-              <TextField
-                margin="normal"
-                
-                fullWidth
-                id="envergadura"
-                label="Envergadura (en cm)"
-                name="envergadura"
-                defaultValue={auth.envergadura}
-                type="number"
-                autoFocus
-                InputProps={{ inputProps: { min: 0} }}
-               
-              />
-              {saved == "error" ? (
-                <Alert severity="error">{message}</Alert>
-               
-              ) : (
-                ""
-              )}
-              {saved == "saved" ? (
-                <Alert severity="success">Usuario actualizado correctamente</Alert>
-                
-              ) : (
-                ""
-              )}
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Actualizar
-              </Button>
-              <Grid container>
-                <Grid item>
-                </Grid>
-              </Grid>
-              </Box>
-              <Note />
-          </Box>
-          
-        </Grid>
-
-    
-    
+            <MenuItem value={"IV"}>IV</MenuItem>
+            <MenuItem value={"V"}>V</MenuItem>
+            <MenuItem value={"6a"}>6a</MenuItem>
+            <MenuItem value={"6a+"}>6a+</MenuItem>
+            <MenuItem value={"6b"}>6b</MenuItem>
+            <MenuItem value={"6b+"}>6b+</MenuItem>
+            <MenuItem value={"6c"}>6c</MenuItem>
+            <MenuItem value={"6c+"}>6c+</MenuItem>
+            <MenuItem value={"7a"}>7a</MenuItem>
+            <MenuItem value={"7a+"}>7a+</MenuItem>
+            <MenuItem value={"7b"}>7b</MenuItem>
+            <MenuItem value={"7b+"}>7b+</MenuItem>
+            <MenuItem value={"7c"}>7c</MenuItem>
+            <MenuItem value={"7c+"}>7c+</MenuItem>
+            <MenuItem value={"8a"}>8a</MenuItem>
+            <MenuItem value={"8a+"}>8a+</MenuItem>
+            <MenuItem value={"8b"}>8b</MenuItem>
+            <MenuItem value={"8b+"}>8b+</MenuItem>
+            <MenuItem value={"8c"}>8c</MenuItem>
+            <MenuItem value={"8c+"}>8c+</MenuItem>
+            <MenuItem value={"9a"}>9a</MenuItem>
+            <MenuItem value={"9a+"}>9a+</MenuItem>
+            <MenuItem value={"9b"}>9b</MenuItem>
+            <MenuItem value={"9b+"}>9b+</MenuItem>
+            <MenuItem value={"9c"}>9c</MenuItem>
+          </TextField>
+          <TextField
+            sx={{ mt: 2 }}
+            margin="normal"
+            fullWidth
+            id="altura"
+            label="Altura (en cm)"
+            name="altura"
+            defaultValue={auth.altura}
+            autoFocus
+            type="number"
+            InputProps={{ inputProps: { min: 0 } }}
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            id="peso"
+            label="Peso (en kg)"
+            name="peso"
+            defaultValue={auth.peso}
+            autoFocus
+            type="number"
+            InputProps={{ inputProps: { min: 0 } }}
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            id="envergadura"
+            label="Envergadura (en cm)"
+            name="envergadura"
+            defaultValue={auth.envergadura}
+            type="number"
+            autoFocus
+            InputProps={{ inputProps: { min: 0 } }}
+          />
+          {saved == "error" ? <Alert severity="error">{message}</Alert> : ""}
+          {saved == "saved" ? (
+            <Alert severity="success">Usuario actualizado correctamente</Alert>
+          ) : (
+            ""
+          )}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Actualizar
+          </Button>
+          <Grid container>
+            <Grid item></Grid>
+          </Grid>
+        </Box>
+        <Note />
+      </Box>
+    </Grid>
   );
 };
-
-
 
 /*<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <header className="content__header content__header--public">

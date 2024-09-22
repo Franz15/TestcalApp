@@ -30,9 +30,7 @@ export default function getLastResult() {
         setResult(0);
       }
     } else {
-      console.log("errorrrr");
     }
   };
-  console.log("Last Result", result);
   return result;
 }
