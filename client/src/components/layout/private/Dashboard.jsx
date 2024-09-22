@@ -10,6 +10,7 @@ import "./dashboard.css";
 export default function Dashboard() {
   //Token de autenticación
   const token = localStorage.getItem("token");
+
   const { auth, loading } = useAuth();
   const [results, setResults] = useState([]);
   const [avgResult, setAvgResult] = useState([]);
@@ -62,13 +63,10 @@ export default function Dashboard() {
 
   return (
     <>
-      {/* Contenido principal */}
       <section className="content">
-        {/* Aqui van las películas */}
         <article className="ratings">
           <Ratings results={results} />
         </article>
-
         <div className="noflex-wrap">
           <article className="linear-chart">
             <LinearChart results={results} />

@@ -149,7 +149,7 @@ const sendVerifEmail = async (req, res) => {
 
   // Enviar el correo
   await sendEmail(user, "Verificación de Correo Electrónico", emailTemplate);
-  res.send("success");
+  res.status(200).send({ status: "success" });
 };
 
 //Confirmar email
@@ -189,7 +189,7 @@ const confirm = async (req, res) => {
       });
     }
 
-  /*  //Verificar el código del usuario
+    /*  //Verificar el código del usuario
     if (user.status === "VERIFIED" ) {
       return res.json({
         success: false,
@@ -232,7 +232,7 @@ const login = (req, res) => {
         message: "Contraseña incorrecta",
       });
     }
-    
+
     //Recuperar Token
     const token = jwt.createToken(user);
 
