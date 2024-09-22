@@ -8,7 +8,6 @@ const secret = "CLAVE_SECRETA-TestcalApp-TFG_JavierV-ITEP-22";
 //Crear función para generar tokens
 const createToken = (user) => {
   let payload;
-  console.log("User ", user);
 
   if (!user._id) {
     payload = {
@@ -47,7 +46,6 @@ const createToken = (user) => {
       exp: moment().add(2, "hours").unix(),
     };
   }
-  console.log("Payload ", payload);
 
   //Devolver JWT token codificado
   return jwt.encode(payload, secret);
