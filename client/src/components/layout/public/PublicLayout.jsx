@@ -9,15 +9,13 @@ export const PublicLayout = () => {
 
   return (
     <body>
- <div className="public-layout">
-      {/* Contenido Principal */}
-      <section className="public__content">
-        {!auth._id ? <Outlet /> : <Navigate to="/social/" />}
-      </section>
-       {/* Pie de página */}
-       <Footer />
-    </div>
+      <div className="public-layout">
+        {/* Contenido Principal */}
+        <section className="public__content">
+          {!auth._id ? <Outlet /> : <Navigate to="/social/" />}
+        </section>
+        {/* Pie de página */}
+      </div>
     </body>
-   
   );
 };

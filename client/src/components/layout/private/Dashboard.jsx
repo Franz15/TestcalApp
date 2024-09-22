@@ -70,18 +70,18 @@ export default function Dashboard() {
         </article>
 
         <div className="noflex-wrap">
-          <article className="radar-chart">
-            <div>
-              <RadarChart results={results} />
-            </div>
-          </article>
-          <article className="radar-chart">
-            <div>
-              <RadarChart results={results} />
-            </div>
-          </article>
           <article className="linear-chart">
             <LinearChart results={results} />
+          </article>
+          <article className="radar-chart">
+            <div>
+              <RadarChart results={results} />
+            </div>
+          </article>
+          <article className="radar-chart">
+            <div>
+              <RadarChart results={results} />
+            </div>
           </article>
         </div>
         <article className="table">

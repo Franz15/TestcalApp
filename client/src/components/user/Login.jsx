@@ -15,7 +15,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AppThemeProvider from "../../assets/theme/Theme";
 import background from "../../assets/img/backgrounds/background5.jpg";
-import './login.css';
+import "./login.css";
 import Alert from "@mui/material/Alert";
 
 export const Login = () => {
@@ -59,7 +59,19 @@ export const Login = () => {
   };
   return (
     <AppThemeProvider>
-      <Grid container component="main" sx={{ height: "97.5vh" }}>
+      <Grid
+        container
+        component="main"
+        sx={{
+          height: {
+            xs: "100vh",
+            sm: "100vh",
+            md: "100vh",
+            lg: "100vh",
+            xl: "100vh",
+          },
+        }}
+      >
         <CssBaseline />
         <Grid
           item
@@ -171,7 +183,7 @@ export const Login = () => {
         </Grid>
       </Grid>
     </AppThemeProvider>
-  /*
+    /*
   
   
   <div className="layout">

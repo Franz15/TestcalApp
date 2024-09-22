@@ -2,7 +2,6 @@
 body {
   font-family: "roboto", Courier, monospace;
   text-align: center;
-  height: 96.5vh;
   padding: 0px;
   margin: 0px;
   display: flex;
@@ -105,12 +104,9 @@ body {
 
 /* FOOTER */
 .footer {
-  height: 30px;
   background: var(--fondo-contenido);
   color: var(--letra-gris);
   border-top: 1px solid white;
-  text-align: center;
-  line-height: 30px; /* Centrar el texto verticalmente */
 }
 
 /* BOTONES */
