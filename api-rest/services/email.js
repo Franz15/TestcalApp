@@ -49,13 +49,13 @@ const getTemplateVerificacion = (user, token) => {
                         <td style="padding: 20px;">
                             <p>Hola, ${user.nombre}</p>
                             <p>Gracias por registrarte en TestcalApp. Para verificar tu dirección de correo electrónico, por favor haz clic en el siguiente enlace:</p>
-                            <p><a href= http://localhost:5555/api/user/confirm/${token} style="background-color: rgb(232,191,86); color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px;">Verificar Correo Electrónico</a></p>
+                            <p><a href= https://api.testcalapp.es/api/user/confirm/${token} style="background-color: rgb(232,191,86); color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px;">Verificar Correo Electrónico</a></p>
                             <p>Si no has creado una cuenta en TestcalApp, puedes ignorar este correo electrónico.</p>
                         </td>
                     </tr>
                     <tr>
                         <td style="background-color: #f4f4f4; padding: 20px; text-align: center;">
-                            <p>Si tienes algún problema al hacer clic en el botón de verificación, copia y pega el siguiente enlace en tu navegador: http://localhost:5555/api/user/confirm/${token}</p>
+                            <p>Si tienes algún problema al hacer clic en el botón de verificación, copia y pega el siguiente enlace en tu navegador: https://api.testcalapp.es/api/user/confirm/${token}</p>
                         </td>
                     </tr>
                 </table>

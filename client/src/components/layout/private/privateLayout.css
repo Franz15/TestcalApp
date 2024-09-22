@@ -84,7 +84,7 @@ body {
 
 .alert a {
   display: block;
-  color: var(--color-borrar);
+  color: whitesmoke;
   text-decoration: none;
 }
 
