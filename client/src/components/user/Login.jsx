@@ -15,7 +15,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AppThemeProvider from "../../assets/theme/Theme";
 import background from "../../assets/img/backgrounds/background5.jpg";
-import Note from "../accesories/Note";
+import "./login.css";
 import Alert from "@mui/material/Alert";
 
 export const Login = () => {
@@ -59,7 +59,19 @@ export const Login = () => {
   };
   return (
     <AppThemeProvider>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid
+        container
+        component="main"
+        sx={{
+          height: {
+            xs: "100vh",
+            sm: "100vh",
+            md: "100vh",
+            lg: "100vh",
+            xl: "100vh",
+          },
+        }}
+      >
         <CssBaseline />
         <Grid
           item
@@ -168,9 +180,43 @@ export const Login = () => {
               </Box>
             </Box>
           </Grid>
-          <Note sx={{ color: "#FFFF", fontSize: "16px" }}> </Note>
         </Grid>
       </Grid>
     </AppThemeProvider>
+    /*
+  
+  
+  <div className="layout">
+
+    <section className="content">
+       
+        <article className="card">
+            <img className="title__img"/>
+            <div className="login__form">
+                <h3 className="login__title">Login</h3>
+                <form className="form">
+                    <input type="email" placeholder="Email"/>
+                    <input type="password" placeholder="Contraseña"/>
+                    <div className="form__submit">
+                        <label className="remember-me">
+                            <input type="checkbox" className="remember-me__checkbox"/>
+                            Recuérdame
+                        </label>
+                        <button type="submit" className="login">Login</button>
+                    </div>
+                    <div className="form__actions">
+                    <a href="#" className="forgot-password">¿Has olvidado tu contraseña?</a>
+                    <a href="/registro" className="register">¿No tienes cuenta?, regístrate aquí</a>
+                    {saved == "error" ? (
+                  <Alert severity="error">{message}</Alert>
+                ) : (
+                  ""
+                )}
+                </div>
+                </form>
+            </div>
+        </article>
+    </section>
+   </div>*/
   );
 };

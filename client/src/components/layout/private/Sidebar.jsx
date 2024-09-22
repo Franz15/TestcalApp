@@ -12,39 +12,24 @@ const drawerWidth = 240;
 
 const Sidebar = () => {
   return (
-    <Drawer
-      variant="permanent"
-      sx={{
-        width: drawerWidth,
-        flexShrink: 0,
-      }}
-    >
-      <Toolbar />
-      <Box sx={{ paddingTop: 2 }}>
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton to="/social/results">
-              <ListItemText primary="Resultados Test 9C" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton to="/social/test9c">
-              <ListItemText primary="Nuevo Test 9C" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Box>
-      <Box sx={{ position: "absolute", width: "240", bottom: 0 }}>
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton to="/social/logout">
-              <LogoutIcon></LogoutIcon>
-              <ListItemText primary="Logout" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Box>
-    </Drawer>
+    <aside className="lateral">
+      <ul>
+        <li>
+          <a href="/social/results">
+            <span>Resultados</span>
+          </a>
+        </li>
+        <li>
+          <a href="/social/test9c"> Nuevo Test 9c</a>
+        </li>
+        <li>
+          <a href="/social/logout">
+            <LogoutIcon></LogoutIcon>{" "}
+            <span className="logout_text"> Cerrar Sesión</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
   );
 };
 

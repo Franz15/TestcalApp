@@ -5,35 +5,31 @@ import Toolbar from "@mui/material/Toolbar";
 import { Avatar, IconButton } from "@mui/material";
 import { useAuth } from "../../../hooks/useAuth";
 
+
 export const Header = () => {
   const { auth } = useAuth();
 
   return (
-    <AppBar
-      position="fixed"
-      sx={{
-        zIndex: (theme) => theme.zIndex.drawer + 1,
-        bgcolor: "rgb(232,191,86)",
-      }}
-    >
-      <Toolbar
-        position="sticky"
-        sx={{ width: "fullWidth", justifyContent: "space-between" }}
-      >
-        <IconButton href="/social/" sx={{ width: 70, height: 70 }}>
+    <>
+    
+    <header className="header">
+      <div className="logo">
+    <IconButton href="/social/" className="icon-button">
           <Avatar
             src="../../../../testcalapp.png"
-            sx={{ width: 76, height: 76 }}
+            sx={{ width: 100, height: 100 }}
           />
         </IconButton>
-
-        <IconButton href="/social/ajustes" sx={{ width: 70, height: 70 }}>
+          </div>
+          
+          <div className="logo">
+          <IconButton href="/social/ajustes" className="icon-button">
           <Avatar
             src={Global.url + "user/avatar/" + auth.image}
-            sx={{ width: 60, height: 60 }}
-          />
+            sx={{ width: 70, height: 70 }}/>
         </IconButton>
-      </Toolbar>
-    </AppBar>
+          </div>
+      </header>
+    </>
   );
 };
