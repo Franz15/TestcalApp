@@ -1,3 +1,3 @@
 export const Global = {
-  url: "http://localhost:5555/api/",
+  url: "https://api.testcalapp.es/api/",
 };
