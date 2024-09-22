@@ -1,0 +1,29 @@
+/* Estilos para AppBar */
+.miAppBar {
+  position: fixed;
+  z-index: 1301; /* Este valor es el mismo que ZIndex.drawer + 1 */
+  background-color: rgb(232, 191, 86);
+}
+
+/* Estilos para Toolbar */
+.miToolbar {
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* Estilos para IconButton */
+.miIconButton {
+  width: 70px;
+  height: 70px;
+}
+
+/* Estilos para Avatar */
+.miAvatar {
+  width: 76px;
+  height: 76px;
+}
+
+.otroAvatar {
+  width: 60px;
+  height: 60px;
+}

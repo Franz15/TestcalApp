@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Rating from "@mui/material/Rating";
-import getLastResult from "../../hooks/test9c/getLastResult";
 import Box from "@mui/material/Box";
 
 function Ratings({ results }) {

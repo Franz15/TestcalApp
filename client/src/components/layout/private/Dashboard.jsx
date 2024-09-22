@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Box, Card, Grid } from "@mui/material";
-import { Global } from "../../../helpers/Global";
+import React, { useState, useEffect } from "react";
 import { Table9c } from "../../accesories/Table9c";
+import { Global } from "../../../helpers/Global";
 import Ratings from "../../accesories/Ratings";
 import { RadarChart } from "../../accesories/RadarChart";
 import { LinearChart } from "../../accesories/LinearChart";
-import Note from "../../accesories/Note";
 import { useAuth } from "../../../hooks/useAuth";
-import Alert from "@mui/material/Alert";
-import getLastResult from "../../../hooks/test9c/getLastResult";
+import "./dashboard.css";
 
 export default function Dashboard() {
-    //Token de autenticación
-    const token = localStorage.getItem("token");
+  //Token de autenticación
+  const token = localStorage.getItem("token");
   const { auth, loading } = useAuth();
-
   const [results, setResults] = useState([]);
   const [avgResult, setAvgResult] = useState([]);
 
@@ -65,35 +61,33 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={12}>
-          {auth.status === "UNVERIFIED" ? (
-            <Alert sx={{ mt: -3, mb: 2 }} severity="error">
-              El EMAIL NO ESTÁ VERIFICADO, POR FAVOR, VERIFÍCALO
-            </Alert>
-          ) : (
-            ""
-          )}
-          <Card sx={{ flexGrow: 1, p: 3 }}>
-            <Ratings results={results} />
-          </Card>
-        </Grid>
-        <Grid item xs={4} sm={4} md={4}>
-          <Card sx={{ flexGrow: 1, p: 3 }}>
-            <RadarChart results={results} />{" "}
-          </Card>
-        </Grid>
-        <Grid item xs={8} sm={8} md={8}>
-          <Card sx={{ maxHeight: "475px", flexGrow: 1, p: 3 }}>
-            <Table9c results={results} handleResults={handleResults} />{" "}
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <LinearChart results={results} />
-        </Grid>
-      </Grid>
-      <Note />
-    </Box>
+    <>
+      {/* Contenido principal */}
+      <section className="content">
+        {/* Aqui van las películas */}
+        <article className="ratings">
+          <Ratings results={results} />
+        </article>
+
+        <div className="noflex-wrap">
+          <article className="linear-chart">
+            <LinearChart results={results} />
+          </article>
+          <article className="radar-chart">
+            <div>
+              <RadarChart results={results} />
+            </div>
+          </article>
+          <article className="radar-chart">
+            <div>
+              <RadarChart results={results} />
+            </div>
+          </article>
+        </div>
+        <article className="table">
+          <Table9c results={results} handleResults={handleResults} />
+        </article>
+      </section>
+    </>
   );
 }

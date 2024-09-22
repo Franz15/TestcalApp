@@ -21,9 +21,11 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
 export function LinearChart({ results }) {
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",

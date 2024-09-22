@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { Table9c } from "../accesories/Table9c";
-import Note from "../accesories/Note";
 
 export function Results() {
   return (
@@ -11,7 +10,6 @@ export function Results() {
         <h1 className="content__title">Resultados Test 9C</h1>
       </header>
       <Table9c />
-      <Note sx={{ mt: "10vh" }} />
     </Box>
   );
 }
