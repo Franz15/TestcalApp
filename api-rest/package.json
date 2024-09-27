@@ -1,6 +1,6 @@
 {
   "name": "api-rest",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "API Rest con Node, Mongo, Express y JWT para TestcalApp",
   "main": "index.js",
   "scripts": {
