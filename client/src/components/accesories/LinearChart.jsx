@@ -25,7 +25,8 @@ ChartJS.register(
 export function LinearChart({ results }) {
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
+    autoPadding: true,
     plugins: {
       legend: {
         position: "top",

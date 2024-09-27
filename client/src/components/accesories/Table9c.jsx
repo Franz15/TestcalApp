@@ -7,7 +7,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import moment from "moment";
@@ -31,7 +31,7 @@ const Result = (props) => (
     <TableCell align="center">{props.result.gradoTeorico}</TableCell>
     <TableCell align="center">
       <button
-      className="button_table edit"
+        className="button_table edit"
         onClick={() => {
           props.deleteResult(props.result._id);
         }}

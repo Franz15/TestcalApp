@@ -14,7 +14,7 @@
   border-radius: 10px;
   box-shadow: 0 0 6px #ddd;
   padding: 60px 25px;
-  margin: 10px;
+  margin: 0 1em;
 }
 
 .noflex-wrap {
@@ -26,14 +26,13 @@
 }
 
 .radar-chart {
-  flex: 1 1 22%;
-  max-width: 22%;
-  max-height: 550px;
+  flex: 1 1 25%;
+  max-width: 25%;
   background: white;
   border-radius: 10px;
   box-shadow: 0 0 6px #ddd;
-  padding: 60px 25px;
-  margin: 0 10px 10px 10px;
+  margin: 0 1em 0 1em;
+  padding: 30px 0 0 10px;
 }
 
 .radar-chart__content {
@@ -45,28 +44,29 @@
 
 .table {
   width: 100%;
-  height: 550px;
+  height: 700px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 0 6px #ddd;
   padding: 65px 25px;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin: 0 10px 10px 10px;
-  overflow: hidden;
-  scrollbar-width: none;
+  margin: 0 1em 1em 1em;
+  overflow-y: auto; /* Desplazamiento vertical */
+  overflow-x: hidden; /* Desactiva el desplazamiento horizontal */
+  scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
 }
+
 .table::-webkit-scrollbar {
-  display: none; /* Ocultar la barra de desplazamiento en Chrome/Safari */
+  display: none; /* Oculta la barra de desplazamiento en Chrome/Safari */
 }
 
 .linear-chart {
-  flex: 1 1 40%;
-  max-width: 35%;
-  max-height: 550px;
+  flex: 1 1 50%;
+  max-width: 50%;
   background: white;
   border-radius: 10px;
   box-shadow: 0 0 6px #ddd;
-  margin: 0 10px 10px 10px;
-  padding: 60px 25px;
+  margin: 0 1em 0 1em;
+  padding: 30px 60px;
 }

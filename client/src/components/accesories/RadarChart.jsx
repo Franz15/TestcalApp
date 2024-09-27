@@ -32,8 +32,9 @@ export function RadarChart({ results }) {
   let test4avg;
   const options = {
     responsive: true,
-    maintainAspectRatio: true
-  }
+    maintainAspectRatio: true,
+    autoPadding: true,
+  };
   function renderConditional(item) {
     if (item === undefined) {
       const data = {
@@ -60,7 +61,7 @@ export function RadarChart({ results }) {
           },
         ],
       };
-      return <Radar data={data} options={options}/>;
+      return <Radar data={data} options={options} />;
     } else {
       const data = {
         labels: [
@@ -91,7 +92,7 @@ export function RadarChart({ results }) {
           },
         ],
       };
-      return <Radar data={data} options = {options} />;
+      return <Radar data={data} options={options} />;
     }
   }
 
