@@ -15,7 +15,7 @@ body {
   display: grid;
   grid-template-areas:
     "header header"
-    "alert alert"
+    "lateral alert"
     "lateral content"
     "lateral footer";
   grid-template-rows: 85px 50px 1fr 30px;
@@ -133,6 +133,9 @@ input[type="button"].delete:hover {
   background: var(--color-borrar);
 }
 
+.layout__content {
+  margin-top: 30px;
+}
 /* BARRA LATERAL */
 
 .lateral {
