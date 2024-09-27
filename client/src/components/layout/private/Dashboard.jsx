@@ -72,14 +72,10 @@ export default function Dashboard() {
             <LinearChart results={results} />
           </article>
           <article className="radar-chart">
-            <div>
-              <RadarChart results={results} />
-            </div>
+            <RadarChart results={results} />
           </article>
           <article className="radar-chart">
-            <div>
-              <RadarChart results={results} />
-            </div>
+            <RadarChart results={results} />
           </article>
         </div>
         <article className="table">
