@@ -1,0 +1,85 @@
+.desktop-sidebar {
+  transition: all 0.3s ease;
+  width: 230px;
+}
+
+/* When sidebar is collapsed, only show icons */
+.desktop-sidebar.sidebar-collapsed {
+  width: 60px;
+  transform: translateX(0); /* Don't hide it, keep visible */
+}
+
+.menu-text {
+  margin-left: 12px;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+/* Hide text but keep icons when sidebar is collapsed */
+.sidebar-collapsed .menu-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* Make icons more prominent in collapsed mode */
+.sidebar-collapsed .lateral a svg {
+  font-size: 24px;
+  margin: 0 auto;
+}
+
+/* Center icons in collapsed mode */
+.sidebar-collapsed .lateral a {
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.mobile-sidebar {
+  display: none;
+}
+
+/* Make icons align better with text */
+.lateral a {
+  display: flex;
+  align-items: center;
+}
+
+/* Mobile Sidebar Styling */
+@media (max-width: 768px) {
+  .desktop-sidebar {
+    display: none;
+  }
+  
+  .mobile-sidebar {
+    display: block;
+    z-index: 1200; /* Ensure drawer is above other elements */
+  }
+
+  /* Style the drawer */
+  .MuiDrawer-paper {
+    width: 250px;
+    background-color: var(--fondo-contenido);
+    padding-top: 20px;
+  }
+
+  /* Style the drawer items */
+  .MuiListItemButton-root {
+    padding: 15px;
+  }
+
+  /* Style the drawer item text */
+  .MuiListItemText-root {
+    color: var(--letra-gris);
+  }
+  
+  /* Active menu item in mobile */
+  .MuiListItemButton-root.Mui-selected {
+    background-color: rgba(232, 191, 86, 0.2);
+  }
+
+  /* Override bottom positioning for last list item in mobile */
+  .MuiListItem-root:last-child {
+    margin-top: auto;
+  }
+}

@@ -1,10 +1,41 @@
 import React from "react";
+import "./footer.css";
+
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="footer">
-      &copy; {"- TestcalApp 1.0.6 - "}
-      {new Date().getFullYear()}
-      {"."}
+      <div className="footer-content">
+        <div className="footer-branding">
+          <div className="footer-logo">
+            <span className="logo-text">T</span>
+          </div>
+          <div className="footer-copyright">
+            <span className="company-name">TestcalApp</span>
+            <span className="version">v1.0.6</span>
+            <span className="copyright">&copy; {currentYear}</span>
+          </div>
+        </div>
+
+        <div className="footer-links">
+          <a href="/about" className="footer-link">
+            Sobre nosotros
+          </a>
+          <span className="footer-divider">•</span>
+          <a href="/terms" className="footer-link">
+            Términos
+          </a>
+          <span className="footer-divider">•</span>
+          <a href="/privacy" className="footer-link">
+            Privacidad
+          </a>
+          <span className="footer-divider">•</span>
+          <a href="/help" className="footer-link">
+            Ayuda
+          </a>
+        </div>
+      </div>
     </footer>
   );
 };

@@ -1,29 +1,43 @@
-/* Estilos para AppBar */
-.miAppBar {
-  position: fixed;
-  z-index: 1301; /* Este valor es el mismo que ZIndex.drawer + 1 */
-  background-color: rgb(232, 191, 86);
+/* Profile avatar styling */
+.profile-avatar {
+  background-color: var(--fondo);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
 }
 
-/* Estilos para Toolbar */
-.miToolbar {
-  width: 100%;
-  justify-content: space-between;
+.profile-avatar:hover {
+  opacity: 0.9;
 }
 
-/* Estilos para IconButton */
-.miIconButton {
-  width: 70px;
-  height: 70px;
+/* Mobile header styling with class */
+.mobile-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
 }
 
-/* Estilos para Avatar */
-.miAvatar {
-  width: 76px;
-  height: 76px;
+.mobile-header .logo-toggle {
+  margin-left: 8px; /* Add extra margin on mobile */
 }
 
-.otroAvatar {
-  width: 60px;
-  height: 60px;
+@media (max-width: 768px) {
+  .miIconButton {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .miAvatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .otroAvatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .user-avatar {
+    width: 54px;
+    height: 54px;
+  }
 }

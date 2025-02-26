@@ -5,6 +5,7 @@ body {
   height: 100vh;
   padding: 0px;
   margin: 0px;
+  overflow-x: hidden;
 }
 
 /* LAYOUT PRIVADO */
@@ -18,9 +19,9 @@ body {
     "lateral alert"
     "lateral content"
     "lateral footer";
-  grid-template-rows: 85px 50px 1fr 30px;
+  grid-template-rows: 70px 50px 1fr 30px; /* Reduced from 40px to 30px */
   grid-template-columns: 230px 1fr;
-  overflow-x: hidden;
+  transition: all 0.3s ease;
 }
 
 .private-layout-no-alert {
@@ -32,8 +33,15 @@ body {
     "alert alert"
     "lateral content"
     "lateral footer";
-  grid-template-rows: 80px 0px 1fr 30px;
+  grid-template-rows: 70px 0px 1fr 30px; /* Reduced from 40px to 30px */
   grid-template-columns: 230px 1fr;
+}
+
+/* Sidebar collapsed state - ONLY for desktop */
+@media (min-width: 769px) {
+  .private-layout.sidebar-collapsed {
+    grid-template-columns: 60px 1fr; /* Change from 0px to 60px to show icons */
+  }
 }
 
 /* CABECERA */
@@ -41,34 +49,49 @@ body {
   grid-area: header;
   text-align: center;
   background: var(--color-principal);
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 0 15px;
+  z-index: 1000;
 }
 
-.logo {
+/* Logo toggle styles */
+.logo-toggle {
   background: var(--fondo);
-  width: 70px;
-  height: 70px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
-  margin: auto 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: start; /* Left align */
 }
 
-.icon-button {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  align-content: center;
+/* Profile link styling */
+.user-profile-link {
+  justify-self: end; /* Right align */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
-/* FOOTER */
+/* Menu toggle button */
+.menu-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.menu-button {
+  color: white;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* FOOTER - basic grid positioning only */
 .footer {
   grid-area: footer;
-  display: flex;
-  justify-content: space-around;
-  font-size: 17px;
-  background: var(--fondo-contenido);
-  color: var(--letra-gris);
-  padding: 2px;
 }
 
 /* ALERTA */
@@ -134,16 +157,20 @@ input[type="button"].delete:hover {
 }
 
 .layout__content {
+  grid-area: content;
   margin-top: 30px;
+  padding: 0 20px;
+  overflow-y: auto;
 }
-/* BARRA LATERAL */
 
+/* BARRA LATERAL */
 .lateral {
   grid-area: lateral;
   text-align: left;
   background: var(--fondo-contenido);
   border-right: 1px solid #ddd;
   padding: 20px 0;
+  overflow-y: auto;
 }
 
 .lateral ul {
@@ -151,6 +178,7 @@ input[type="button"].delete:hover {
   text-decoration: none;
   list-style: none;
   padding: 0px 0px 0px 10px;
+  margin: 0;
 }
 
 .lateral li {
@@ -166,12 +194,19 @@ input[type="button"].delete:hover {
   transition: transform 300ms;
   padding: 20px 10px;
 }
+
+/* Adjust logout positioning and width for sidebar collapse */
 ul li:last-child {
   font-weight: bolder;
   position: fixed;
   bottom: 0;
   text-align: center;
   justify-content: space-between;
+  width: 200px;
+}
+
+.sidebar-collapsed ul li:last-child {
+  width: 60px;
 }
 
 .lateral a:hover {
@@ -179,7 +214,6 @@ ul li:last-child {
 }
 
 /* MEDIA QUERIES */
-
 @media (max-width: 1085px) {
   .content {
     flex-grow: column-wrap;
@@ -192,5 +226,79 @@ ul li:last-child {
   .table,
   .linear-chart {
     width: 100%;
+  }
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+  .private-layout,
+  .private-layout-no-alert {
+    grid-template-areas:
+      "header"
+      "alert"
+      "content"
+      "footer";
+    grid-template-rows: 70px 50px 1fr 45px; /* Increase footer height on mobile */
+    grid-template-columns: 1fr;
+  }
+
+  .private-layout-no-alert {
+    grid-template-rows: 65px 0px 1fr 45px; /* Match footer height */
+  }
+
+  /* The sidebar shouldn't affect the grid on mobile */
+  .private-layout.sidebar-collapsed {
+    grid-template-columns: 1fr;
+  }
+
+  .layout__content {
+    padding: 0 15px;
+  }
+
+  /* Keep header elements well-aligned */
+  .header {
+    padding: 0 15px;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+  }
+
+  /* Keep logo size consistent on mobile */
+  .logo-toggle {
+    width: 52px;
+    height: 52px;
+  }
+
+  /* Reset fixed positioning for logout on mobile */
+  ul li:last-child {
+    position: relative;
+    width: auto;
+    bottom: auto;
+  }
+
+  /* Hide the desktop sidebar completely on mobile */
+  .lateral.desktop-sidebar {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Use flex layout instead of grid for better alignment on small screens */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  /* Larger logo for mobile with right padding */
+  .logo-toggle {
+    width: 48px;
+    height: 48px;
+    margin-left: 10px; /* Move it slightly to the right */
+  }
+
+  /* Profile avatar styles for mobile */
+  .profile-avatar {
+    margin-right: 5px;
   }
 }

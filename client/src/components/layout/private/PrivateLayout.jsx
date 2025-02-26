@@ -10,12 +10,19 @@ import Footer from "../../accesories/Footer";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import Grow from "@mui/material/Grow";
+import { SidebarContext } from "../../../context/SidebarContext";
 
 export const PrivateLayout = () => {
   const token = localStorage.getItem("token");
   const { auth, loading } = useAuth();
   const [alertVisible, setAlertVisible] = useState();
   const [open, setOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -45,59 +52,84 @@ export const PrivateLayout = () => {
     } else {
       setAlertVisible(false);
     }
-  });
+  }, [auth.status]);
+
+  // Check viewport width and set sidebar state accordingly
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      
+      // Only auto-close sidebar on mobile
+      if (mobile && sidebarOpen) {
+        setSidebarOpen(false);
+      } else if (!mobile && !sidebarOpen) {
+        setSidebarOpen(true);
+      }
+    };
+
+    // Set initial state based on viewport
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Clean up
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   if (loading) {
     return <CircularProgress color="inherit" />;
   } else {
     return (
-      <div
-        className={`private-layout ${
-          !alertVisible ? "private-layout-no-alert" : ""
-        }`}
-      >
-        {/* Cabecera */}
-        <Header></Header>
+      <SidebarContext.Provider value={{ sidebarOpen, toggleSidebar }}>
+        <div
+          className={`private-layout ${!alertVisible ? "private-layout-no-alert" : ""} ${!sidebarOpen && !isMobile ? "sidebar-collapsed" : ""}`}
+        >
+          {/* Cabecera */}
+          <Header />
 
-        {/* Alerta */}
-        <nav className={`alert ${!alertVisible ? "alert-hidden" : ""}`}>
-          <div className="alert_message">
-            <Alert
-              onClick={handleVerification}
-              sx={{ width: "100%", cursor: "pointer" }}
-              severity="error"
-            >
-              <a>El EMAIL NO ESTÁ VERIFICADO, POR FAVOR, VERIFÍCALO</a>
-            </Alert>
-          </div>
-          <Snackbar
-            open={open}
-            autoHideDuration={6000} // Se ocultará automáticamente después de 3 segundos
-            onClose={handleClose}
-            anchorOrigin={{ vertical: "top", horizontal: "right" }} // Posición de la alerta
-            TransitionComponent={Grow} // Transición de tipo Grow
-            transitionDuration={{ enter: 1000, exit: 1000 }} // Duración de la animación en milisegundos
-          >
-            <Alert
+          {/* Alerta */}
+          <nav className={`alert ${!alertVisible ? "alert-hidden" : ""}`}>
+            <div className="alert_message">
+              <Alert
+                onClick={handleVerification}
+                sx={{ width: "100%", cursor: "pointer" }}
+                severity="error"
+              >
+                <a>El EMAIL NO ESTÁ VERIFICADO, POR FAVOR, VERIFÍCALO</a>
+              </Alert>
+            </div>
+            <Snackbar
+              open={open}
+              autoHideDuration={6000} // Se ocultará automáticamente después de 3 segundos
               onClose={handleClose}
-              severity="success"
-              sx={{ width: "100%", cursor: "pointer" }}
+              anchorOrigin={{ vertical: "top", horizontal: "right" }} // Posición de la alerta
+              TransitionComponent={Grow} // Transición de tipo Grow
+              transitionDuration={{ enter: 1000, exit: 1000 }} // Duración de la animación en milisegundos
             >
-              El email se ha enviado, por favor, revise su correo
-            </Alert>
-          </Snackbar>
-        </nav>
+              <Alert
+                onClose={handleClose}
+                severity="success"
+                sx={{ width: "100%", cursor: "pointer" }}
+              >
+                El email se ha enviado, por favor, revise su correo
+              </Alert>
+            </Snackbar>
+          </nav>
 
-        {/* Contenido principal */}
-        <section className="layout__content">
-          {auth._id ? <Outlet /> : <Navigate to="/login" />}
-        </section>
+          {/* Contenido principal */}
+          <section className="layout__content">
+            {auth._id ? <Outlet /> : <Navigate to="/login" />}
+          </section>
 
-        {/* Barra lateral */}
-        <Sidebar></Sidebar>
+          {/* Barra lateral */}
+          <Sidebar />
 
-        {/* Pie de página */}
-        <Footer />
-      </div>
+          {/* Pie de página */}
+          <Footer />
+        </div>
+      </SidebarContext.Provider>
     );
   }
 };
