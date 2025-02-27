@@ -161,9 +161,13 @@ input[type="button"].delete:hover {
 
 .layout__content {
   grid-area: content;
-  margin-top: 30px;
-  padding: 0 20px;
+  margin-top: 20px;
+  padding: 0;
   overflow-y: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 /* BARRA LATERAL */
