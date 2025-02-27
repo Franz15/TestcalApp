@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -14,11 +14,23 @@ import EqualizerIcon from "@mui/icons-material/Equalizer";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import Tooltip from "@mui/material/Tooltip";
+import { Avatar } from "@mui/material";
 import { SidebarContext } from "../../../context/SidebarContext";
 import "./sidebar.css";
 
 const Sidebar = () => {
   const { sidebarOpen, toggleSidebar } = useContext(SidebarContext);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  
+  // Check for mobile view
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Menu items configuration for reuse
   const menuItems = [
@@ -35,6 +47,24 @@ const Sidebar = () => {
           !sidebarOpen ? "sidebar-collapsed" : ""
         }`}
       >
+        <div className="sidebar-logo-container">
+          <IconButton 
+            onClick={toggleSidebar} 
+            className="sidebar-logo"
+            aria-label="toggle sidebar"
+            sx={{ 
+              "&:hover": { backgroundColor: "transparent" },
+              padding: 0
+            }}
+            disableRipple
+          >
+            <Avatar
+              src="../../../../testcalapp.png"
+              sx={{ width: 55, height: 55 }}
+            />
+          </IconButton>
+        </div>
+        
         <ul>
           {menuItems.map((item, index) => (
             <li key={index}>
@@ -97,10 +127,23 @@ const Sidebar = () => {
             sx={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "flex-end",
+              justifyContent: "space-between",
               p: 1,
             }}
           >
+            <IconButton
+              className="sidebar-logo-mobile"
+              sx={{ 
+                "&:hover": { backgroundColor: "transparent" },
+                padding: 0
+              }}
+              disableRipple
+            >
+              <Avatar
+                src="../../../../testcalapp.png"
+                sx={{ width: 45, height: 45 }}
+              />
+            </IconButton>
             <IconButton onClick={toggleSidebar} aria-label="close sidebar">
               <CloseIcon />
             </IconButton>

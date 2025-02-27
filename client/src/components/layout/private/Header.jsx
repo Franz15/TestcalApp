@@ -8,7 +8,7 @@ import "./header.css";
 export const Header = () => {
   const { auth } = useAuth();
   const { toggleSidebar } = useContext(SidebarContext);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   // Slightly increased sizes for avatars
   const avatarSize = 50; // Increased from 45px
@@ -18,7 +18,7 @@ export const Header = () => {
   // Check for mobile view
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 480);
+      setIsMobile(window.innerWidth <= 768);
     };
 
     window.addEventListener('resize', handleResize);
@@ -27,23 +27,28 @@ export const Header = () => {
 
   return (
     <header className={`header ${isMobile ? 'mobile-header' : ''}`}>
-      <div className="menu-toggle logo-toggle">
-        <IconButton 
-          onClick={toggleSidebar} 
-          className="menu-button"
-          aria-label="toggle sidebar"
-          sx={{ 
-            "&:hover": { backgroundColor: "transparent" },
-            padding: 0
-          }}
-          disableRipple
-        >
-          <Avatar
-            src="../../../../testcalapp.png"
-            sx={{ width: toggleLogoSize, height: toggleLogoSize }}
-          />
-        </IconButton>
-      </div>
+      {/* Only show logo toggle on mobile */}
+      {isMobile && (
+        <div className="menu-toggle logo-toggle">
+          <IconButton 
+            onClick={toggleSidebar} 
+            className="menu-button"
+            aria-label="toggle sidebar"
+            sx={{ 
+              "&:hover": { backgroundColor: "transparent" },
+              padding: 0
+            }}
+            disableRipple
+          >
+            <Avatar
+              src="../../../../testcalapp.png"
+              sx={{ width: toggleLogoSize, height: toggleLogoSize }}
+            />
+          </IconButton>
+        </div>
+      )}
+      
+      {!isMobile && <div className="header-spacer"></div>}
           
       <a href="/social/ajustes" className="user-profile-link">
         <Avatar

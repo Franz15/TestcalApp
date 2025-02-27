@@ -1,12 +1,41 @@
 .desktop-sidebar {
   transition: all 0.3s ease;
   width: 230px;
+  z-index: 1100; /* Ensure sidebar appears above other elements */
+  display: block !important;
+}
+
+/* Logo container styling */
+.sidebar-logo-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 70px; /* Match the header height */
+  padding-left: 15px;
+  padding-top: 5px; /* Reduced from 15px to place logo higher */
+  margin-bottom: 20px;
+}
+
+.sidebar-logo {
+  background: var(--fondo);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 /* When sidebar is collapsed, only show icons */
 .desktop-sidebar.sidebar-collapsed {
   width: 60px;
   transform: translateX(0); /* Don't hide it, keep visible */
+}
+
+.sidebar-collapsed .sidebar-logo-container {
+  justify-content: center;
+  padding-left: 0;
 }
 
 .menu-text {
@@ -60,7 +89,19 @@
   .MuiDrawer-paper {
     width: 250px;
     background-color: var(--fondo-contenido);
-    padding-top: 20px;
+    padding-top: 0;
+  }
+
+  /* Logo in mobile sidebar */
+  .sidebar-logo-mobile {
+    background: var(--fondo);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
   }
 
   /* Style the drawer items */

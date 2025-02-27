@@ -1,3 +1,30 @@
+.header {
+  grid-area: header;
+  text-align: center;
+  background: var(--color-principal);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 15px;
+  z-index: 1000;
+}
+
+.header-spacer {
+  flex-grow: 1;
+}
+
+/* Logo toggle styles */
+.logo-toggle {
+  background: var(--fondo);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+}
+
 /* Profile avatar styling */
 .profile-avatar {
   background-color: var(--fondo);
@@ -16,11 +43,34 @@
   align-items: center !important;
 }
 
-.mobile-header .logo-toggle {
-  margin-left: 8px; /* Add extra margin on mobile */
+/* Profile link styling */
+.user-profile-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+/* Menu toggle button */
+.menu-button {
+  color: white;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
+  .header {
+    justify-content: space-between;
+  }
+  
+  /* Keep logo size consistent on mobile */
+  .logo-toggle {
+    width: 48px;
+    height: 48px;
+    margin-left: 5px;
+  }
+  
   .miIconButton {
     width: 50px;
     height: 50px;

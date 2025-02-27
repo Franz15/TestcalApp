@@ -60,10 +60,8 @@ export const PrivateLayout = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
       
-      // Only auto-close sidebar on mobile
-      if (mobile && sidebarOpen) {
-        setSidebarOpen(false);
-      } else if (!mobile && !sidebarOpen) {
+      // Force sidebar open on desktop
+      if (!mobile) {
         setSidebarOpen(true);
       }
     };
