@@ -21,7 +21,7 @@ body {
     "lateral footer";
   grid-template-rows: 70px 50px 1fr 30px;
   grid-template-columns: 230px 1fr;
-  transition: all 0.3s ease;
+  transition: grid-template-columns 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .private-layout-no-alert {
@@ -35,6 +35,7 @@ body {
     "lateral footer";
   grid-template-rows: 70px 0px 1fr 30px;
   grid-template-columns: 230px 1fr;
+  transition: grid-template-columns 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Sidebar collapsed state - ONLY for desktop */
@@ -42,6 +43,7 @@ body {
   .private-layout.sidebar-collapsed,
   .private-layout-no-alert.sidebar-collapsed {
     grid-template-columns: 60px 1fr;
+    transition: grid-template-columns 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
@@ -187,13 +189,13 @@ input[type="button"].delete:hover {
 }
 
 .lateral a {
-  display: block;
+  display: flex;
   font-size: 19px;
   font-weight: lighter;
   color: var(--letra-gris);
   text-decoration: none;
   transition: transform 300ms;
-  padding: 20px 10px;
+  padding: 20px 10px 20px 20px; /* Increased left padding to 20px to match logo */
 }
 
 /* Adjust logout positioning and width for sidebar collapse */

@@ -1,19 +1,23 @@
 .desktop-sidebar {
-  transition: all 0.3s ease;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   width: 230px;
   z-index: 1100; /* Ensure sidebar appears above other elements */
   display: block !important;
+  position: relative; /* Allow for relative positioning of logo */
+  overflow-x: hidden; /* Prevent content from overflowing during transition */
 }
 
 /* Logo container styling */
 .sidebar-logo-container {
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
+  position: relative;
+  top: -20px;
+  margin-bottom: -20px;
+  padding-left: 25px; /* Increased from 20px to move logo more to the right */
   height: 70px; /* Match the header height */
-  padding-left: 15px;
-  padding-top: 5px; /* Reduced from 15px to place logo higher */
-  margin-bottom: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar-logo {
@@ -25,43 +29,68 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  z-index: 1200; /* Ensure logo appears above everything */
+  transition: transform 0.3s ease; /* Add smooth transition for hover effects */
+}
+
+.sidebar-logo:hover {
+  transform: scale(1.05); /* Subtle scale effect on hover */
 }
 
 /* When sidebar is collapsed, only show icons */
 .desktop-sidebar.sidebar-collapsed {
   width: 60px;
   transform: translateX(0); /* Don't hide it, keep visible */
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar-collapsed .sidebar-logo-container {
-  justify-content: center;
-  padding-left: 0;
+  justify-content: flex-start;
+  padding-left: 5px; /* Reduced padding to move logo more to the left */
+  top: -20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .menu-text {
   margin-left: 12px;
   opacity: 1;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
+  display: inline-block; /* Ensure width transitions work properly */
 }
 
 /* Hide text but keep icons when sidebar is collapsed */
 .sidebar-collapsed .menu-text {
   opacity: 0;
   width: 0;
+  margin-left: 0;
   overflow: hidden;
+}
+
+/* Icon container transitions */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 30px; /* Ensure consistent width for icons */
+  margin-left: 0; /* Align with logo */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Make icons more prominent in collapsed mode */
 .sidebar-collapsed .lateral a svg {
   font-size: 24px;
   margin: 0 auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Center icons in collapsed mode */
 .sidebar-collapsed .lateral a {
-  justify-content: center;
-  padding: 20px 0;
+  justify-content: flex-start; /* Left-align icons */
+  padding: 20px 0 20px 5px; /* Reduced left padding to move icons more to the left */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mobile-sidebar {
@@ -72,6 +101,7 @@
 .lateral a {
   display: flex;
   align-items: center;
+  transition: all 0.3s ease; /* Smooth transition for hover effects and collapsed state */
 }
 
 /* Mobile Sidebar Styling */
@@ -79,7 +109,7 @@
   .desktop-sidebar {
     display: none;
   }
-  
+
   .mobile-sidebar {
     display: block;
     z-index: 1200; /* Ensure drawer is above other elements */
@@ -113,7 +143,7 @@
   .MuiListItemText-root {
     color: var(--letra-gris);
   }
-  
+
   /* Active menu item in mobile */
   .MuiListItemButton-root.Mui-selected {
     background-color: rgba(232, 191, 86, 0.2);
