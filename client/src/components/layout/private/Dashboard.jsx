@@ -15,7 +15,6 @@ export default function Dashboard() {
   const [results, setResults] = useState([]);
   const [avgResult, setAvgResult] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [contentVisible, setContentVisible] = useState(false);
   const dataFetchedRef = useRef(false);
 
   // Fetch results data
@@ -84,10 +83,6 @@ export default function Dashboard() {
         console.error("Error loading dashboard data:", error);
       } finally {
         setLoading(false);
-        // Delay showing content to ensure smooth animation
-        setTimeout(() => {
-          setContentVisible(true);
-        }, 100);
       }
     };
     
@@ -106,29 +101,27 @@ export default function Dashboard() {
   // Render dashboard content with animations
   return (
     <section className="content">
-      <div className={contentVisible ? "dashboard-content visible" : "dashboard-content"}>
-        <article className="ratings animate-item" style={{ animationDelay: '0s' }}>
-          <Ratings results={results} />
+      <article className="ratings">
+        <Ratings results={results} />
+      </article>
+      
+      <div className="noflex-wrap">
+        <article className="linear-chart">
+          <LinearChart results={results} />
         </article>
         
-        <div className="noflex-wrap">
-          <article className="linear-chart animate-item" style={{ animationDelay: '0.1s' }}>
-            <LinearChart results={results} />
-          </article>
-          
-          <article className="radar-chart animate-item" style={{ animationDelay: '0.2s' }}>
-            <RadarChart results={results} />
-          </article>
-          
-          <article className="radar-chart animate-item" style={{ animationDelay: '0.3s' }}>
-            <RadarChart results={results} />
-          </article>
-        </div>
+        <article className="radar-chart">
+          <RadarChart results={results} />
+        </article>
         
-        <article className="table animate-item" style={{ animationDelay: '0.4s' }}>
-          <Table9c results={results} handleResults={handleResults} />
+        <article className="radar-chart">
+          <RadarChart results={results} />
         </article>
       </div>
+      
+      <article className="table">
+        <Table9c results={results} handleResults={handleResults} />
+      </article>
     </section>
   );
 }

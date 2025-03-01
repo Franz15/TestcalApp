@@ -5,10 +5,8 @@ import { useAuth } from "../../../hooks/useAuth";
 import { Header } from "./Header";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./privateLayout.css";
-import "./transitions.css";
 import "./loading.css";
 import Sidebar from "./Sidebar";
-import TransitionWrapper from "./TransitionWrapper";
 import Footer from "../../accesories/Footer";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
@@ -125,9 +123,7 @@ export const PrivateLayout = () => {
 
           {/* Contenido principal */}
           <section className="layout__content">
-            <TransitionWrapper>
-              {auth._id ? <Outlet /> : <Navigate to="/login" />}
-            </TransitionWrapper>
+            {auth._id ? <Outlet /> : <Navigate to="/login" />}
           </section>
 
           {/* Barra lateral */}
