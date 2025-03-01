@@ -10,11 +10,6 @@ export const Header = () => {
   const { toggleSidebar } = useContext(SidebarContext);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // Slightly increased sizes for avatars
-  const avatarSize = 50; // Increased from 45px
-  // Slightly larger logo size
-  const toggleLogoSize = isMobile ? 45 : 55; // Increased from 50px
-
   // Check for mobile view
   useEffect(() => {
     const handleResize = () => {
@@ -42,7 +37,7 @@ export const Header = () => {
           >
             <Avatar
               src="../../../../testcalapp.png"
-              sx={{ width: toggleLogoSize, height: toggleLogoSize }}
+              sx={{ width: 55, height: 55 }}
             />
           </IconButton>
         </div>
@@ -54,11 +49,7 @@ export const Header = () => {
         <Avatar
           src={Global.url + "user/avatar/" + auth.image}
           className="profile-avatar"
-          sx={{ 
-            width: isMobile ? 42 : avatarSize, 
-            height: isMobile ? 42 : avatarSize,
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
-          }}
+          sx={{ width: 55, height: 55 }}
         />
       </a>
     </header>

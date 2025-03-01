@@ -10,28 +10,28 @@
 /* Make sure the canvas is responsive */
 .linear-chart-container canvas {
   width: 100% !important;
-  height: 300px !important;
+  height: 400px !important; /* Increased from 300px to 400px */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .linear-chart-container {
     padding: 5px 0;
-    height: 250px;
+    height: 300px; /* Increased from 250px to 300px */
   }
   
   .linear-chart-container canvas {
-    height: 220px !important;
+    height: 280px !important; /* Increased from 220px to 280px */
   }
 }
 
 /* Small mobile devices */
 @media (max-width: 480px) {
   .linear-chart-container {
-    height: 200px;
+    height: 250px; /* Increased from 200px to 250px */
   }
   
   .linear-chart-container canvas {
-    height: 180px !important;
+    height: 230px !important; /* Increased from 180px to 230px */
   }
 }

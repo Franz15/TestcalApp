@@ -125,8 +125,8 @@
   /* Logo in mobile sidebar */
   .sidebar-logo-mobile {
     background: var(--fondo);
-    width: 48px;
-    height: 48px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     display: flex;
     justify-content: center;

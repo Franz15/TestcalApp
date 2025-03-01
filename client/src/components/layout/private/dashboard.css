@@ -76,6 +76,7 @@
 .linear-chart {
   flex: 2;
   min-width: 450px; /* Larger minimum width for linear chart */
+  min-height: 460px; /* Added explicit minimum height */
   background: white;
   border-radius: 10px;
   box-shadow: 0 0 6px #ddd;
@@ -107,7 +108,7 @@
 @media (max-width: 768px) {
   .linear-chart {
     padding: 15px 10px;
-    min-height: 250px;
+    min-height: 350px;
     height: auto;
   }
   
@@ -124,7 +125,7 @@
 @media (max-width: 480px) {
   .linear-chart {
     padding: 10px 5px;
-    min-height: 200px;
+    min-height: 300px;
   }
 }
 

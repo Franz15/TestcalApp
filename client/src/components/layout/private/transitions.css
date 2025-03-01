@@ -1,0 +1,150 @@
+/* Page transitions */
+.transition-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  will-change: opacity, transform;
+}
+
+.fadeIn {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.fadeOut {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+}
+
+/* Path-specific transitions */
+.route-dashboard-enter {
+  animation: slideInFromLeft 0.4s ease-out forwards;
+}
+
+.route-test-enter {
+  animation: slideInFromRight 0.4s ease-out forwards;
+}
+
+.route-config-enter {
+  animation: slideInFromTop 0.4s ease-out forwards;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth transition for elements */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Staggered animations for lists */
+.staggered-item {
+  opacity: 0;
+}
+
+.staggered-item:nth-child(1) {
+  animation: fadeIn 0.4s ease-out 0.05s forwards;
+}
+
+.staggered-item:nth-child(2) {
+  animation: fadeIn 0.4s ease-out 0.1s forwards;
+}
+
+.staggered-item:nth-child(3) {
+  animation: fadeIn 0.4s ease-out 0.15s forwards;
+}
+
+.staggered-item:nth-child(4) {
+  animation: fadeIn 0.4s ease-out 0.2s forwards;
+}
+
+.staggered-item:nth-child(5) {
+  animation: fadeIn 0.4s ease-out 0.25s forwards;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .fadeIn, .fadeOut {
+    animation-duration: 0.3s; /* Slightly faster on mobile */
+  }
+}

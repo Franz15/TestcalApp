@@ -17,7 +17,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Grid } from "@mui/material";
+import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import Slider from "react-slick";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -26,10 +26,16 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import Input from "@mui/material/Input";
+import Container from "@mui/material/Container";
 import "./test9c.css";
 
 export function Test9c() {
-  //Token de autenticación
+  // Theme and responsive breakpoints
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+  
+  // Auth and state
   const token = localStorage.getItem("token");
   const { auth } = useAuth();
   const [grade, setGrade] = useState("");
@@ -39,6 +45,7 @@ export function Test9c() {
   const [test3Tiempo, setTest3] = useState("");
   const [variante, setVariante] = useState("");
   const [test4Tiempo, setTest4] = useState("");
+  const [activeStep, setActiveStep] = useState(0);
   let [resultados, grado] = " ";
 
   const steps = [
@@ -47,15 +54,27 @@ export function Test9c() {
     "Fuerza Abdominal",
     "Fuerza de Agarre",
   ];
+  
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    adaptiveHeight: true,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          arrows: false,
+        }
+      }
+    ]
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    
     let puntos1 = Test1Test2(test1Peso, pesoCorp);
     let test1Porcent = Porcentaje(test1Peso, pesoCorp);
     let puntos2 = Test1Test2(test2Peso, pesoCorp);
@@ -64,9 +83,6 @@ export function Test9c() {
     let puntos4 = Test4(test4Tiempo);
     [resultados, grado] = Puntuaciones(puntos1, puntos2, puntos3, puntos4);
 
-    //Prevenir actualizacion de la pantalla
-    e.preventDefault();
-    //Recoger los datos del formulario
     const form = {
       fecha: new Date(),
       userId: auth._id,
@@ -85,42 +101,32 @@ export function Test9c() {
       test4Punt: puntos4,
       gradoTeorico: grado,
     };
-    let newRecord = form;
-    // ??????????????????????????????????????????
-    const request = await fetch(Global.url + "results/save", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify(newRecord),
-    });
-    const data = await request.json();
 
-    if (data.status == "success") {
-    } else {
+    try {
+      const request = await fetch(Global.url + "results/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(form),
+      });
+      const data = await request.json();
+      
+      if (data.status === "success") {
+        setGrade(grado);
+        handleNext();
+      }
+    } catch (error) {
+      console.error("Error saving results:", error);
     }
-    setGrade(grado);
-    handleNext();
-    return { puntos1, puntos2, puntos3, puntos4, resultados, grado };
-  };
-  const handleChange1 = (e) => {
-    setTest1(e.target.value);
-  };
-  const handleChange2 = (e) => {
-    setTest2(e.target.value);
-  };
-  const handleChange3 = (e) => {
-    setTest3(e.target.value);
-  };
-  const handleChangeVariante = (e) => {
-    setVariante(e.target.value);
-  };
-  const handleChange4 = (e) => {
-    setTest4(e.target.value);
   };
 
-  const [activeStep, setActiveStep] = React.useState(0);
+  const handleChange1 = (e) => setTest1(e.target.value);
+  const handleChange2 = (e) => setTest2(e.target.value);
+  const handleChange3 = (e) => setTest3(e.target.value);
+  const handleChangeVariante = (e) => setVariante(e.target.value);
+  const handleChange4 = (e) => setTest4(e.target.value);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -140,397 +146,396 @@ export function Test9c() {
     setTest4("");
   };
 
-  return (
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justify="center"
-      padding={3}
-    >
-      <Stepper activeStep={activeStep}>
-        {steps.map((label) => {
-          const stepProps = {};
-          const labelProps = {};
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
+  // Common styles for input sections
+  const inputSectionStyle = {
+    display: 'flex', 
+    flexDirection: 'column', 
+    alignItems: isMobile ? 'flex-start' : 'center',
+    width: '100%',
+    mt: 2, 
+    mb: 1,
+    ml: isMobile ? 0 : 2
+  };
 
-      {(() => {
-        if (activeStep === steps.length)
-          return (
-            /*<React.Fragment>
-              <Card
-                sx={{
-                  maxWidth: 700,
-                  maxHeight: 900,
-                  display: "flex",
-                  flexDirection: "column",
-                  pt: 2,
-                }}
-              >
-                <CardMedia
-                  height={400}
-                  component="iframe"
-                  alt="Resultados"
-                  src="../../../assets/img/backgrounds/background2.jpg"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5">
-                    Resultado de tu test:
-                  </Typography>
-                  <Typography sx={{ mt: 2, mb: 1 }}>
-                    Con tus condiciones físicas actuales podrías llegar a
-                    escalar hasta {grade}
-                  </Typography>
-                </CardContent>
-              </Card>
+  // Render test content based on active step
+  const renderTestContent = () => {
+    if (activeStep === steps.length) {
+      return (
+        <div className="test-results">
+          <h2 className="test-results-title">Resultado de tu test:</h2>
+          <p className="test-results-description">
+            Con tus condiciones físicas actuales podrías llegar a escalar hasta
+          </p>
+          <span className="test-results-grade">{grade}</span>
+          
+          <div className="test-results-buttons">
+            <button 
+              className="test-button test-button-secondary" 
+              onClick={handleReset}
+            >
+              Volver a hacer el Test
+            </button>
+            
+            <a href="/social" className="test-button test-button-primary">
+              Ir al Dashboard
+            </a>
+          </div>
+        </div>
+      );
+    }
 
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                <Box sx={{ flex: "1 1 auto" }} />
-                <Button onClick={handleReset}>Volver a hacer el Test</Button>
-              </Box>
+    // Common card props
+    const cardProps = {
+      className: "test-card",
+      sx: {
+        width: '100%',
+        maxWidth: 700,
+        boxShadow: 3,
+        borderRadius: 2,
+      }
+    };
 
-              <Box sx={{ display: "flex", flexDirection: "column", pt: 2 }}>
-                <Box sx={{ flex: "1 1 auto" }} />
-                <Button href="/social">Ir al Dashboard</Button>
-              </Box>
-            </React.Fragment>*/
-            <>
-              <div className="prueba">
-                <div className="card">
-                  <div className="card-content">
-                    <h5>Resultado de tu test:</h5>
-                    <p>
-                      Con tus condiciones físicas actuales podrías llegar a
-                      escalar hasta <br />
-                      {grade}
-                      <span id="grade"> </span>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="buttons">
-                  <button className="button_test edit" oncClick="handleReset()">
-                    Volver a hacer el Test
-                  </button>
-
-                  <Button href="/social" className="button_return edit">
-                    Ir al Dashboard
-                  </Button>
-                </div>
-              </div>
-            </>
-          );
-        if (activeStep === 0)
-          return (
-            <React.Fragment>
-              <Card
-                sx={{
-                  maxWidth: 700,
-                  maxHeight: 900,
-                  display: "flex",
-                  flexDirection: "column",
-                  pt: 2,
-                }}
-              >
-                <CardMedia
-                  height={400}
-                  component="iframe"
-                  alt="Suspensión en regletas"
-                  src="https://www.youtube.com/embed/BOx9Q_sUBnM"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5">
-                    Test 1: Fuerza de dedos.
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary">
-                    Realiza una suspensión durante 5 segundos en una regleta de
-                    20mm con el mayor lastre que puedas. Escribe aquí por favor
-                    qué lastre has utilizado (si no pones nada serán 0kg)
-                  </Typography>
-                  <Typography
-                    sx={{ ml: 20, mt: 2, mb: 1 }}
-                    color="text.secondary"
-                  >
-                    Introduce el peso de tu suspensión
-                  </Typography>
-
-                  <Input
-                    sx={{ ml: 20, mt: 2, mb: 1 }}
+    if (activeStep === 0) {
+      return (
+        <>
+          <Card {...cardProps}>
+            <div className="video-container">
+              <CardMedia
+                component="iframe"
+                alt="Suspensión en regletas"
+                src="https://www.youtube.com/embed/BOx9Q_sUBnM"
+                sx={{ border: 0 }}
+              />
+            </div>
+            <CardContent className="test-card-content">
+              <Typography variant="h5" component="h2" className="test-card-title">
+                Test 1: Fuerza de dedos
+              </Typography>
+              <Typography className="test-card-description">
+                Realiza una suspensión durante 5 segundos en una regleta de
+                20mm con el mayor lastre que puedas. Escribe aquí por favor
+                qué lastre has utilizado (si no pones nada serán 0kg)
+              </Typography>
+              
+              <div className="test-input-group">
+                <label className="test-input-label">
+                  Introduce el peso de tu suspensión
+                </label>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <input
+                    className="test-input-field"
                     type="number"
                     id="test1Peso"
                     onChange={handleChange1}
                     value={test1Peso}
-                    endAdornment={
-                      <InputAdornment position="end">kg</InputAdornment>
-                    }
+                    min="0"
                   />
-                </CardContent>
-              </Card>
+                  <span className="test-input-addon">kg</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  maxWidth: 700,
-                  justifyContent: "space-between",
-                  pt: 2,
-                }}
-              >
-                <Button
-                  color="secondary"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
-                  Atrás
-                </Button>
-                <Button onClick={handleNext}>Siguiente</Button>
-              </Box>
-            </React.Fragment>
-          );
+          <div className="test-buttons">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNext}
+              className="test-button test-button-primary"
+            >
+              Siguiente
+            </Button>
+          </div>
+        </>
+      );
+    }
 
-        if (activeStep === 1)
-          return (
-            <React.Fragment>
-              <Card
-                sx={{
-                  maxWidth: 700,
-                  maxHeight: 900,
-                  display: "flex",
-                  flexDirection: "column",
-                  pt: 2,
-                }}
-              >
-                <CardMedia
-                  height={400}
-                  component="iframe"
-                  alt="Dominada lastrada"
-                  src="https://www.youtube.com/embed/Y7X1LJqJPSM"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Test 2: Fuerza de tracción.
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Realiza una dominada (agarre prono) con la mayor cantidad de
-                    lastre que puedas. Escribe aquí por favor qué lastre has
-                    utilizado (si no pones nada serán 0kg)
-                  </Typography>
-                  <Typography
-                    sx={{ ml: 20, mt: 2, mb: 1 }}
-                    color="text.secondary"
-                  >
-                    Introduce el resultado de tu dominada lastrada
-                  </Typography>
-
-                  <Input
-                    sx={{ ml: 20, mt: 2, mb: 1 }}
+    if (activeStep === 1) {
+      return (
+        <>
+          <Card {...cardProps}>
+            <div className="video-container">
+              <CardMedia
+                component="iframe"
+                alt="Dominada lastrada"
+                src="https://www.youtube.com/embed/Y7X1LJqJPSM"
+                sx={{ border: 0 }}
+              />
+            </div>
+            <CardContent className="test-card-content">
+              <Typography variant="h5" component="h2" className="test-card-title">
+                Test 2: Fuerza de tracción
+              </Typography>
+              <Typography className="test-card-description">
+                Realiza una dominada (agarre prono) con la mayor cantidad de
+                lastre que puedas. Escribe aquí por favor qué lastre has
+                utilizado (si no pones nada serán 0kg)
+              </Typography>
+              
+              <div className="test-input-group">
+                <label className="test-input-label">
+                  Introduce el resultado de tu dominada lastrada
+                </label>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <input
+                    className="test-input-field"
                     type="number"
-                    id="test2Tiempo"
+                    id="test2Peso"
                     onChange={handleChange2}
                     value={test2Peso}
-                    endAdornment={
-                      <InputAdornment position="end">kg</InputAdornment>
-                    }
+                    min="0"
                   />
-                </CardContent>
-              </Card>
+                  <span className="test-input-addon">kg</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                <Button
-                  color="secondary"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
-                  Atrás
-                </Button>
-                <Box sx={{ flex: "1 1 auto" }} />
+          <div className="test-buttons">
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={handleBack}
+              className="test-button test-button-secondary"
+            >
+              Atrás
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNext}
+              className="test-button test-button-primary"
+            >
+              Siguiente
+            </Button>
+          </div>
+        </>
+      );
+    }
 
-                <Button onClick={handleNext}>Siguiente</Button>
-              </Box>
-            </React.Fragment>
-          );
-
-        if (activeStep === 2)
-          return (
-            <React.Fragment>
-              <Card
-                sx={{
-                  maxWidth: 700,
-                  maxHeight: 900,
-                  display: "flex",
-                  flexDirection: "column",
-                  pt: 2,
-                }}
-              >
-                <Slider {...settings}>
-                  {
+    if (activeStep === 2) {
+      return (
+        <>
+          <Card {...cardProps}>
+            <div className="slider-container">
+              <Slider {...settings}>
+                <div>
+                  <div className="video-container">
                     <CardMedia
-                      height={400}
                       component="iframe"
                       alt="Rodillas Dobladas"
                       src="https://www.youtube.com/embed/tERWNQjvek4"
+                      sx={{ border: 0 }}
                     />
-                  }
-                  <CardMedia
-                    height={400}
-                    component="iframe"
-                    alt="L-Sit"
-                    src="https://www.youtube.com/embed/WHi1bvZLwlw"
-                  />
-                  <CardMedia
-                    height={400}
-                    component="iframe"
-                    alt="Front Lever"
-                    src="https://www.youtube.com/embed/0GUycaYNpls"
-                  />
-                </Slider>
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Test 3: Fuerza abdominal.
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Agarrado de una barra haz un front lever todo el tiempo que
-                    puedas. Si no puedes, puedes hacer un L-Sit con las piernas
-                    estiradas, o, si no puedes, con las piernas dobladas, no hay
-                    problema.
-                  </Typography>
-                  <Typography
-                    sx={{ ml: 20, mt: 2, mb: 1 }}
-                    color="text.secondary"
-                  >
-                    Introduce el tiempo que has aguantado (en segundos)
-                  </Typography>
-                  <Input
-                    sx={{ ml: 20, mt: 2, mb: 1 }}
+                  </div>
+                </div>
+                <div>
+                  <div className="video-container">
+                    <CardMedia
+                      component="iframe"
+                      alt="L-Sit"
+                      src="https://www.youtube.com/embed/WHi1bvZLwlw"
+                      sx={{ border: 0 }}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div className="video-container">
+                    <CardMedia
+                      component="iframe"
+                      alt="Front Lever"
+                      src="https://www.youtube.com/embed/0GUycaYNpls"
+                      sx={{ border: 0 }}
+                    />
+                  </div>
+                </div>
+              </Slider>
+            </div>
+            <CardContent className="test-card-content">
+              <Typography variant="h5" component="h2" className="test-card-title">
+                Test 3: Fuerza abdominal
+              </Typography>
+              <Typography className="test-card-description">
+                Agarrado de una barra haz un front lever todo el tiempo que
+                puedas. Si no puedes, puedes hacer un L-Sit con las piernas
+                estiradas, o, si no puedes, con las piernas dobladas, no hay
+                problema.
+              </Typography>
+              
+              <div className="test-input-group">
+                <label className="test-input-label">
+                  Introduce el tiempo que has aguantado (en segundos)
+                </label>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <input
+                    className="test-input-field"
+                    type="number"
                     id="test3Tiempo"
                     onChange={handleChange3}
                     value={test3Tiempo}
-                    InputProps={{ inputProps: { min: 0 } }}
-                    endAdornment={
-                      <InputAdornment position="end">s</InputAdornment>
-                    }
+                    min="0"
                   />
+                  <span className="test-input-addon">s</span>
+                </div>
+              </div>
 
-                  <FormControl sx={{ ml: 20, mt: 2, mb: 1 }}>
-                    <FormLabel id="controlled-radio-buttons-group">
-                      Selecciona la variante que has hecho
-                    </FormLabel>
-                    <RadioGroup
-                      row
-                      aria-labelledby="controlled-radio-buttons-group"
-                      name="controlled-radio-buttons-group"
-                      value={variante}
+              <div className="test-radio-group">
+                <label className="test-radio-title">
+                  Selecciona la variante que has hecho
+                </label>
+                <div className="test-radio-options">
+                  <div className="test-radio-option">
+                    <input
+                      type="radio"
+                      id="rodillasDobladas"
+                      name="variante"
+                      value="Rodillas Dobladas"
+                      checked={variante === "Rodillas Dobladas"}
                       onChange={handleChangeVariante}
-                      sx={{ color: "text.secondary" }}
-                    >
-                      <FormControlLabel
-                        value="Rodillas Dobladas"
-                        control={<Radio />}
-                        label="Rodillas Dobladas"
-                      />
-                      <FormControlLabel
-                        value="L-Sit"
-                        control={<Radio />}
-                        label="L Sit"
-                      />
-                      <FormControlLabel
-                        value="Front Lever"
-                        control={<Radio />}
-                        label="Front Lever"
-                      />
-                    </RadioGroup>
-                  </FormControl>
-                </CardContent>
-              </Card>
+                    />
+                    <label htmlFor="rodillasDobladas" className="test-radio-label">
+                      Rodillas Dobladas
+                    </label>
+                  </div>
+                  <div className="test-radio-option">
+                    <input
+                      type="radio"
+                      id="lSit"
+                      name="variante"
+                      value="L-Sit"
+                      checked={variante === "L-Sit"}
+                      onChange={handleChangeVariante}
+                    />
+                    <label htmlFor="lSit" className="test-radio-label">
+                      L-Sit
+                    </label>
+                  </div>
+                  <div className="test-radio-option">
+                    <input
+                      type="radio"
+                      id="frontLever"
+                      name="variante"
+                      value="Front Lever"
+                      checked={variante === "Front Lever"}
+                      onChange={handleChangeVariante}
+                    />
+                    <label htmlFor="frontLever" className="test-radio-label">
+                      Front Lever
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                <Button
-                  color="secondary"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
-                  Atrás
-                </Button>
-                <Box sx={{ flex: "1 1 auto" }} />
-
-                <Button onClick={handleNext}>Siguiente</Button>
-              </Box>
-            </React.Fragment>
-          );
-        else activeStep === 3;
-        return (
-          <React.Fragment>
-            <Card
-              sx={{
-                maxWidth: 700,
-                maxHeight: 900,
-                display: "flex",
-                flexDirection: "column",
-                pt: 2,
-              }}
+          <div className="test-buttons">
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={handleBack}
+              className="test-button test-button-secondary"
             >
-              <CardMedia
-                height={400}
-                component="iframe"
-                alt="handle bar"
-                src="https://www.youtube.com/embed/4RqNGRVaTUQ"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Test 4: Fuerza de agarre.
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Cuélgate de una barra, relajado, todo el tiempo que puedas
-                  (las manos tienen que estar todo el tiempo en la barra, no
-                  puedes liberar una o moverlas). Escribe aquí por favor cuál ha
-                  sido tu tiempo
-                </Typography>
-                <Typography
-                  sx={{ ml: 20, mt: 2, mb: 1 }}
-                  color="text.secondary"
-                >
-                  Introduce el tiempo que has aguantado (en segundos)
-                </Typography>
+              Atrás
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNext}
+              className="test-button test-button-primary"
+            >
+              Siguiente
+            </Button>
+          </div>
+        </>
+      );
+    }
 
-                <Input
-                  sx={{ ml: 20, mt: 2, mb: 1 }}
+    // Step 3
+    return (
+      <>
+        <Card {...cardProps}>
+          <div className="video-container">
+            <CardMedia
+              component="iframe"
+              alt="Handle bar"
+              src="https://www.youtube.com/embed/4RqNGRVaTUQ"
+              sx={{ border: 0 }}
+            />
+          </div>
+          <CardContent className="test-card-content">
+            <Typography variant="h5" component="h2" className="test-card-title">
+              Test 4: Fuerza de agarre
+            </Typography>
+            <Typography className="test-card-description">
+              Cuélgate de una barra, relajado, todo el tiempo que puedas
+              (las manos tienen que estar todo el tiempo en la barra, no
+              puedes liberar una o moverlas). Escribe aquí por favor cuál ha
+              sido tu tiempo
+            </Typography>
+            
+            <div className="test-input-group">
+              <label className="test-input-label">
+                Introduce el tiempo que has aguantado (en segundos)
+              </label>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <input
+                  className="test-input-field"
                   type="number"
-                  id="test1Peso"
+                  id="test4Tiempo"
                   onChange={handleChange4}
                   value={test4Tiempo}
-                  InputProps={{ inputProps: { min: 0 } }}
-                  endAdornment={
-                    <InputAdornment position="end">s</InputAdornment>
-                  }
+                  min="0"
                 />
-              </CardContent>
-            </Card>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Button
-                color="secondary"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Atrás
-              </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
+                <span className="test-input-addon">s</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-              <Button onClick={handleSubmit}>Resultados</Button>
-            </Box>
-          </React.Fragment>
-        );
-      })()}
-    </Grid>
+        <div className="test-buttons">
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={handleBack}
+            className="test-button test-button-secondary"
+          >
+            Atrás
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            className="test-button test-button-primary"
+          >
+            Resultados
+          </Button>
+        </div>
+      </>
+    );
+  };
+
+  return (
+    <div className="test-container">
+      <div className="test-stepper">
+        <Stepper 
+          activeStep={activeStep} 
+          alternativeLabel={isMobile}
+          sx={{ 
+            overflowX: 'auto',
+            '& .MuiStepLabel-label': {
+              fontSize: isMobile ? '0.75rem' : '0.875rem',
+            }
+          }}
+        >
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </div>
+      
+      {renderTestContent()}
+    </div>
   );
 }

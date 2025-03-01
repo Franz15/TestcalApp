@@ -141,7 +141,7 @@ const Sidebar = () => {
             >
               <Avatar
                 src="../../../../testcalapp.png"
-                sx={{ width: 45, height: 45 }}
+                sx={{ width: 55, height: 55 }}
               />
             </IconButton>
             <IconButton onClick={toggleSidebar} aria-label="close sidebar">

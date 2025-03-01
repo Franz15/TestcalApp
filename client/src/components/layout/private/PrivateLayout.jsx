@@ -5,7 +5,10 @@ import { useAuth } from "../../../hooks/useAuth";
 import { Header } from "./Header";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./privateLayout.css";
+import "./transitions.css";
+import "./loading.css";
 import Sidebar from "./Sidebar";
+import TransitionWrapper from "./TransitionWrapper";
 import Footer from "../../accesories/Footer";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
@@ -77,7 +80,11 @@ export const PrivateLayout = () => {
   }, []);
 
   if (loading) {
-    return <CircularProgress color="inherit" />;
+    return (
+      <div className="loading-container">
+        <CircularProgress color="inherit" className="loading-spinner" />
+      </div>
+    );
   } else {
     return (
       <SidebarContext.Provider value={{ sidebarOpen, toggleSidebar }}>
@@ -118,7 +125,9 @@ export const PrivateLayout = () => {
 
           {/* Contenido principal */}
           <section className="layout__content">
-            {auth._id ? <Outlet /> : <Navigate to="/login" />}
+            <TransitionWrapper>
+              {auth._id ? <Outlet /> : <Navigate to="/login" />}
+            </TransitionWrapper>
           </section>
 
           {/* Barra lateral */}

@@ -249,7 +249,7 @@ ul li:last-child {
       "alert"
       "content"
       "footer";
-    grid-template-rows: 70px 50px 1fr 45px;
+    grid-template-rows: 70px 50px 1fr 30px;
     grid-template-columns: 1fr;
   }
 
@@ -265,7 +265,7 @@ ul li:last-child {
   .layout__content {
     padding: 0 15px;
   }
-  
+
   /* Ensure alert is properly positioned on mobile */
   .alert {
     z-index: 100;
