@@ -1,138 +1,239 @@
-/* LAYOUT */
-.layout {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  background-image: url("../../assets/img/backgrounds/background5.jpg"); /* Ruta de tu imagen */
-  background-size: cover;
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
+/* Login Container */
+.login-container {
+  min-height: 100vh;
+  font-family: "roboto", Courier, monospace;
+  position: relative;
+  overflow: hidden;
 }
 
-/* CONTENIDO PRINCIPAL */
-.content {
-  text-align: center;
-  /*height: 100vh;*/
-  padding: 0px;
-  margin: 0px;
-  grid-area: content;
-  display: flex;
-  flex-flow: row wrap;
-  width: 100%;
-  /* Asegura que el content no colapse su altura */
+/* Background Effects */
+.login-background {
+  transition: all 7s ease-in-out;
 }
 
-/* TARJETA */
-.card {
-  width: 35%;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 6px #ddd;
-  padding: 60px 25px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centra horizontalmente los elementos dentro de la tarjeta */
+.login-container:hover .login-background {
+  transform: scale(1.05);
 }
 
-.title__img {
-  background-image: url("../koala-profile.jpg"); /* Ruta de tu imagen */
-  background-size: cover; /* Ajusta el tamaÃ±o de la imagen para cubrir el contenedor */
-  background-position: center; /* Centra la imagen en el contenedor */
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+/* Welcome Message */
+.welcome-message {
+  animation: fadeInUp 1s ease-out;
+  font-family: "roboto", Courier, monospace;
 }
 
-.login__form {
-  width: 100%; /* Asegura que el formulario ocupe el ancho de la tarjeta */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centra horizontalmente los elementos dentro del formulario */
+/* Login Card */
+.login-card {
+  transition: all 0.3s ease;
+  background-color: #ffffff !important;
+  font-family: "roboto", Courier, monospace;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  width: 80%; /* Ajusta el ancho de los inputs y el botÃ³n */
-  gap: 15px; /* Espacio entre elementos */
+/* Logo */
+.login-logo {
+  transition: all 0.3s ease;
+  animation: fadeInDown 0.8s ease-out;
 }
 
-.form input {
-  width: 100%;
-  padding: 15px 10px;
-  margin-bottom: 10px; /* Espacio inferior */
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  box-sizing: border-box; /* Incluye el padding y borde en el ancho y alto */
+.login-logo:hover {
+  transform: scale(1.05);
 }
 
-.remember-me {
-  padding: 15px 0;
-  display: flex;
+/* Title */
+.login-title {
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: "roboto", Courier, monospace;
 }
 
-.form__submit,
-.form__actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px; /* Espacio entre elementos */
-  width: 100%;
+/* We're now handling the line directly in the JSX */
+.login-title::after {
+  content: none;
 }
 
-.forgot-password,
-.register {
-  margin: 10px 0 0 0;
-  font-size: 14px;
-  color: var(--letra-gris);
+/* Form Input Styles */
+.MuiOutlinedInput-root {
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+  font-family: "roboto", Courier, monospace !important;
 }
 
-.register a {
-  color: var(--azul-claro);
-  text-decoration: none;
+.MuiOutlinedInput-input {
+  font-family: "roboto", Courier, monospace !important;
 }
 
-.register a:hover {
-  text-decoration: underline;
+.MuiInputLabel-root {
+  font-family: "roboto", Courier, monospace !important;
 }
 
-/* BOTONES */
-button,
-input[type="submit"],
-input[type="button"] {
-  background: #0b70e1;
-  width: 100px;
-  color: white;
-  border: none;
-  padding: 15px;
-  border-radius: 3px;
-  text-transform: capitalize;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 300ms;
+.MuiFormHelperText-root {
+  font-family: "roboto", Courier, monospace !important;
 }
 
-button.login:hover,
-input[type="submit"].login:hover,
-input[type="button"].login:hover {
-  background: var(--color-editar);
+.MuiOutlinedInput-root:hover {
+  background-color: #f9f9f9;
 }
 
-button.delete:hover,
-input[type="submit"].delete:hover,
-input[type="button"].delete:hover {
-  background: var(--color-borrar);
+.MuiOutlinedInput-root.Mui-focused {
+  box-shadow: 0 0 0 2px rgba(232, 191, 86, 0.2);
 }
 
-/* MEDIA QUERIES */
-@media (max-width: 1085px) {
-  .content {
-    flex-direction: column;
+/* Password visibility toggle */
+.password-toggle-button {
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.password-toggle-button:hover .password-icon {
+  transform: scale(1.15);
+}
+
+.password-icon {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.password-toggle-button:active .password-icon {
+  transform: scale(0.85);
+}
+
+/* Password icon animations */
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg);
   }
+  to {
+    opacity: 1;
+    transform: rotate(0);
+  }
+}
 
-  .card {
-    width: 80%;
+@keyframes rotateOut {
+  from {
+    opacity: 1;
+    transform: rotate(0);
+  }
+  to {
+    opacity: 0;
+    transform: rotate(90deg);
+  }
+}
+
+.password-icon.visible {
+  animation: rotateIn 0.3s forwards;
+  color: var(--color-principal);
+}
+
+.password-icon.hidden {
+  animation: rotateIn 0.3s forwards;
+}
+
+/* Login Button */
+.login-button {
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  font-family: "roboto", Courier, monospace !important;
+}
+
+.login-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s ease;
+}
+
+.login-button:hover::after {
+  left: 100%;
+}
+
+/* Links */
+a {
+  transition: all 0.2s ease;
+  font-family: "roboto", Courier, monospace !important;
+}
+
+/* Typography */
+.MuiTypography-root {
+  font-family: "roboto", Courier, monospace !important;
+}
+
+/* Checkbox */
+.MuiFormControlLabel-label {
+  font-family: "roboto", Courier, monospace !important;
+}
+
+/* Footer */
+.login-footer {
+  font-family: "roboto", Courier, monospace;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Apply animations */
+.login-card {
+  animation: slideInFromRight 0.5s ease forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 599px) {
+  .login-card {
+    border-radius: 12px !important;
+    margin: 16px !important;
+    height: auto !important;
+  }
+  
+  .login-logo {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .login-title {
+    font-size: 1.8rem !important;
   }
 }
