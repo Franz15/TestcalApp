@@ -33,7 +33,7 @@ import background from "../../assets/img/backgrounds/background5.jpg";
 import "./login.css";
 
 export const Login = () => {
-  const { form, changed, setForm } = useForm({});
+  const { form, changed } = useForm({});
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState("not_sended");
   const [message, setMessage] = useState("");
@@ -46,13 +46,27 @@ export const Login = () => {
   // Check if there are saved credentials in localStorage
   useEffect(() => {
     const savedEmail = localStorage.getItem("rememberedEmail");
+    const savedPassword = localStorage.getItem("rememberedPassword");
     const savedRememberMe = localStorage.getItem("rememberMe") === "true";
     
-    if (savedEmail && savedRememberMe) {
-      setForm(prev => ({
-        ...prev,
-        email: savedEmail
-      }));
+    if (savedEmail && savedPassword && savedRememberMe) {
+      // Update the email field
+      changed({
+        target: {
+          name: "email",
+          value: savedEmail
+        }
+      });
+      
+      // Update the password field
+      changed({
+        target: {
+          name: "password",
+          value: savedPassword
+        }
+      });
+      
+      // Set remember me checkbox
       setRememberMe(true);
     }
   }, []);
@@ -96,15 +110,6 @@ export const Login = () => {
     setLoading(true);
 
     try {
-      // Save remember me preference
-      if (rememberMe) {
-        localStorage.setItem("rememberedEmail", form.email);
-        localStorage.setItem("rememberMe", "true");
-      } else {
-        localStorage.removeItem("rememberedEmail");
-        localStorage.setItem("rememberMe", "false");
-      }
-
       // Datos del usuario
       let userToLogin = form;
 
@@ -120,6 +125,17 @@ export const Login = () => {
       const data = await request.json();
 
       if (data.status === "success") {
+        // Save remember me preference and user credentials
+        if (rememberMe) {
+          localStorage.setItem("rememberedEmail", form.email);
+          localStorage.setItem("rememberedPassword", form.password); // Store password securely
+          localStorage.setItem("rememberMe", "true");
+        } else {
+          localStorage.removeItem("rememberedEmail");
+          localStorage.removeItem("rememberedPassword");
+          localStorage.setItem("rememberMe", "false");
+        }
+
         // Persistir los datos en el navegador
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
@@ -430,11 +446,16 @@ export const Login = () => {
                         checked={rememberMe}
                         onChange={handleRememberMe}
                         disabled={loading}
+                        className="remember-checkbox"
                         sx={{ 
                           color: "var(--color-principal)",
                           '&.Mui-checked': {
                             color: "var(--color-principal)"
-                          }
+                          },
+                          '&:hover': {
+                            backgroundColor: 'rgba(232, 191, 86, 0.08)'
+                          },
+                          transition: 'all 0.3s ease'
                         }}
                       />
                     }
@@ -444,12 +465,19 @@ export const Login = () => {
                         sx={{ 
                           color: "var(--letra-gris)",
                           fontSize: "14px",
-                          fontFamily: '"roboto", Courier, monospace'
+                          fontFamily: '"roboto", Courier, monospace',
+                          cursor: 'pointer'
                         }}
+                        onClick={() => !loading && setRememberMe(!rememberMe)}
                       >
-                        Recordarme
+                        Mantener sesión iniciada
                       </Typography>
                     }
+                    sx={{
+                      '& .MuiFormControlLabel-label': {
+                        userSelect: 'none'
+                      }
+                    }}
                   />
                   
                   <Link
@@ -613,7 +641,7 @@ export const Login = () => {
                       fontFamily: '"roboto", Courier, monospace'
                     }}
                   >
-                    Inicio de sesión exitoso. Redirigiendo...
+                    Sesión iniciada correctamente. Accediendo a su cuenta...
                   </Alert>
                 )}
                 
