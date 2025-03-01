@@ -8,6 +8,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0 20px;
   box-sizing: border-box;
+  margin-top: 8px; /* Reduced from 15px to 8px */
 }
 
 .ratings {
@@ -38,6 +39,9 @@
   box-shadow: 0 0 6px #ddd;
   padding: 30px 10px 10px 10px;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .radar-chart__content {
@@ -61,6 +65,8 @@
   overflow-x: hidden;
   scrollbar-width: none;
   box-sizing: border-box;
+  position: relative;
+  z-index: 10; /* Lower z-index than the alert */
 }
 
 .table::-webkit-scrollbar {
@@ -75,6 +81,9 @@
   box-shadow: 0 0 6px #ddd;
   padding: 30px;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Responsive adjustments */
@@ -91,6 +100,31 @@
   
   .radar-chart:last-child {
     margin-bottom: 0;
+  }
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+  .linear-chart {
+    padding: 15px 10px;
+    min-height: 250px;
+    height: auto;
+  }
+  
+  .content {
+    padding: 0 10px;
+  }
+  
+  .ratings {
+    padding: 30px 15px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .linear-chart {
+    padding: 10px 5px;
+    min-height: 200px;
   }
 }
 
