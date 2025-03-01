@@ -1,4 +1,6 @@
 import React from "react";
+import { Avatar } from "@mui/material";
+
 import "./footer.css";
 
 const Footer = () => {
@@ -9,7 +11,10 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-branding">
           <div className="footer-logo">
-            <span className="logo-text">T</span>
+            <Avatar
+              src="../../../../testcalapp.png"
+              sx={{ width: 20, height: 20 }}
+            />
           </div>
           <div className="footer-copyright">
             <span className="company-name">TestcalApp</span>
