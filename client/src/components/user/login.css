@@ -26,6 +26,9 @@
   transition: all 0.3s ease;
   background-color: #ffffff !important;
   font-family: "roboto", Courier, monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Logo */
@@ -255,14 +258,88 @@ a {
     border-radius: 12px !important;
     margin: 16px !important;
     height: auto !important;
-  }
-  
-  .login-logo {
-    width: 100px !important;
-    height: 100px !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
   }
   
   .login-title {
-    font-size: 1.8rem !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .MuiTextField-root {
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .MuiInputBase-root {
+    min-height: 40px !important;
+  }
+  
+  .MuiInputLabel-root {
+    font-size: 0.85rem !important;
+    transform: translate(14px, 12px) scale(1) !important;
+  }
+  
+  .MuiInputLabel-shrink {
+    transform: translate(14px, -6px) scale(0.75) !important;
+  }
+  
+  .MuiFormHelperText-root {
+    margin-top: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .login-button {
+    padding: 8px 16px !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .MuiDivider-root {
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .login-footer {
+    margin-top: 10px !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Medium screens */
+@media (min-width: 600px) and (max-width: 959px) {
+  .login-card {
+    max-width: 90% !important;
+  }
+  
+  .MuiTextField-root {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+/* Landscape mode on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .login-logo {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .login-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .MuiTextField-root {
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+  }
+  
+  .login-card {
+    height: 85vh !important;
+    overflow-y: auto !important;
   }
 }
