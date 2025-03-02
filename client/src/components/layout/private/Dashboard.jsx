@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Table9c } from "../../accesories/Table9c";
 import { Global } from "../../../helpers/Global";
-import Ratings from "../../accesories/Ratings";
+import RatingsNew from "../../accesories/RatingsNew";
 import { RadarChart } from "../../accesories/RadarChart";
-import { LinearChart } from "../../accesories/LinearChart";
+import { LinearChart } from "../../accesories/LinearChartNew";
 import { useAuth } from "../../../hooks/useAuth";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./dashboard.css";
@@ -30,6 +30,7 @@ export default function Dashboard() {
 
       const data = await request.json();
       if (data.status === "success" && data.results) {
+        console.log("API Results:", data.results); // Debug log
         setResults(data.results);
       } else {
         setResults([]);
@@ -102,7 +103,8 @@ export default function Dashboard() {
   return (
     <section className="content">
       <article className="ratings">
-        <Ratings results={results} />
+        {console.log("Passing results to RatingsNew:", results)}
+        <RatingsNew results={results} />
       </article>
       
       <div className="noflex-wrap">
