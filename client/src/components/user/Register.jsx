@@ -15,20 +15,20 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
 import MenuItem from "@mui/material/MenuItem";
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Divider from '@mui/material/Divider';
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import Divider from "@mui/material/Divider";
 import CircularProgress from "@mui/material/CircularProgress";
 
 // Icons
-import EmailIcon from '@mui/icons-material/Email';
-import LockIcon from '@mui/icons-material/Lock';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import PersonIcon from '@mui/icons-material/Person';
-import HeightIcon from '@mui/icons-material/Height';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import GradeIcon from '@mui/icons-material/Grade';
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import PersonIcon from "@mui/icons-material/Person";
+import HeightIcon from "@mui/icons-material/Height";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import GradeIcon from "@mui/icons-material/Grade";
 
 // Theme and styles
 import AppThemeProvider from "../../assets/theme/Theme";
@@ -163,7 +163,7 @@ export const Register = () => {
           height: "100vh",
           position: "relative",
           fontFamily: '"roboto", Courier, monospace',
-          overflow: "hidden"
+          overflow: "hidden",
         }}
       >
         <CssBaseline />
@@ -186,7 +186,7 @@ export const Register = () => {
             width: "100%",
             position: "absolute",
             top: 0,
-            left: 0
+            left: 0,
           }}
         />
 
@@ -200,7 +200,7 @@ export const Register = () => {
             left: "5%",
             zIndex: 2,
             display: { xs: "none", md: "block" },
-            fontFamily: '"roboto", Courier, monospace'
+            fontFamily: '"roboto", Courier, monospace',
           }}
         >
           <Typography
@@ -210,8 +210,8 @@ export const Register = () => {
               fontWeight: 300,
               textShadow: "0 2px 8px rgba(0,0,0,0.4)",
               mb: 1,
-              fontFamily: 'inherit',
-              fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" }
+              fontFamily: "inherit",
+              fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
             }}
           >
             Únete a nosotros
@@ -224,8 +224,8 @@ export const Register = () => {
               opacity: 0.9,
               textShadow: "0 1px 4px rgba(0,0,0,0.3)",
               maxWidth: "500px",
-              fontFamily: 'inherit',
-              fontSize: { xs: "0.9rem", sm: "1rem", md: "1.25rem" }
+              fontFamily: "inherit",
+              fontSize: { xs: "0.9rem", sm: "1rem", md: "1.25rem" },
             }}
           >
             Crea tu cuenta para comenzar tu experiencia personalizada
@@ -259,19 +259,19 @@ export const Register = () => {
               flexDirection: "column",
               justifyContent: "center",
               fontFamily: '"roboto", Courier, monospace',
-              '&::-webkit-scrollbar': {
-                width: '8px',
+              "&::-webkit-scrollbar": {
+                width: "8px",
               },
-              '&::-webkit-scrollbar-track': {
-                background: '#f1f1f1',
-                borderRadius: '4px',
+              "&::-webkit-scrollbar-track": {
+                background: "#f1f1f1",
+                borderRadius: "4px",
               },
-              '&::-webkit-scrollbar-thumb': {
-                background: '#888',
-                borderRadius: '4px',
+              "&::-webkit-scrollbar-thumb": {
+                background: "#888",
+                borderRadius: "4px",
               },
-              '&::-webkit-scrollbar-thumb:hover': {
-                background: '#555',
+              "&::-webkit-scrollbar-thumb:hover": {
+                background: "#555",
               },
             }}
           >
@@ -283,11 +283,17 @@ export const Register = () => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                minHeight: "100%"
+                minHeight: "100%",
               }}
             >
               {/* Container for logo and text */}
-              <Box sx={{ position: "relative", textAlign: "center", mb: { xs: 0.75, sm: 1, md: 2 } }}>
+              <Box
+                sx={{
+                  position: "relative",
+                  textAlign: "center",
+                  mb: { xs: 0.75, sm: 1, md: 2 },
+                }}
+              >
                 <Box
                   component="img"
                   src="../../../../testcalapp.png"
@@ -297,7 +303,7 @@ export const Register = () => {
                     width: { xs: 80, sm: 100, md: 140 },
                     height: { xs: 80, sm: 100, md: 140 },
                     objectFit: "contain",
-                    mb: { xs: 0.5, sm: 0.75, md: 1 }
+                    mb: { xs: 0.5, sm: 0.75, md: 1 },
                   }}
                 />
 
@@ -308,11 +314,11 @@ export const Register = () => {
                   sx={{
                     fontWeight: 700,
                     color: "#454545",
-                    fontFamily: 'inherit',
+                    fontFamily: "inherit",
                     position: "relative",
                     pb: { xs: 0.75, sm: 1 },
                     mb: { xs: 0.5, sm: 0.5 },
-                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2.125rem" }
+                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2.125rem" },
                   }}
                 >
                   Registro
@@ -325,7 +331,7 @@ export const Register = () => {
                       height: "3px",
                       width: "40px",
                       backgroundColor: "var(--color-principal)",
-                      borderRadius: "3px"
+                      borderRadius: "3px",
                     }}
                   />
                 </Typography>
@@ -335,9 +341,9 @@ export const Register = () => {
                   sx={{
                     color: "#666",
                     textAlign: "center",
-                    fontFamily: 'inherit',
-                    fontSize: { xs: '12px', sm: '13px', md: '14px' },
-                    display: { xs: 'block', sm: 'block' }
+                    fontFamily: "inherit",
+                    fontSize: { xs: "12px", sm: "13px", md: "14px" },
+                    display: { xs: "block", sm: "block" },
                   }}
                 >
                   Crea tu cuenta para empezar
@@ -366,19 +372,24 @@ export const Register = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <PersonIcon sx={{ color: "var(--letra-gris)", fontSize: { xs: '1.1rem', sm: '1.25rem' } }} />
+                        <PersonIcon
+                          sx={{
+                            color: "var(--letra-gris)",
+                            fontSize: { xs: "1.1rem", sm: "1.25rem" },
+                          }}
+                        />
                       </InputAdornment>
                     ),
                     sx: {
                       borderRadius: "8px",
-                      fontFamily: '"roboto", Courier, monospace'
-                    }
+                      fontFamily: '"roboto", Courier, monospace',
+                    },
                   }}
                   InputLabelProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   FormHelperTextProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   sx={{ mb: { xs: 0.75, sm: 1 } }}
                   size="small"
@@ -399,19 +410,24 @@ export const Register = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <PersonIcon sx={{ color: "var(--letra-gris)", fontSize: { xs: '1.1rem', sm: '1.25rem' } }} />
+                        <PersonIcon
+                          sx={{
+                            color: "var(--letra-gris)",
+                            fontSize: { xs: "1.1rem", sm: "1.25rem" },
+                          }}
+                        />
                       </InputAdornment>
                     ),
                     sx: {
                       borderRadius: "8px",
-                      fontFamily: '"roboto", Courier, monospace'
-                    }
+                      fontFamily: '"roboto", Courier, monospace',
+                    },
                   }}
                   InputLabelProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   FormHelperTextProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   sx={{ mb: { xs: 0.75, sm: 1 } }}
                   size="small"
@@ -433,19 +449,24 @@ export const Register = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <EmailIcon sx={{ color: "var(--letra-gris)", fontSize: { xs: '1.1rem', sm: '1.25rem' } }} />
+                        <EmailIcon
+                          sx={{
+                            color: "var(--letra-gris)",
+                            fontSize: { xs: "1.1rem", sm: "1.25rem" },
+                          }}
+                        />
                       </InputAdornment>
                     ),
                     sx: {
                       borderRadius: "8px",
-                      fontFamily: '"roboto", Courier, monospace'
-                    }
+                      fontFamily: '"roboto", Courier, monospace',
+                    },
                   }}
                   InputLabelProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   FormHelperTextProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   sx={{ mb: { xs: 0.75, sm: 1 } }}
                   size="small"
@@ -465,19 +486,24 @@ export const Register = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <PersonIcon sx={{ color: "var(--letra-gris)", fontSize: { xs: '1.1rem', sm: '1.25rem' } }} />
+                        <PersonIcon
+                          sx={{
+                            color: "var(--letra-gris)",
+                            fontSize: { xs: "1.1rem", sm: "1.25rem" },
+                          }}
+                        />
                       </InputAdornment>
                     ),
                     sx: {
                       borderRadius: "8px",
-                      fontFamily: '"roboto", Courier, monospace'
-                    }
+                      fontFamily: '"roboto", Courier, monospace',
+                    },
                   }}
                   InputLabelProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   FormHelperTextProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   sx={{ mb: { xs: 0.75, sm: 1 } }}
                   size="small"
@@ -498,7 +524,12 @@ export const Register = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <LockIcon sx={{ color: "var(--letra-gris)", fontSize: { xs: '1.1rem', sm: '1.25rem' } }} />
+                        <LockIcon
+                          sx={{
+                            color: "var(--letra-gris)",
+                            fontSize: { xs: "1.1rem", sm: "1.25rem" },
+                          }}
+                        />
                       </InputAdornment>
                     ),
                     endAdornment: (
@@ -509,33 +540,42 @@ export const Register = () => {
                           edge="end"
                           className="password-toggle-button"
                           sx={{
-                            color: showPassword ? "var(--color-principal)" : "var(--letra-gris)",
+                            color: showPassword
+                              ? "var(--color-principal)"
+                              : "var(--letra-gris)",
                             transition: "all 0.3s ease",
                             borderRadius: "4px",
-                            padding: { xs: '3px', sm: '4px' },
-                            '&:hover': {
-                              backgroundColor: 'transparent'
-                            }
+                            padding: { xs: "3px", sm: "4px" },
+                            "&:hover": {
+                              backgroundColor: "transparent",
+                            },
                           }}
                         >
-                          {showPassword ?
-                            <VisibilityOffIcon sx={{ fontSize: { xs: '1.1rem', sm: '1.25rem' } }} className="password-icon visible" /> :
-                            <VisibilityIcon sx={{ fontSize: { xs: '1.1rem', sm: '1.25rem' } }} className="password-icon hidden" />
-                          }
+                          {showPassword ? (
+                            <VisibilityOffIcon
+                              sx={{ fontSize: { xs: "1.1rem", sm: "1.25rem" } }}
+                              className="password-icon visible"
+                            />
+                          ) : (
+                            <VisibilityIcon
+                              sx={{ fontSize: { xs: "1.1rem", sm: "1.25rem" } }}
+                              className="password-icon hidden"
+                            />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     ),
                     sx: {
                       borderRadius: "8px",
                       fontFamily: '"roboto", Courier, monospace',
-                      transition: "all 0.3s ease"
-                    }
+                      transition: "all 0.3s ease",
+                    },
                   }}
                   InputLabelProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   FormHelperTextProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   sx={{ mb: { xs: 0.75, sm: 1 } }}
                   size="small"
@@ -555,19 +595,24 @@ export const Register = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <GradeIcon sx={{ color: "var(--letra-gris)", fontSize: { xs: '1.1rem', sm: '1.25rem' } }} />
+                        <GradeIcon
+                          sx={{
+                            color: "var(--letra-gris)",
+                            fontSize: { xs: "1.1rem", sm: "1.25rem" },
+                          }}
+                        />
                       </InputAdornment>
                     ),
                     sx: {
                       borderRadius: "8px",
-                      fontFamily: '"roboto", Courier, monospace'
-                    }
+                      fontFamily: '"roboto", Courier, monospace',
+                    },
                   }}
                   InputLabelProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   FormHelperTextProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   sx={{ mb: { xs: 0.75, sm: 1 } }}
                   size="small"
@@ -610,24 +655,29 @@ export const Register = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <HeightIcon sx={{ color: "var(--letra-gris)", fontSize: { xs: '1.1rem', sm: '1.25rem' } }} />
+                        <HeightIcon
+                          sx={{
+                            color: "var(--letra-gris)",
+                            fontSize: { xs: "1.1rem", sm: "1.25rem" },
+                          }}
+                        />
                       </InputAdornment>
                     ),
                     inputProps: { min: 0 },
                     sx: {
                       borderRadius: "8px",
-                      fontFamily: '"roboto", Courier, monospace'
-                    }
+                      fontFamily: '"roboto", Courier, monospace',
+                    },
                   }}
                   onChange={changed}
                   error={!!errors.altura}
                   helperText={errors.altura}
                   disabled={loading}
                   InputLabelProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   FormHelperTextProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   sx={{ mb: { xs: 0.75, sm: 1 } }}
                   size="small"
@@ -644,24 +694,29 @@ export const Register = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <FitnessCenterIcon sx={{ color: "var(--letra-gris)", fontSize: { xs: '1.1rem', sm: '1.25rem' } }} />
+                        <FitnessCenterIcon
+                          sx={{
+                            color: "var(--letra-gris)",
+                            fontSize: { xs: "1.1rem", sm: "1.25rem" },
+                          }}
+                        />
                       </InputAdornment>
                     ),
                     inputProps: { min: 0 },
                     sx: {
                       borderRadius: "8px",
-                      fontFamily: '"roboto", Courier, monospace'
-                    }
+                      fontFamily: '"roboto", Courier, monospace',
+                    },
                   }}
                   onChange={changed}
                   error={!!errors.peso}
                   helperText={errors.peso}
                   disabled={loading}
                   InputLabelProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   FormHelperTextProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   sx={{ mb: { xs: 0.75, sm: 1 } }}
                   size="small"
@@ -678,24 +733,30 @@ export const Register = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <HeightIcon sx={{ transform: 'rotate(90deg)', color: "var(--letra-gris)", fontSize: { xs: '1.1rem', sm: '1.25rem' } }} />
+                        <HeightIcon
+                          sx={{
+                            transform: "rotate(90deg)",
+                            color: "var(--letra-gris)",
+                            fontSize: { xs: "1.1rem", sm: "1.25rem" },
+                          }}
+                        />
                       </InputAdornment>
                     ),
                     inputProps: { min: 0 },
                     sx: {
                       borderRadius: "8px",
-                      fontFamily: '"roboto", Courier, monospace'
-                    }
+                      fontFamily: '"roboto", Courier, monospace',
+                    },
                   }}
                   onChange={changed}
                   error={!!errors.envergadura}
                   helperText={errors.envergadura}
                   disabled={loading}
                   InputLabelProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   FormHelperTextProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   sx={{ mb: { xs: 0.75, sm: 1 } }}
                   size="small"
@@ -720,10 +781,10 @@ export const Register = () => {
                     fontFamily: '"roboto", Courier, monospace',
                     position: "relative",
                     boxShadow: "0 4px 12px rgba(232, 191, 86, 0.35)",
-                    '&:hover': {
+                    "&:hover": {
                       backgroundColor: "var(--color-secundario)",
-                      boxShadow: "0 6px 16px rgba(232, 156, 86, 0.4)"
-                    }
+                      boxShadow: "0 6px 16px rgba(232, 156, 86, 0.4)",
+                    },
                   }}
                 >
                   {loading ? (
@@ -731,10 +792,12 @@ export const Register = () => {
                       size={22}
                       sx={{
                         color: "#454545",
-                        position: "absolute"
+                        position: "absolute",
                       }}
                     />
-                  ) : "Registrarse"}
+                  ) : (
+                    "Registrarse"
+                  )}
                 </Button>
 
                 <Divider sx={{ my: { xs: 0.75, sm: 1.5, md: 2 } }}>
@@ -744,33 +807,35 @@ export const Register = () => {
                       color: "#999",
                       px: 1,
                       fontSize: { xs: "12px", sm: "13px", md: "14px" },
-                      fontFamily: '"roboto", Courier, monospace'
+                      fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
                     o
                   </Typography>
                 </Divider>
 
-                <Box sx={{ textAlign: "center", mt: { xs: 0.75, sm: 1.5, md: 2 } }}>
+                <Box
+                  sx={{ textAlign: "center", mt: { xs: 0.75, sm: 1.5, md: 2 } }}
+                >
                   <Typography
                     variant="body2"
                     sx={{
                       color: "var(--letra-gris)",
                       fontSize: { xs: "12px", sm: "13px", md: "14px" },
-                      fontFamily: '"roboto", Courier, monospace'
+                      fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
-                    ¿Ya tienes una cuenta?{' '}
+                    ¿Ya tienes una cuenta?{" "}
                     <Link
                       href="/login"
                       sx={{
                         color: "var(--color-secundario)",
                         textDecoration: "none",
                         fontWeight: 500,
-                        fontFamily: 'inherit',
-                        '&:hover': {
-                          textDecoration: "underline"
-                        }
+                        fontFamily: "inherit",
+                        "&:hover": {
+                          textDecoration: "underline",
+                        },
                       }}
                     >
                       Inicia sesión aquí
@@ -787,7 +852,7 @@ export const Register = () => {
                       borderRadius: "8px",
                       backgroundColor: "var(--color-success)",
                       fontFamily: '"roboto", Courier, monospace',
-                      fontSize: { xs: "12px", sm: "13px", md: "14px" }
+                      fontSize: { xs: "12px", sm: "13px", md: "14px" },
                     }}
                   >
                     Usuario registrado correctamente. Redirigiendo al login...
@@ -803,7 +868,7 @@ export const Register = () => {
                       borderRadius: "8px",
                       backgroundColor: "var(--color-alerta)",
                       fontFamily: '"roboto", Courier, monospace',
-                      fontSize: { xs: "12px", sm: "13px", md: "14px" }
+                      fontSize: { xs: "12px", sm: "13px", md: "14px" },
                     }}
                   >
                     {message}
@@ -822,27 +887,37 @@ export const Register = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    fontFamily: '"roboto", Courier, monospace'
+                    fontFamily: '"roboto", Courier, monospace',
                   }}
                 >
-                  <Box className="footer-branding" sx={{ display: "flex", alignItems: "center" }}>
+                  <Box
+                    className="footer-branding"
+                    sx={{ display: "flex", alignItems: "center" }}
+                  >
                     <Box
                       component="img"
                       src="../../../../testcalapp.png"
-                      sx={{ 
-                        width: { xs: 16, sm: 18, md: 20 }, 
-                        height: { xs: 16, sm: 18, md: 20 }, 
-                        mr: { xs: 0.5, sm: 0.75, md: 1 }, 
-                        objectFit: "contain" 
+                      sx={{
+                        width: { xs: 16, sm: 18, md: 20 },
+                        height: { xs: 16, sm: 18, md: 20 },
+                        mr: { xs: 0.5, sm: 0.75, md: 1 },
+                        objectFit: "contain",
                       }}
                     />
-                    <Box sx={{ display: "flex", alignItems: "center", fontSize: { xs: "10px", sm: "11px", md: "12px" }, color: "var(--letra-gris)" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        fontSize: { xs: "10px", sm: "11px", md: "12px" },
+                        color: "var(--letra-gris)",
+                      }}
+                    >
                       <Typography
                         variant="caption"
                         sx={{
                           fontWeight: 500,
-                          fontFamily: 'inherit',
-                          fontSize: { xs: "10px", sm: "11px", md: "12px" }
+                          fontFamily: "inherit",
+                          fontSize: { xs: "10px", sm: "11px", md: "12px" },
                         }}
                       >
                         TestcalApp
@@ -853,18 +928,18 @@ export const Register = () => {
                           opacity: 0.7,
                           fontSize: { xs: "8px", sm: "9px", md: "10px" },
                           ml: 0.5,
-                          fontFamily: 'inherit'
+                          fontFamily: "inherit",
                         }}
                       >
-                        v1.0.6
+                        v1.07
                       </Typography>
                       <Typography
                         variant="caption"
                         sx={{
                           opacity: 0.7,
                           ml: 1,
-                          fontFamily: 'inherit',
-                          fontSize: { xs: "8px", sm: "9px", md: "10px" }
+                          fontFamily: "inherit",
+                          fontSize: { xs: "8px", sm: "9px", md: "10px" },
                         }}
                       >
                         &copy; {currentYear}

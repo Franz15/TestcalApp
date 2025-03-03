@@ -14,12 +14,12 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
-import InputAdornment from '@mui/material/InputAdornment';
+import InputAdornment from "@mui/material/InputAdornment";
 import CircularProgress from "@mui/material/CircularProgress";
-import Divider from '@mui/material/Divider';
+import Divider from "@mui/material/Divider";
 
 // Icons
-import EmailIcon from '@mui/icons-material/Email';
+import EmailIcon from "@mui/icons-material/Email";
 
 // Theme and styles
 import AppThemeProvider from "../../assets/theme/Theme";
@@ -95,7 +95,7 @@ export const Recover = () => {
         sx={{
           height: "100vh",
           position: "relative",
-          fontFamily: '"roboto", Courier, monospace'
+          fontFamily: '"roboto", Courier, monospace',
         }}
       >
         <CssBaseline />
@@ -118,10 +118,10 @@ export const Recover = () => {
             width: "100%",
             position: "absolute",
             top: 0,
-            left: 0
+            left: 0,
           }}
         />
-        
+
         {/* Welcome message in bottom left */}
         <Box
           className="welcome-message"
@@ -131,7 +131,7 @@ export const Recover = () => {
             left: "5%",
             zIndex: 2,
             display: { xs: "none", md: "block" },
-            fontFamily: '"roboto", Courier, monospace'
+            fontFamily: '"roboto", Courier, monospace',
           }}
         >
           <Typography
@@ -141,7 +141,7 @@ export const Recover = () => {
               fontWeight: 300,
               textShadow: "0 2px 8px rgba(0,0,0,0.4)",
               mb: 1,
-              fontFamily: 'inherit'
+              fontFamily: "inherit",
             }}
           >
             Recupera tu cuenta
@@ -154,13 +154,13 @@ export const Recover = () => {
               opacity: 0.9,
               textShadow: "0 1px 4px rgba(0,0,0,0.3)",
               maxWidth: "500px",
-              fontFamily: 'inherit'
+              fontFamily: "inherit",
             }}
           >
             Te enviaremos instrucciones para restablecer tu contraseña
           </Typography>
         </Box>
-        
+
         <Grid
           container
           justifyContent="flex-end"
@@ -186,7 +186,7 @@ export const Recover = () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              fontFamily: '"roboto", Courier, monospace'
+              fontFamily: '"roboto", Courier, monospace',
             }}
           >
             <Box
@@ -195,7 +195,7 @@ export const Recover = () => {
                 px: { xs: 3, sm: 4 },
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               {/* Container for logo and text */}
@@ -209,10 +209,10 @@ export const Recover = () => {
                     width: 140,
                     height: 140,
                     objectFit: "contain",
-                    mb: 1
+                    mb: 1,
                   }}
                 />
-                
+
                 <Typography
                   component="h1"
                   variant="h4"
@@ -220,10 +220,10 @@ export const Recover = () => {
                   sx={{
                     fontWeight: 700,
                     color: "#454545",
-                    fontFamily: 'inherit',
+                    fontFamily: "inherit",
                     position: "relative",
                     pb: 2,
-                    mb: 1
+                    mb: 1,
                   }}
                 >
                   Recuperación
@@ -236,24 +236,24 @@ export const Recover = () => {
                       height: "3px",
                       width: "40px",
                       backgroundColor: "var(--color-principal)",
-                      borderRadius: "3px"
+                      borderRadius: "3px",
                     }}
                   />
                 </Typography>
-                
+
                 <Typography
                   variant="body1"
                   sx={{
                     color: "#666",
                     textAlign: "center",
-                    fontFamily: 'inherit',
-                    fontSize: '16px'
+                    fontFamily: "inherit",
+                    fontSize: "16px",
                   }}
                 >
                   Ingresa tu email para restablecer tu contraseña
                 </Typography>
               </Box>
-              
+
               <Box
                 component="form"
                 noValidate
@@ -281,18 +281,18 @@ export const Recover = () => {
                     ),
                     sx: {
                       borderRadius: "8px",
-                      fontFamily: '"roboto", Courier, monospace'
-                    }
+                      fontFamily: '"roboto", Courier, monospace',
+                    },
                   }}
                   InputLabelProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   FormHelperTextProps={{
-                    sx: { fontFamily: '"roboto", Courier, monospace' }
+                    sx: { fontFamily: '"roboto", Courier, monospace' },
                   }}
                   sx={{ mb: 2 }}
                 />
-                
+
                 <Button
                   type="submit"
                   fullWidth
@@ -312,10 +312,10 @@ export const Recover = () => {
                     fontFamily: '"roboto", Courier, monospace',
                     position: "relative",
                     boxShadow: "0 4px 12px rgba(232, 191, 86, 0.35)",
-                    '&:hover': {
+                    "&:hover": {
                       backgroundColor: "var(--color-secundario)",
-                      boxShadow: "0 6px 16px rgba(232, 156, 86, 0.4)"
-                    }
+                      boxShadow: "0 6px 16px rgba(232, 156, 86, 0.4)",
+                    },
                   }}
                 >
                   {loading ? (
@@ -323,12 +323,14 @@ export const Recover = () => {
                       size={24}
                       sx={{
                         color: "#454545",
-                        position: "absolute"
+                        position: "absolute",
                       }}
                     />
-                  ) : "Recuperar contraseña"}
+                  ) : (
+                    "Recuperar contraseña"
+                  )}
                 </Button>
-                
+
                 <Divider sx={{ my: 2 }}>
                   <Typography
                     variant="body2"
@@ -336,13 +338,13 @@ export const Recover = () => {
                       color: "#999",
                       px: 1,
                       fontSize: "14px",
-                      fontFamily: '"roboto", Courier, monospace'
+                      fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
                     o
                   </Typography>
                 </Divider>
-                
+
                 <Box sx={{ textAlign: "center", mt: 2 }}>
                   <Typography
                     variant="body2"
@@ -350,7 +352,7 @@ export const Recover = () => {
                       color: "var(--letra-gris)",
                       fontSize: "14px",
                       fontFamily: '"roboto", Courier, monospace',
-                      mb: 1
+                      mb: 1,
                     }}
                   >
                     <Link
@@ -359,42 +361,42 @@ export const Recover = () => {
                         color: "var(--color-secundario)",
                         textDecoration: "none",
                         fontWeight: 500,
-                        fontFamily: 'inherit',
-                        '&:hover': {
-                          textDecoration: "underline"
-                        }
+                        fontFamily: "inherit",
+                        "&:hover": {
+                          textDecoration: "underline",
+                        },
                       }}
                     >
                       Volver al inicio de sesión
                     </Link>
                   </Typography>
-                  
+
                   <Typography
                     variant="body2"
                     sx={{
                       color: "var(--letra-gris)",
                       fontSize: "14px",
-                      fontFamily: '"roboto", Courier, monospace'
+                      fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
-                    ¿No tienes una cuenta?{' '}
+                    ¿No tienes una cuenta?{" "}
                     <Link
                       href="/registro"
                       sx={{
                         color: "var(--color-secundario)",
                         textDecoration: "none",
                         fontWeight: 500,
-                        fontFamily: 'inherit',
-                        '&:hover': {
-                          textDecoration: "underline"
-                        }
+                        fontFamily: "inherit",
+                        "&:hover": {
+                          textDecoration: "underline",
+                        },
                       }}
                     >
                       Regístrate aquí
                     </Link>
                   </Typography>
                 </Box>
-                
+
                 {saved === "success" && (
                   <Alert
                     severity="success"
@@ -402,13 +404,13 @@ export const Recover = () => {
                       mt: 3,
                       borderRadius: "8px",
                       backgroundColor: "var(--color-success)",
-                      fontFamily: '"roboto", Courier, monospace'
+                      fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
                     {message}
                   </Alert>
                 )}
-                
+
                 {saved === "error" && (
                   <Alert
                     severity="error"
@@ -416,13 +418,13 @@ export const Recover = () => {
                       mt: 3,
                       borderRadius: "8px",
                       backgroundColor: "var(--color-alerta)",
-                      fontFamily: '"roboto", Courier, monospace'
+                      fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
                     {message}
                   </Alert>
                 )}
-                
+
                 {/* Footer */}
                 <Box
                   component="footer"
@@ -435,21 +437,36 @@ export const Recover = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    fontFamily: '"roboto", Courier, monospace'
+                    fontFamily: '"roboto", Courier, monospace',
                   }}
                 >
-                  <Box className="footer-branding" sx={{ display: "flex", alignItems: "center" }}>
+                  <Box
+                    className="footer-branding"
+                    sx={{ display: "flex", alignItems: "center" }}
+                  >
                     <Box
                       component="img"
                       src="../../../../testcalapp.png"
-                      sx={{ width: 20, height: 20, mr: 1, objectFit: "contain" }}
+                      sx={{
+                        width: 20,
+                        height: 20,
+                        mr: 1,
+                        objectFit: "contain",
+                      }}
                     />
-                    <Box sx={{ display: "flex", alignItems: "center", fontSize: "12px", color: "var(--letra-gris)" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        fontSize: "12px",
+                        color: "var(--letra-gris)",
+                      }}
+                    >
                       <Typography
                         variant="caption"
                         sx={{
                           fontWeight: 500,
-                          fontFamily: 'inherit'
+                          fontFamily: "inherit",
                         }}
                       >
                         TestcalApp
@@ -460,17 +477,17 @@ export const Recover = () => {
                           opacity: 0.7,
                           fontSize: "10px",
                           ml: 0.5,
-                          fontFamily: 'inherit'
+                          fontFamily: "inherit",
                         }}
                       >
-                        v1.0.6
+                        v1.07
                       </Typography>
                       <Typography
                         variant="caption"
                         sx={{
                           opacity: 0.7,
                           ml: 1,
-                          fontFamily: 'inherit'
+                          fontFamily: "inherit",
                         }}
                       >
                         &copy; {currentYear}
