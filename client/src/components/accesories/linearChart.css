@@ -1,0 +1,37 @@
+.linear-chart-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Make sure the canvas is responsive */
+.linear-chart-container canvas {
+  width: 100% !important;
+  height: 400px !important; /* Increased from 300px to 400px */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .linear-chart-container {
+    padding: 5px 0;
+    height: 300px; /* Increased from 250px to 300px */
+  }
+  
+  .linear-chart-container canvas {
+    height: 280px !important; /* Increased from 220px to 280px */
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .linear-chart-container {
+    height: 250px; /* Increased from 200px to 250px */
+  }
+  
+  .linear-chart-container canvas {
+    height: 230px !important; /* Increased from 180px to 230px */
+  }
+}
