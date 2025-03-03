@@ -480,7 +480,7 @@ export const Recover = () => {
                           fontFamily: "inherit",
                         }}
                       >
-                        v1.07
+                        v1.0.7
                       </Typography>
                       <Typography
                         variant="caption"
