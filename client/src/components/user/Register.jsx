@@ -931,7 +931,7 @@ export const Register = () => {
                           fontFamily: "inherit",
                         }}
                       >
-                        v1.0.7
+                        v1.0.8
                       </Typography>
                       <Typography
                         variant="caption"
