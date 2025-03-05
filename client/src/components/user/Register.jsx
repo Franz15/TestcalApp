@@ -295,17 +295,42 @@ export const Register = () => {
                 }}
               >
                 <Box
-                  component="img"
-                  src="../../../../testcalapp.png"
-                  alt="App Logo"
-                  className="login-logo"
                   sx={{
+                    position: "relative",
+                    display: "inline-block",
                     width: { xs: 80, sm: 100, md: 140 },
                     height: { xs: 80, sm: 100, md: 140 },
-                    objectFit: "contain",
                     mb: { xs: 0.5, sm: 0.75, md: 1 },
                   }}
-                />
+                >
+                  <Box
+                    component="img"
+                    src="../../../../testcalapp.png"
+                    alt="App Logo"
+                    className="login-logo"
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      position: "relative",
+                      zIndex: 1,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      content: '""',
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: "50%",
+                      border: "2px solid var(--color-principal)",
+                      boxSizing: "border-box",
+                      top: 0,
+                      left: 0,
+                      zIndex: 0,
+                    }}
+                  />
+                </Box>
 
                 <Typography
                   component="h1"

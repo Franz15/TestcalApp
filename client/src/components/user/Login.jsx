@@ -279,17 +279,42 @@ export const Login = () => {
               <Box sx={{ position: "relative", textAlign: "center", mb: 3 }}>
                 {/* Logo positioned to align with the line */}
                 <Box
-                  component="img"
-                  src="../../../../testcalapp.png"
-                  alt="App Logo"
-                  className="login-logo"
                   sx={{
+                    position: "relative",
+                    display: "inline-block",
                     width: 140,
                     height: 140,
-                    objectFit: "contain",
                     mb: 1,
                   }}
-                />
+                >
+                  <Box
+                    component="img"
+                    src="../../../../testcalapp.png"
+                    alt="App Logo"
+                    className="login-logo"
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      position: "relative",
+                      zIndex: 1,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      content: '""',
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: "50%",
+                      border: "2px solid var(--color-principal)",
+                      boxSizing: "border-box",
+                      top: 0,
+                      left: 0,
+                      zIndex: 0,
+                    }}
+                  />
+                </Box>
 
                 <Typography
                   component="h1"

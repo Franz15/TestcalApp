@@ -78,27 +78,38 @@ const Error404 = () => {
             }}
           >
             <Box sx={{ position: "relative", mb: 3 }}>
-              <Avatar
-                src="../../../../testcalapp.png"
-                sx={{
-                  width: 80,
-                  height: 80,
-                  position: "relative",
-                  zIndex: 2,
-                }}
-              />
               <Box
                 sx={{
-                  position: "absolute",
-                  top: -5,
-                  left: -5,
-                  width: 90,
-                  height: 90,
-                  borderRadius: "50%",
-                  border: "2px solid rgb(232, 191, 86)",
-                  zIndex: 1,
+                  position: "relative",
+                  display: "inline-block",
+                  width: 80,
+                  height: 80,
                 }}
-              />
+              >
+                <Avatar
+                  src="../../../../testcalapp.png"
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                />
+                <Box
+                  sx={{
+                    content: '""',
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "50%",
+                    border: "2px solid var(--color-principal)",
+                    boxSizing: "border-box",
+                    top: 0,
+                    left: 0,
+                    zIndex: 0,
+                  }}
+                />
+              </Box>
             </Box>
 
             <ErrorOutlineIcon
