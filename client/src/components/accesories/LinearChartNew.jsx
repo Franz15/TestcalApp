@@ -36,7 +36,7 @@ ChartJS.register(
   Filler
 );
 
-export function LinearChart({ results }) {
+export default function LinearChart({ results }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [chartType, setChartType] = useState("progress"); // progress or score
   const [timeRange, setTimeRange] = useState("all"); // all, 6m, 3m, 1m

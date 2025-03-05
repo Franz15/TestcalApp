@@ -42,7 +42,7 @@ export const PrivateLayout = () => {
     });
 
     const data = await request.json();
-    if (data.status == "success") {
+    if (data.status === "success") {
       setOpen(true);
     }
   };
@@ -105,11 +105,12 @@ export const PrivateLayout = () => {
             </div>
             <Snackbar
               open={open}
-              autoHideDuration={6000} // Se ocultará automáticamente después de 3 segundos
+              autoHideDuration={6000}
               onClose={handleClose}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }} // Posición de la alerta
-              TransitionComponent={Grow} // Transición de tipo Grow
-              transitionDuration={{ enter: 1000, exit: 1000 }} // Duración de la animación en milisegundos
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              TransitionComponent={Grow}
+              transitionDuration={{ enter: 1000, exit: 1000 }}
+              sx={{ zIndex: 2000 }} // Z-index más alto que el Alert
             >
               <Alert
                 onClose={handleClose}

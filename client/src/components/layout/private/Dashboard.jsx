@@ -3,7 +3,7 @@ import { Table9c } from "../../accesories/Table9c";
 import { Global } from "../../../helpers/Global";
 import RatingsNew from "../../accesories/RatingsNew";
 import { RadarChart } from "../../accesories/RadarChart";
-import { LinearChart } from "../../accesories/LinearChartNew";
+import LinearChart from "../../accesories/LinearChartNew";
 import { useAuth } from "../../../hooks/useAuth";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./dashboard.css";

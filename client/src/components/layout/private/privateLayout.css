@@ -103,7 +103,7 @@ body {
   display: flex;
   justify-content: space-around;
   position: relative;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .alert_message {
@@ -268,7 +268,7 @@ ul li:last-child {
 
   /* Ensure alert is properly positioned on mobile */
   .alert {
-    z-index: 100;
+    z-index: 1000;
   }
 
   /* Keep header elements well-aligned */

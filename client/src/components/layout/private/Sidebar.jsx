@@ -21,15 +21,15 @@ import "./sidebar.css";
 const Sidebar = () => {
   const { sidebarOpen, toggleSidebar } = useContext(SidebarContext);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  
+
   // Check for mobile view
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Menu items configuration for reuse
@@ -48,23 +48,24 @@ const Sidebar = () => {
         }`}
       >
         <div className="sidebar-logo-container">
-          <IconButton 
-            onClick={toggleSidebar} 
+          <IconButton
+            onClick={toggleSidebar}
             className="sidebar-logo"
             aria-label="toggle sidebar"
-            sx={{ 
+            sx={{
               "&:hover": { backgroundColor: "transparent" },
-              padding: 0
+              padding: 0,
             }}
             disableRipple
           >
             <Avatar
               src="../../../../testcalapp.png"
-              sx={{ width: 55, height: 55 }}
+              sx={{ width: 52, height: 52 }}
             />
           </IconButton>
+          <div className="app-title">TESTCALAPP</div>
         </div>
-        
+
         <ul>
           {menuItems.map((item, index) => (
             <li key={index}>
@@ -133,15 +134,15 @@ const Sidebar = () => {
           >
             <IconButton
               className="sidebar-logo-mobile"
-              sx={{ 
+              sx={{
                 "&:hover": { backgroundColor: "transparent" },
-                padding: 0
+                padding: 0,
               }}
               disableRipple
             >
               <Avatar
                 src="../../../../testcalapp.png"
-                sx={{ width: 55, height: 55 }}
+                sx={{ width: 45, height: 45 }}
               />
             </IconButton>
             <IconButton onClick={toggleSidebar} aria-label="close sidebar">
