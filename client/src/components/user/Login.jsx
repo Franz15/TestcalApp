@@ -662,7 +662,7 @@ export const Login = () => {
                           fontFamily: "inherit",
                         }}
                       >
-                        v1.0.8.1
+                        v1.0.9
                       </Typography>
                       <Typography
                         variant="caption"

@@ -18,7 +18,7 @@ const Footer = () => {
           </div>
           <div className="footer-copyright">
             <span className="company-name">TestcalApp</span>
-            <span className="version">v1.0.8.1</span>
+            <span className="version">v1.0.9</span>
             <span className="copyright">&copy; {currentYear}</span>
           </div>
         </div>
