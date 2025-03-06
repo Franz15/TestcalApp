@@ -13,6 +13,8 @@ export default function Dashboard() {
   const token = localStorage.getItem("token");
   const { auth } = useAuth();
   const [results, setResults] = useState([]);
+  const [type, setType] = useState("");
+  const [globalResults, setGlobalResults] = useState([]);
   const [avgResult, setAvgResult] = useState([]);
   const [loading, setLoading] = useState(true);
   const dataFetchedRef = useRef(false);
@@ -38,6 +40,20 @@ export default function Dashboard() {
     } catch (error) {
       console.error("Error fetching results:", error);
       setResults([]);
+    }
+    request = await fetch(Global.url + "results/list", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    data = await request.json();
+    if (data.status == "success") {
+      setGlobalResults(data.results);
+    } else {
+      setGlobalResults(0);
     }
   };
 
@@ -75,7 +91,7 @@ export default function Dashboard() {
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
-    
+
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -86,7 +102,7 @@ export default function Dashboard() {
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, []);
 
@@ -106,21 +122,21 @@ export default function Dashboard() {
         {console.log("Passing results to RatingsNew:", results)}
         <RatingsNew results={results} />
       </article>
-      
+
       <div className="noflex-wrap">
         <article className="linear-chart">
           <LinearChart results={results} />
         </article>
-        
+
         <article className="radar-chart">
           <RadarChart results={results} />
         </article>
-        
+
         <article className="radar-chart">
           <RadarChart results={results} />
         </article>
       </div>
-      
+
       <article className="table">
         <Table9c results={results} handleResults={handleResults} />
       </article>

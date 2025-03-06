@@ -1,0 +1,81 @@
+/* Estilos para el componente Dedos */
+
+.test-card {
+  border-radius: 12px;
+  overflow: hidden;
+  height: 100%;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.test-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los diálogos */
+.MuiDialog-paper {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+/* Estilos para los campos de entrada */
+.input-field {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* Animación para las tarjetas */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+  .test-card {
+    margin-bottom: 16px;
+  }
+  
+  .MuiDialog-paper {
+    margin: 16px !important;
+    width: calc(100% - 32px) !important;
+  }
+}
+
+/* Estilos para el estado de carga */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+/* Estilos para las instrucciones */
+.instructions {
+  white-space: pre-line;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+/* Estilos para los botones de acción */
+.action-button {
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 500;
+  text-transform: none;
+}
+
+/* Estilos para los iconos en las tarjetas */
+.card-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}

@@ -60,7 +60,7 @@ export const PrivateLayout = () => {
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      
+
       // Force sidebar open on desktop
       if (!mobile) {
         setSidebarOpen(true);
@@ -71,10 +71,10 @@ export const PrivateLayout = () => {
     handleResize();
 
     // Add event listener
-    window.addEventListener('resize', handleResize);
-    
+    window.addEventListener("resize", handleResize);
+
     // Clean up
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   if (loading) {
@@ -87,7 +87,9 @@ export const PrivateLayout = () => {
     return (
       <SidebarContext.Provider value={{ sidebarOpen, toggleSidebar }}>
         <div
-          className={`private-layout ${!alertVisible ? "private-layout-no-alert" : ""} ${!sidebarOpen && !isMobile ? "sidebar-collapsed" : ""}`}
+          className={`private-layout ${
+            !alertVisible ? "private-layout-no-alert" : ""
+          } ${!sidebarOpen && !isMobile ? "sidebar-collapsed" : ""}`}
         >
           {/* Cabecera */}
           <Header />

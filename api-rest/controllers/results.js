@@ -1,5 +1,18 @@
 //Importar modelos
-const Result = require("../models/result");
+
+const {
+  Result,
+  MaxReachDer,
+  Dobles,
+  UnoCincoNueve,
+  Max20mm,
+  MinEdge,
+  BloqueoDer,
+  BloqueoIzq,
+  MaxPesoDom,
+  MaxReachIzq,
+  MaxNumDom,
+} = require("../models/result");
 const user = require("../models/user");
 const paginate = require("mongoose-pagination");
 
@@ -13,10 +26,29 @@ const pruebaResults = (req, res) => {
 //Listar resultados de un usuario
 const listResults = (req, res) => {
   const userId = req.user.id;
+  const params = req.body._type;
 
-  Result.find({ userId: userId })
-    .sort({ fecha: -1 })
-    .exec((error, results, total) => {
+  if (params) {
+    Result.find({ userId: userId, _type: params }).exec(
+      (error, results, total) => {
+        if (error) {
+          return res.status(404).send({
+            status: "error",
+            message: "Error",
+            error,
+          });
+        }
+
+        //Devuelve el resultado ()
+        return res.status(200).send({
+          status: "success",
+          total,
+          results,
+        });
+      }
+    );
+  } else {
+    Result.find({ userId: userId }).exec((error, results, total) => {
       if (error) {
         return res.status(404).send({
           status: "error",
@@ -24,6 +56,7 @@ const listResults = (req, res) => {
           error,
         });
       }
+
       //Devuelve el resultado ()
       return res.status(200).send({
         status: "success",
@@ -31,11 +64,13 @@ const listResults = (req, res) => {
         results,
       });
     });
+  }
 };
 
 const lastResult = (req, res) => {
   const userId = req.user.id;
-  Result.findOne({ userId: userId })
+  
+  /*Result.findOne({ userId: userId })
     .sort({ fecha: -1 })
     .exec((error, result) => {
       if (error) {
@@ -50,17 +85,94 @@ const lastResult = (req, res) => {
         status: "success",
         result,
       });
-    });
+    });*/
+
+    Result.aggregate(
+      [
+        {
+          $match: { userId: userId },
+        },
+        {
+          $group: {
+            _id: "$gradoDeclarado",
+            maxReachDerValues: { $push: "$maxReachDer" },
+            maxReachIzqValues: { $push: "$maxReachIzq" },
+            max20mmValues: { $push: "$max20mmPorcent" },
+            doblesValues: { $push: "$dobles" },
+            minEdgeValues: { $push: "$minEdge" },
+            bloqueoDerValues: { $push: "$bloqueoDer" },
+            bloqueoIzqValues: { $push: "$bloqueoIzq" },
+          },
+        },
+
+        {
+          $project: {
+            _id: 1,
+            maxReachDerLast: { $last: "$maxReachDerValues" },
+            maxReachIzqLast: { $last: "$maxReachIzqValues" },
+            max20mmLast: { $last: "$max20mmValues" },
+            doblesLast: { $last: "$doblesValues" },
+            minEdgeLast: { $last: "$minEdgeValues" },
+            bloqueoDerLast: { $last: "$bloqueoDerValues" },
+            bloqueoIzqLast: { $last: "$bloqueoIzqValues" },
+          },
+        },
+      ],
+      function (err, result) {
+        if (err) {
+          return res.status(404).send({
+            status: "error",
+            message: "Error",
+            err,
+          });
+        }
+        return res.status(200).send({
+          status: "success",
+          result,
+        });
+      }
+    );
 };
 
 //Guardar resultados test
 const saveResults = (req, res) => {
+  let newResult;
   //Recoger datos del body
   const params = req.body;
-  //Si no llegan datos, dar respuesta negativa
 
   //Crear y rellenar el objeto del modelo
-  let newResult = new Result(params);
+  //Test 9C
+  if (params._type == "test9c") {
+    newResult = new Result(params);
+  }
+  //Dedos
+  else if (params._type == "max20mm") {
+    newResult = new Max20mm(params);
+  } else if (params._type == "minEdge") {
+    newResult = new MinEdge(params);
+  } else if (params._type == "repeaters") {
+  }
+  //Campus
+  else if (params._type == "maxReachDer") {
+    newResult = new MaxReachDer(params);
+  } else if (params._type == "maxReachIzq") {
+    newResult = new MaxReachIzq(params);
+  } else if (params._type == "dobles") {
+    newResult = new Dobles(params);
+  } else if (params._type == "159") {
+    newResult = new UnoCincoNueve(params);
+  }
+  //PullUps
+  else if (params._type == "bloqueoDer") {
+    newResult = new BloqueoDer(params);
+  } else if (params._type == "bloqueoIzq") {
+    newResult = new BloqueoIzq(params);
+  } else if (params._type == "maxPesoDom") {
+    newResult = new MaxPesoDom(params);
+  } else if (params._type == "maxNumDom") {
+    newResult = new MaxNumDom(params);
+  }
+
   //Guardar objeto en BBDD
   newResult.save((error, resultStored) => {
     resultStored = newResult;
@@ -131,11 +243,11 @@ const remove = (req, res) => {
 
 //Recuperar todos los resultados de otros usuarios del mismo grado
 const sameGrade = async (req, res) => {
+  
   //Sacar el id de usuario
   const userGrade = req.user.grado;
-
-  let grado = Result.find({ gradoDeclarado: userGrade });
-
+  const opt = req.body.opt;
+if (opt === "push"){
   Result.aggregate(
     [
       {
@@ -144,18 +256,15 @@ const sameGrade = async (req, res) => {
       {
         $group: {
           _id: "$gradoDeclarado",
-          test1avg: {
-            $avg: "$test1Punt",
-          },
-          test2avg: {
-            $avg: "$test2Punt",
-          },
-          test3avg: {
-            $avg: "$test3Punt",
-          },
-          test4avg: {
-            $avg: "$test4Punt",
-          },
+          maxReachDer: { $push: "$maxReachDer" },
+          maxReachIzq: { $push: "$maxReachIzq" },
+          max20mm: { $push: "$max20mmPorcent" },
+          dobles: { $push: "$dobles" },
+          cinco:{ $push :"$cinco" },
+          nueve: {$push:"$nueve"},
+          minEdge: { $push: "$minEdge" },
+          bloqueoDer: { $push: "$bloqueoDer" },
+          bloqueoIzq: { $push: "$bloqueoIzq" },
         },
       },
     ],
@@ -164,7 +273,7 @@ const sameGrade = async (req, res) => {
         return res.status(404).send({
           status: "error",
           message: "Error",
-          error,
+          err,
         });
       }
       return res.status(200).send({
@@ -173,6 +282,48 @@ const sameGrade = async (req, res) => {
       });
     }
   );
+}else {
+  Result.aggregate(
+    [
+      {
+        $match: { gradoDeclarado: userGrade },
+      },
+      {
+        $group: {
+          _id: "$gradoDeclarado",
+          test1avg: { $avg: "$test1Punt" },
+          test2avg: { $avg: "$test2Punt" },
+          test3avg: { $avg: "$test3Punt" },
+          test4avg: { $avg: "$test4Punt" },
+          maxReachDer: { $avg: "$maxReachDer" },
+          maxReachIzq: { $avg: "$maxReachIzq" },
+          max20mm: { $avg: "$max20mmPorcent" },
+          dobles: { $avg: "$dobles" },
+          unoCincoNueve: {
+            $avg: { $avg: ["$cinco", "$nueve"] },
+          },
+          minEdge: { $avg: "$minEdge" },
+          bloqueoDer: { $avg: "$bloqueoDer" },
+          bloqueoIzq: { $avg: "$bloqueoIzq" },
+        },
+      },
+    ],
+    function (err, result) {
+      if (err) {
+        return res.status(404).send({
+          status: "error",
+          message: "Error",
+          err,
+        });
+      }
+      return res.status(200).send({
+        status: "success",
+        result,
+      });
+    }
+  );
+}
+  
 };
 
 //});

@@ -1,0 +1,58 @@
+/* Estilos para el componente Tests */
+
+.test-card {
+  border-radius: 12px;
+  overflow: hidden;
+  height: 100%;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.test-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Animación para las tarjetas */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+  .test-card {
+    margin-bottom: 16px;
+  }
+}
+
+/* Estilos para el estado de carga */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+/* Estilos para el encabezado */
+.tests-header {
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.tests-header h1 {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--letra-gris);
+}
+
+.tests-header p {
+  color: rgba(0, 0, 0, 0.6);
+  max-width: 800px;
+}
