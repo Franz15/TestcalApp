@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { Global } from "../../../helpers/Global";
+import { calcularPuntuacion } from "../../../utils/calcularPuntuacion";
 import { 
   Card, 
   CardContent, 
