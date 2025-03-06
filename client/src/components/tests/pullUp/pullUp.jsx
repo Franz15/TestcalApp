@@ -1,51 +1,143 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { Global } from "../../../helpers/Global";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import { Grid } from "@mui/material";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import InputAdornment from "@mui/material/InputAdornment";
-import Input from "@mui/material/Input";
 import { Porcentaje } from "../test9c/ComponentsTest9c";
+import { 
+  Card, 
+  CardContent, 
+  Typography, 
+  Grid, 
+  Button, 
+  Dialog, 
+  DialogActions, 
+  DialogContent, 
+  DialogTitle, 
+  InputAdornment, 
+  TextField,
+  Box,
+  Container,
+  Paper,
+  Divider,
+  CardActionArea,
+  Fade,
+  CircularProgress,
+  Snackbar,
+  Alert,
+  IconButton
+} from "@mui/material";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import RepeatIcon from "@mui/icons-material/Repeat";
+import CloseIcon from "@mui/icons-material/Close";
+import InfoIcon from "@mui/icons-material/Info";
+import "./pullUp.css";
+import "../../../components/common/buttons.css";
+
+// Definición de las pruebas disponibles
+const testDefinitions = [
+  {
+    id: "lockOff",
+    name: "Bloqueos",
+    description: "Mide el tiempo máximo que puedes mantener un bloqueo de 90 grados en una barra de dominadas con un solo brazo.",
+    icon: <AccessTimeIcon fontSize="large" />,
+    color: "var(--color-principal)",
+    dialogTitle: "Test 1: Máximo tiempo bloqueando con cada brazo",
+    instructions: `Esta prueba mide el tiempo máximo que puedes mantener un bloqueo de 90 grados en una barra de dominadas con un solo brazo.
+
+Para completar esta prueba, mantén el bloqueo a 90 grados el máximo tiempo posible. NO se recomienda hacer más de 6 series durante un día de prueba. Descansa al menos 5 minutos entre intentos. Registra el tiempo en segundos y envía la información a continuación. Si no eres capaz de aguantar, introduce 0.
+
+Asegúrate de calentar adecuadamente antes de intentar cualquiera de estas pruebas de referencia. Recomendamos que completes solo una prueba al día para capturar tu mejor potencial en los resultados de la prueba.`,
+    inputLabelDer: "Brazo Derecho",
+    inputLabelIzq: "Brazo Izquierdo",
+    inputUnit: "s",
+    inputType: "lockOff"
+  },
+  {
+    id: "maxWeight",
+    name: "Dominadas lastradas",
+    description: "Mide el peso máximo con el que puedes hacer una dominada.",
+    icon: <FitnessCenterIcon fontSize="large" />,
+    color: "var(--color-secundario)",
+    dialogTitle: "Test 2: Dominada con el máximo lastre posible",
+    instructions: `Esta prueba mide el peso máximo con el que puedes hacer una dominada.
+
+Para completar esta prueba, haz una dominada con el máximo lastre posible. Descansa al menos 5 minutos entre intentos. Registra el peso en kilos y envía la información a continuación.
+
+Asegúrate de calentar adecuadamente antes de intentar cualquiera de estas pruebas de referencia. Recomendamos que completes solo una prueba al día para capturar tu mejor potencial en los resultados de la prueba.`,
+    inputLabelBoth: "Lastre",
+    inputLabelDer: "Lastre brazo derecho",
+    inputLabelIzq: "Lastre brazo izquierdo",
+    inputUnit: "kg",
+    inputType: "maxWeight"
+  },
+  {
+    id: "maxNumDom",
+    name: "Máximo número de dominadas",
+    description: "Mide cuántas dominadas puedes realizar con tu peso corporal.",
+    icon: <RepeatIcon fontSize="large" />,
+    color: "var(--color-principal)",
+    dialogTitle: "Test 3: Máximo número de dominadas",
+    instructions: `Esta prueba mide cuántas dominadas puedes realizar con tu peso corporal.
+
+Para completar esta prueba, realiza el máximo número de dominadas posible. Registra el número de repeticiones y envía la información a continuación.
+
+Asegúrate de calentar adecuadamente antes de intentar cualquiera de estas pruebas de referencia. Recomendamos que completes solo una prueba al día para capturar tu mejor potencial en los resultados de la prueba.`,
+    inputLabelBoth: "Número de repeticiones",
+    inputLabelDer: "Número de repeticiones brazo derecho",
+    inputLabelIzq: "Número de repeticiones brazo izquierdo",
+    inputUnit: "",
+    inputType: "maxNumDom"
+  }
+];
 
 export function PullUp() {
-  const [openLockOff, setOpenLockOff] = useState(false);
-  const [openMaxWeight, setOpenMaxWeight] = useState(false);
-  const [openMaxNumDom, setOpenMaxNumDom] = useState(false);
-
+  const token = localStorage.getItem("token");
+  const { auth } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [currentTest, setCurrentTest] = useState(null);
   const [option, setOption] = useState("");
   const [bloqueoDer, setBloqueoDer] = useState("");
   const [bloqueoIzq, setBloqueoIzq] = useState("");
   const [maxWeight, setMaxWeight] = useState("");
   const [maxWeightDer, setMaxWeightDer] = useState("");
   const [maxWeightIzq, setMaxWeightIzq] = useState("");
-
   const [maxNumDom, setMaxNumDom] = useState("");
   const [maxNumDomDer, setMaxNumDomDer] = useState("");
   const [maxNumDomIzq, setMaxNumDomIzq] = useState("");
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success"
+  });
 
-  const token = localStorage.getItem("token");
-  const { auth } = useAuth();
+  // Simular carga de datos
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 800);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
-  const handleCloseLockOff = () => {
-    setOpenLockOff(false);
+  const handleOpenDialog = (test) => {
+    setCurrentTest(test);
+    setOption("");
+    setBloqueoDer("");
+    setBloqueoIzq("");
+    setMaxWeight("");
+    setMaxWeightDer("");
+    setMaxWeightIzq("");
+    setMaxNumDom("");
+    setMaxNumDomDer("");
+    setMaxNumDomIzq("");
+    setOpenDialog(true);
   };
-  const handleClickLockOff = () => {
-    setOpenLockOff(true);
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
-  const handleCloseMaxWeight = () => {
-    setOpenMaxWeight(false);
-  };
-  const handleClickMaxWeight = () => {
-    setOpenMaxWeight(true);
-  };
+
   const handleChangeLockOffDer = (e) => {
     setBloqueoDer(e.target.value);
     if (option !== "bloqueoIzq"){
@@ -54,6 +146,7 @@ export function PullUp() {
       setOption("bloqueo");
     }
   };
+
   const handleChangeLockOffIzq = (e) => {
     setBloqueoIzq(e.target.value);
     if (option !== "bloqueoDer"){
@@ -62,43 +155,61 @@ export function PullUp() {
       setOption("bloqueo");
     }
   };
-  const handleChangeMaxWeightDer = (e) => {
-    setMaxWeightDer(e.target.value);
-    setOption("maxPesoDom");
-  };
-  const handleChangeMaxWeightIzq = (e) => {
-    setMaxWeightIzq(e.target.value);
-    setOption("maxPesoDom");
-  };
+
   const handleChangeMaxWeight = (e) => {
     setMaxWeight(e.target.value);
     setOption("maxPesoDom");
   };
-  const handleClickMaxNumDom = () => {
-    setOpenMaxNumDom(true);
+
+  const handleChangeMaxWeightDer = (e) => {
+    setMaxWeightDer(e.target.value);
+    setOption("maxPesoDom");
   };
+
+  const handleChangeMaxWeightIzq = (e) => {
+    setMaxWeightIzq(e.target.value);
+    setOption("maxPesoDom");
+  };
+
   const handleChangeMaxNumDom = (e) => {
     setMaxNumDom(e.target.value);
     setOption("maxNumDom");
   };
+
   const handleChangeMaxNumDomDer = (e) => {
     setMaxNumDomDer(e.target.value);
     setOption("maxNumDom");
   };
+
   const handleChangeMaxNumDomIzq = (e) => {
     setMaxNumDomIzq(e.target.value);
     setOption("maxNumDom");
   };
-  const handleCloseMaxNumDom = () => {
-    setOpenMaxNumDom(false);
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({
+      ...snackbar,
+      open: false
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!option) {
+      setSnackbar({
+        open: true,
+        message: "Por favor, introduce un valor válido",
+        severity: "error"
+      });
+      return;
+    }
+
     let form;
     let form2 = null;
-    //Recoger datos del formulario
-    if (option == "bloqueo") {
+    
+    // Recoger datos del formulario según el tipo de test
+    if (option === "bloqueo") {
       form = {
         fecha: new Date(),
         userId: auth._id,
@@ -113,7 +224,7 @@ export function PullUp() {
         bloqueoIzq: bloqueoIzq,
         _type: "bloqueoIzq",
       };
-    } else if (option == "bloqueoDer") {
+    } else if (option === "bloqueoDer") {
       form = {
         fecha: new Date(),
         userId: auth._id,
@@ -121,7 +232,7 @@ export function PullUp() {
         bloqueoDer: bloqueoDer,
         _type: "bloqueoDer",
       };
-    } else if (option == "bloqueoIzq") {
+    } else if (option === "bloqueoIzq") {
       form = {
         fecha: new Date(),
         userId: auth._id,
@@ -129,8 +240,7 @@ export function PullUp() {
         bloqueoIzq: bloqueoIzq,
         _type: "bloqueoIzq",
       };
-    } 
-    if (option == "maxPesoDom") {
+    } else if (option === "maxPesoDom") {
       form = {
         fecha: new Date(),
         userId: auth._id,
@@ -149,8 +259,7 @@ export function PullUp() {
         pesoCorp: auth.peso,
         _type: "maxPesoDom",
       };
-    }
-    if (option == "maxNumDom") {
+    } else if (option === "maxNumDom") {
       form = {
         fecha: new Date(),
         userId: auth._id,
@@ -162,306 +271,409 @@ export function PullUp() {
         _type: "maxNumDom",
       };
     }
-    let newRecord = form;
 
-    let request = await fetch(Global.url + "results/save", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify(newRecord),
-    });
-    const data = await request.json();
-
-    if (data.status == "success") {
-      handleCloseLockOff();
-      handleCloseMaxWeight();
-      handleCloseMaxNumDom();
-      setBloqueoDer("");
-      setBloqueoIzq("");
-      setMaxWeight("");
-      setMaxNumDom("");
-      setMaxNumDomDer("");
-      setMaxNumDomIzq("");
-    } else {
-    }
-
-    if (form2 !==null){
-      request = await fetch(Global.url + "results/save", {
+    try {
+      const request = await fetch(Global.url + "results/save", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
         },
-        body: JSON.stringify(form2),
+        body: JSON.stringify(form),
       });
+      
       const data = await request.json();
-  
-      if (data.status == "success") {
-        handleCloseLockOff();
-        handleCloseMaxWeight();
-        handleCloseMaxNumDom();
+
+      if (data.status === "success") {
+        if (form2 !== null) {
+          const request2 = await fetch(Global.url + "results/save", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token,
+            },
+            body: JSON.stringify(form2),
+          });
+          
+          const data2 = await request2.json();
+          
+          if (data2.status === "success") {
+            setSnackbar({
+              open: true,
+              message: "Resultados guardados correctamente",
+              severity: "success"
+            });
+          } else {
+            setSnackbar({
+              open: true,
+              message: "Error al guardar el segundo resultado",
+              severity: "error"
+            });
+          }
+        } else {
+          setSnackbar({
+            open: true,
+            message: "Resultado guardado correctamente",
+            severity: "success"
+          });
+        }
+        
+        handleCloseDialog();
+        setOption("");
         setBloqueoDer("");
         setBloqueoIzq("");
         setMaxWeight("");
+        setMaxWeightDer("");
+        setMaxWeightIzq("");
         setMaxNumDom("");
         setMaxNumDomDer("");
         setMaxNumDomIzq("");
-        setOption("");
-        form2 = null;
       } else {
+        setSnackbar({
+          open: true,
+          message: "Error al guardar el resultado",
+          severity: "error"
+        });
       }
-  
-   }  else {
-    setBloqueoDer("");
-    setBloqueoIzq("");
-    setOption("");
-   }
-   
+    } catch (error) {
+      console.error("Error al enviar los datos:", error);
+      setSnackbar({
+        open: true,
+        message: "Error de conexión",
+        severity: "error"
+      });
+    }
   };
 
+  // Componente para cada tarjeta de test
+  const TestCard = ({ test }) => (
+    <Fade in={!loading} timeout={500 + testDefinitions.indexOf(test) * 150}>
+      <Grid item xs={12} sm={6} md={4}>
+        <Card 
+          className="test-card" 
+          elevation={3}
+          sx={{ 
+            height: '100%',
+            transition: 'transform 0.3s, box-shadow 0.3s',
+            '&:hover': {
+              transform: 'translateY(-8px)',
+              boxShadow: '0 12px 20px rgba(0, 0, 0, 0.1)'
+            }
+          }}
+        >
+          <CardActionArea 
+            onClick={() => handleOpenDialog(test)}
+            sx={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}
+          >
+            <Box 
+              sx={{ 
+                backgroundColor: test.color,
+                p: 3,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'white'
+              }}
+            >
+              {test.icon}
+            </Box>
+            <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+              <Typography gutterBottom variant="h5" component="div" fontWeight="bold">
+                {test.name}
+              </Typography>
+              <Divider sx={{ my: 1.5 }} />
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                {test.description}
+              </Typography>
+              <Box sx={{ flexGrow: 1 }} />
+              <Typography 
+                variant="button" 
+                sx={{ 
+                  mt: 2, 
+                  alignSelf: 'flex-end',
+                  color: test.color
+                }}
+              >
+                Iniciar Test
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </Grid>
+    </Fade>
+  );
+
+  // Renderizar el contenido del diálogo según el test seleccionado
+  const renderDialogContent = () => {
+    if (!currentTest) return null;
+
+    if (currentTest.id === "lockOff") {
+      return (
+        <>
+          <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
+            <InfoIcon sx={{ color: 'text.secondary', mr: 1, mt: 0.5 }} />
+            <Typography variant="body1" color="text.secondary" style={{ whiteSpace: 'pre-line' }}>
+              {currentTest.instructions}
+            </Typography>
+          </Box>
+          
+          <Box sx={{ mt: 3 }}>
+            <TextField
+              label={currentTest.inputLabelDer}
+              type="number"
+              value={bloqueoDer}
+              onChange={handleChangeLockOffDer}
+              InputProps={{
+                endAdornment: <InputAdornment position="end">{currentTest.inputUnit}</InputAdornment>,
+              }}
+              variant="outlined"
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+
+            <TextField
+              label={currentTest.inputLabelIzq}
+              type="number"
+              value={bloqueoIzq}
+              onChange={handleChangeLockOffIzq}
+              InputProps={{
+                endAdornment: <InputAdornment position="end">{currentTest.inputUnit}</InputAdornment>,
+              }}
+              variant="outlined"
+              fullWidth
+            />
+          </Box>
+        </>
+      );
+    } else if (currentTest.id === "maxWeight") {
+      return (
+        <>
+          <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
+            <InfoIcon sx={{ color: 'text.secondary', mr: 1, mt: 0.5 }} />
+            <Typography variant="body1" color="text.secondary" style={{ whiteSpace: 'pre-line' }}>
+              {currentTest.instructions}
+            </Typography>
+          </Box>
+          
+          <Box sx={{ mt: 3 }}>
+            <TextField
+              label={currentTest.inputLabelBoth}
+              type="number"
+              value={maxWeight}
+              onChange={handleChangeMaxWeight}
+              InputProps={{
+                endAdornment: <InputAdornment position="end">{currentTest.inputUnit}</InputAdornment>,
+              }}
+              variant="outlined"
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+
+            <TextField
+              label={currentTest.inputLabelDer}
+              type="number"
+              value={maxWeightDer}
+              onChange={handleChangeMaxWeightDer}
+              InputProps={{
+                endAdornment: <InputAdornment position="end">{currentTest.inputUnit}</InputAdornment>,
+              }}
+              variant="outlined"
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+
+            <TextField
+              label={currentTest.inputLabelIzq}
+              type="number"
+              value={maxWeightIzq}
+              onChange={handleChangeMaxWeightIzq}
+              InputProps={{
+                endAdornment: <InputAdornment position="end">{currentTest.inputUnit}</InputAdornment>,
+              }}
+              variant="outlined"
+              fullWidth
+            />
+          </Box>
+        </>
+      );
+    } else if (currentTest.id === "maxNumDom") {
+      return (
+        <>
+          <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
+            <InfoIcon sx={{ color: 'text.secondary', mr: 1, mt: 0.5 }} />
+            <Typography variant="body1" color="text.secondary" style={{ whiteSpace: 'pre-line' }}>
+              {currentTest.instructions}
+            </Typography>
+          </Box>
+          
+          <Box sx={{ mt: 3 }}>
+            <TextField
+              label={currentTest.inputLabelBoth}
+              type="number"
+              value={maxNumDom}
+              onChange={handleChangeMaxNumDom}
+              variant="outlined"
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+
+            <TextField
+              label={currentTest.inputLabelDer}
+              type="number"
+              value={maxNumDomDer}
+              onChange={handleChangeMaxNumDomDer}
+              variant="outlined"
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+
+            <TextField
+              label={currentTest.inputLabelIzq}
+              type="number"
+              value={maxNumDomIzq}
+              onChange={handleChangeMaxNumDomIzq}
+              variant="outlined"
+              fullWidth
+            />
+          </Box>
+        </>
+      );
+    }
+  };
+
+  // Diálogo de test
+  const TestDialog = () => {
+    if (!currentTest) return null;
+    
+    return (
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        maxWidth="md"
+        fullWidth
+        PaperProps={{
+          elevation: 5,
+          sx: { borderRadius: 2 }
+        }}
+      >
+        <DialogTitle 
+          sx={{ 
+            backgroundColor: currentTest.color, 
+            color: 'white',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
+        >
+          <Box display="flex" alignItems="center">
+            {currentTest.icon}
+            <Typography variant="h6" sx={{ ml: 1 }}>
+              {currentTest.dialogTitle}
+            </Typography>
+          </Box>
+          <IconButton 
+            onClick={handleCloseDialog}
+            sx={{ 
+              color: 'white',
+              padding: '8px',
+              borderRadius: '4px',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              }
+            }}
+            size="small"
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </DialogTitle>
+        
+        <DialogContent sx={{ pt: 3 }}>
+          {renderDialogContent()}
+        </DialogContent>
+        
+        <DialogActions sx={{ p: 3 }}>
+          <Button 
+            onClick={handleCloseDialog} 
+            variant="outlined"
+            className="app-button app-button-secondary"
+            sx={{ 
+              borderColor: currentTest.color,
+              color: currentTest.color,
+              fontWeight: 600,
+              '&:hover': {
+                borderColor: currentTest.color === 'var(--color-principal)' ? 'var(--color-secundario)' : 'var(--color-principal)',
+                color: currentTest.color === 'var(--color-principal)' ? 'var(--color-secundario)' : 'var(--color-principal)',
+                backgroundColor: `${currentTest.color}10`
+              }
+            }}
+          >
+            VOLVER
+          </Button>
+          <Button 
+            onClick={handleSubmit} 
+            variant="contained"
+            className="app-button app-button-primary"
+            sx={{ 
+              backgroundColor: currentTest.color,
+              color: '#fff',
+              fontWeight: 600,
+              '&:hover': {
+                backgroundColor: currentTest.color === 'var(--color-principal)' ? 'var(--color-secundario)' : 'var(--color-principal)',
+                transform: 'translateY(-2px)'
+              }
+            }}
+          >
+            GUARDAR
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  };
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
+        <CircularProgress size={40} thickness={4} />
+      </Box>
+    );
+  }
+
   return (
-    <Grid
-      container
-      spacing={0}
-      alignItems="top"
-      justify="distance-between"
-      padding={3}
-      style={{ minHeight: "100vh" }}
-    >
-      <Dialog
-        open={openLockOff}
-        onClose={handleCloseLockOff}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Test 1: Maximo tiempo bloqueando con cada brazo."}
-        </DialogTitle>
-        <DialogContent>
-          <Typography variant="body1" color="text.secondary">
-            Esta prueba mide el tiempo máximo que puedes mantener un bloqueo de
-            90 grados en una barra de dominadas con un solo brazo.
-            <br></br>
-            Para completar esta prueba, mantén el bloqueo a 90 grados el máximo
-            tiempo posible. NO se recomienda hacer más de 6 series durante un
-            día de prueba. Descansa al menos 5 minutos entre intentos. Registra
-            el tiempo en segundos y envía la información a continuación. Si no
-            eres capaz de aguantar, introduce 0<br></br>
-            <br></br>
-            Asegúrate de calentar adecuadamente antes de intentar cualquiera de
-            estas pruebas de referencia. Recomendamos que completes solo una
-            prueba al día para capturar tu mejor potencial en los resultados de
-            la prueba.
+    <Container maxWidth="xl" sx={{ py: 4 }}>
+      <Fade in={!loading} timeout={300}>
+        <Paper elevation={0} sx={{ p: 3, mb: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.8)' }}>
+          <Typography variant="h4" component="h1" gutterBottom fontWeight="bold">
+            Test de Dominadas
           </Typography>
-          <br></br>
-          Brazo Derecho
-          <Input
-            sx={{ ml: 20, mt: 2, mb: 1 }}
-            type="number"
-            id="lockOffDer"
-            onChange={handleChangeLockOffDer}
-            value={bloqueoDer}
-            endAdornment={<InputAdornment position="end">s</InputAdornment>}
-          />
-          <br></br>
-          Brazo Izquierdo
-          <Input
-            sx={{ ml: 20, mt: 2, mb: 1 }}
-            type="number"
-            id="lockOffIzq"
-            onChange={handleChangeLockOffIzq}
-            value={bloqueoIzq}
-            endAdornment={<InputAdornment position="end">s</InputAdornment>}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseLockOff}>Cancel</Button>
-          <Button onClick={handleSubmit} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      <Dialog
-        open={openMaxWeight}
-        onClose={handleCloseMaxWeight}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Test 2: Dominada con el máximo lastre posible."}
-        </DialogTitle>
-        <DialogContent>
-          <Typography variant="body1" color="text.secondary">
-            Esta prueba mide el peso máximo con el que puedes hacer una
-            dominada.
-            <br></br>
-            Para completar esta prueba, haz una dominada con el máximo lastre
-            posible. Descansa al menos 5 minutos entre intentos. Registra el
-            peso en kilos y envía la información a continuación.
-            <br></br>
-            <br></br>
-            Asegúrate de calentar adecuadamente antes de intentar cualquiera de
-            estas pruebas de referencia. Recomendamos que completes solo una
-            prueba al día para capturar tu mejor potencial en los resultados de
-            la prueba.
+          <Typography variant="body1" color="text.secondary" paragraph>
+            Selecciona una de las siguientes pruebas para evaluar tu fuerza en dominadas y seguir tu progreso.
           </Typography>
-          <br></br>
-          Lastre
-          <Input
-            sx={{ ml: 20, mt: 2, mb: 1 }}
-            type="number"
-            id="maxPesoDom"
-            onChange={handleChangeMaxWeight}
-            value={maxWeight}
-            endAdornment={<InputAdornment position="end">kg</InputAdornment>}
-          />
-          <br></br>
-          Lastre brazo derecho
-          <Input
-            sx={{ ml: 20, mt: 2, mb: 1 }}
-            type="number"
-            id="maxPesoDomDer"
-            onChange={handleChangeMaxWeightDer}
-            value={maxWeightDer}
-            endAdornment={<InputAdornment position="end">kg</InputAdornment>}
-          />
-          <br></br>
-          Lastre brazo izquierdo
-          <Input
-            sx={{ ml: 20, mt: 2, mb: 1 }}
-            type="number"
-            id="maxPesoDomIzq"
-            onChange={handleChangeMaxWeightIzq}
-            value={maxWeightIzq}
-            endAdornment={<InputAdornment position="end">kg</InputAdornment>}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseMaxWeight}>Cancel</Button>
-          <Button onClick={handleSubmit} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      <Dialog
-        open={openMaxNumDom}
-        onClose={handleCloseMaxNumDom}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+        </Paper>
+      </Fade>
+      
+      <Grid container spacing={3}>
+        {testDefinitions.map((test) => (
+          <TestCard key={test.id} test={test} />
+        ))}
+      </Grid>
+      
+      <TestDialog />
+      
+      <Snackbar 
+        open={snackbar.open} 
+        autoHideDuration={6000} 
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Test 3: Máximo número de dominadas."}
-        </DialogTitle>
-        <DialogContent>
-          <Typography variant="body1" color="text.secondary">
-            Esta prueba cuantas dominadas puedes realizar con tu peso corporal.
-            <br></br>
-            Para completar esta prueba, haz una dominada con el máximo lastre
-            posible. Descansa al menos 5 minutos entre intentos. Registra el
-            peso en kilos y envía la información a continuación.
-            <br></br>
-            <br></br>
-            Asegúrate de calentar adecuadamente antes de intentar cualquiera de
-            estas pruebas de referencia. Recomendamos que completes solo una
-            prueba al día para capturar tu mejor potencial en los resultados de
-            la prueba.
-          </Typography>
-          <br></br>
-          Número de repeticiones<br></br>
-          <Input
-            sx={{ ml: 20, mt: 2, mb: 1 }}
-            type="number"
-            id="maxNumDom"
-            onChange={handleChangeMaxNumDom}
-            value={maxNumDom}
-          />
-          <br></br>
-          Número de repeticiones brazo derecho<br></br>
-          <Input
-            sx={{ ml: 20, mt: 2, mb: 1 }}
-            type="number"
-            id="maxNumDomDer"
-            onChange={handleChangeMaxNumDomDer}
-            value={maxNumDomDer}
-          />
-          <br></br>
-          Número de repeticiones brazo izquierdo<br></br>
-          <Input
-            sx={{ ml: 20, mt: 2, mb: 1 }}
-            type="number"
-            id="maxNumDomIzq"
-            onChange={handleChangeMaxNumDomIzq}
-            value={maxNumDomIzq}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseMaxNumDom}>Cancel</Button>
-          <Button onClick={handleSubmit} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      <Button
-        sx={{
-          maxWidth: 700,
-          maxHeight: 100,
-          display: "flex",
-          flexDirection: "column",
-          pt: 3,
-        }}
-        onClick={handleClickLockOff}
-      >
-        <Card>
-          <CardContent>
-            <Typography gutterBottom variant="h5">
-              Bloqueos
-            </Typography>
-          </CardContent>
-        </Card>
-      </Button>
-
-      <Button
-        sx={{
-          maxWidth: 700,
-          maxHeight: 100,
-          display: "flex",
-          flexDirection: "column",
-          pt: 3,
-        }}
-        onClick={handleClickMaxWeight}
-      >
-        <Card>
-          <CardContent>
-            <Typography gutterBottom variant="h5">
-              Dominadas lastradas
-            </Typography>
-          </CardContent>
-        </Card>
-      </Button>
-
-      <Button
-        sx={{
-          maxWidth: 700,
-          maxHeight: 100,
-          display: "flex",
-          flexDirection: "column",
-          pt: 3,
-        }}
-        onClick={handleClickMaxNumDom}
-      >
-        <Card>
-          <CardContent>
-            <Typography gutterBottom variant="h5">
-              Máximo número de dominadas
-            </Typography>
-          </CardContent>
-        </Card>
-      </Button>
-    </Grid>
+        <Alert 
+          onClose={handleCloseSnackbar} 
+          severity={snackbar.severity} 
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </Container>
   );
 }

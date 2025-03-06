@@ -1,0 +1,265 @@
+/* Estilos comunes para botones en la aplicación */
+
+:root {
+  --button-primary-color: var(--color-principal);
+  --button-primary-hover: rgba(209, 172, 77, 1); /* Versión más oscura del color principal */
+  --button-secondary-color: var(--color-secundario);
+  --button-secondary-hover: rgba(209, 140, 77, 1); /* Versión más oscura del color secundario */
+  --button-danger-color: #f44336;
+  --button-danger-hover: #d32f2f;
+  --button-success-color: #4caf50;
+  --button-success-hover: #388e3c;
+  --button-border-radius: 8px;
+  --button-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --button-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  --button-shadow-hover: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón base */
+.app-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  transition: var(--button-transition);
+  box-shadow: var(--button-shadow);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  min-width: 120px;
+  height: 42px;
+  font-family: 'Montserrat', 'Roboto', sans-serif;
+}
+
+/* Efecto de onda al hacer clic */
+.app-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.app-button:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+/* Botón primario */
+.app-button-primary {
+  background-color: var(--button-secondary-color);
+  color: white;
+}
+
+.app-button-primary:hover, .app-button-primary:focus {
+  background-color: var(--button-secondary-hover);
+  box-shadow: var(--button-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.app-button-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--button-shadow);
+}
+
+/* Botón secundario */
+.app-button-secondary {
+  background-color: white;
+  color: var(--button-secondary-color);
+  border: 1px solid var(--button-secondary-color);
+}
+
+.app-button-secondary:hover, .app-button-secondary:focus {
+  background-color: rgba(232, 156, 86, 0.05);
+  box-shadow: var(--button-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.app-button-secondary:active {
+  transform: translateY(0);
+  box-shadow: var(--button-shadow);
+}
+
+/* Botón de éxito */
+.app-button-success {
+  background-color: var(--button-success-color);
+  color: white;
+}
+
+.app-button-success:hover, .app-button-success:focus {
+  background-color: var(--button-success-hover);
+  box-shadow: var(--button-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Botón de peligro */
+.app-button-danger {
+  background-color: var(--button-danger-color);
+  color: white;
+}
+
+.app-button-danger:hover, .app-button-danger:focus {
+  background-color: var(--button-danger-hover);
+  box-shadow: var(--button-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Botón con icono */
+.app-button-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.app-button-icon svg {
+  font-size: 1.2rem;
+}
+
+/* Botón grande */
+.app-button-large {
+  padding: 12px 28px;
+  font-size: 1rem;
+  height: 48px;
+}
+
+/* Botón pequeño */
+.app-button-small {
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  min-width: 80px;
+  height: 36px;
+}
+
+/* Botón de texto (sin fondo) */
+.app-button-text {
+  background-color: transparent;
+  box-shadow: none;
+  color: var(--button-secondary-color);
+  padding: 8px 16px;
+}
+
+.app-button-text:hover, .app-button-text:focus {
+  background-color: rgba(232, 156, 86, 0.05);
+  box-shadow: none;
+  transform: none;
+}
+
+/* Botón deshabilitado */
+.app-button:disabled {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.app-button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Botón de carga */
+.app-button-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.app-button-loading .button-text {
+  visibility: hidden;
+}
+
+.app-button-loading::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: button-loading-spinner 1s ease infinite;
+}
+
+/* Grupo de botones */
+.app-button-group {
+  display: flex;
+  gap: 12px;
+}
+
+.app-button-group-vertical {
+  flex-direction: column;
+}
+
+/* Animaciones */
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-button {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .app-button-large {
+    padding: 10px 24px;
+  }
+  
+  .app-button-small {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+  
+  .app-button-group {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-button {
+    width: 100%;
+    padding: 10px 16px;
+  }
+  
+  .app-button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+}
