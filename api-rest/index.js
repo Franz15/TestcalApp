@@ -3,8 +3,12 @@ require("dotenv").config();
 const connection = require("./database/connection");
 const express = require("express");
 const cors = require("cors");
+const fs = require("fs");
 
 console.log("API funcionando");
+
+//Asegurar que existe la carpeta de avatares (el volumen de Railway arranca vacío)
+fs.mkdirSync("./uploads/avatars", { recursive: true });
 
 //Conexión a Base de Datos
 connection();
