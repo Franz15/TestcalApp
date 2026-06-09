@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
     //Sacar datos de usuario del localstorage
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
-    console.log(localStorage);
     //Comprobar si tengo el token y el user
     if (!token || !user || token == null) {
       setLoading(false);
@@ -26,9 +25,6 @@ export const AuthProvider = ({ children }) => {
     //Transformar los datos a un objeto Javascript
     const userObj = JSON.parse(user);
     const userId = userObj.id;
-    console.log("user", user);
-    console.log("userObj", userObj);
-    console.log("userId", userId);
 
     //Petición Ajax al backend para que compruebe el token y me devuelva los datos del usuario
     const request = await fetch(Global.url + "user/profile/" + userId, {
@@ -41,17 +37,14 @@ export const AuthProvider = ({ children }) => {
 
     const data = await request.json();
     if (data.status == "success") {
-      console.log("request", request);
-      console.log("data", data);
-
       //Setear el estado del auth
       setAuth(data.user);
       setLoading(false);
       tokenValidated = true;
     } else {
       setLoading(false);
-      return false;
       tokenValidated = false;
+      return false;
     }
   };
   return (

@@ -1,0 +1,158 @@
+/* FOOTER */
+.footer {
+  grid-area: footer;
+  background: var(--fondo-contenido);
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  color: var(--letra-gris);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.footer-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Branding section with logo and copyright */
+.footer-branding {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--color-principal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.logo-text {
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.footer-copyright {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.company-name {
+  font-weight: 500;
+}
+
+.version {
+  opacity: 0.7;
+  font-size: 10px;
+  margin-left: 5px;
+}
+
+.copyright {
+  margin-left: 8px;
+  opacity: 0.7;
+}
+
+/* Links section */
+.footer-links {
+  display: flex;
+  align-items: center;
+}
+
+.footer-link {
+  color: var(--letra-gris);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 12px;
+}
+
+.footer-link:hover {
+  color: var(--color-principal);
+}
+
+.footer-divider {
+  margin: 0 6px;
+  opacity: 0.4;
+  font-size: 8px;
+  color: var(--color-principal);
+}
+
+/* Mobile footer - sleeker design */
+@media (max-width: 768px) {
+  .footer {
+    border-top: none;
+    background: linear-gradient(to right, rgba(246, 247, 249, 0.97), rgba(246, 247, 249, 0.99));
+  }
+  
+  .footer-content {
+    padding: 0 15px;
+  }
+  
+  .footer-copyright {
+    font-size: 11px;
+  }
+  
+  .footer-logo {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .logo-text {
+    font-size: 10px;
+  }
+  
+  .footer-link {
+    font-size: 11px;
+  }
+}
+
+/* Tablet and smaller screens */
+@media (max-width: 650px) {
+  .footer {
+    height: auto;
+  }
+  
+  .footer-content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 3px 10px;
+  }
+  
+  .footer-branding {
+    margin-right: 15px;
+  }
+  
+  .footer-links {
+    margin-left: auto;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .footer-content {
+    justify-content: space-between;
+  }
+  
+  .footer-links {
+    display: none;
+  }
+  
+  .footer-branding {
+    margin-right: 0;
+  }
+  
+  .company-name {
+    font-weight: 400;
+  }
+}

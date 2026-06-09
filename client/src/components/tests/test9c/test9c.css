@@ -1,0 +1,412 @@
+/* Test9c Styles */
+:root {
+  --primary-color: #0066cc;
+  --primary-hover: #0055aa;
+  --secondary-color: #f5f5f5;
+  --text-dark: #333;
+  --text-medium: #666;
+  --text-light: #999;
+  --border-radius: 10px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+.test-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 15px;
+  box-sizing: border-box;
+}
+
+/* Stepper styles */
+.test-stepper {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.test-stepper::-webkit-scrollbar {
+  height: 4px;
+}
+
+.test-stepper::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 4px;
+}
+
+/* Card styles */
+.test-card {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  margin-bottom: 20px;
+  transition: var(--transition);
+  width: 100%;
+}
+
+/* Video container */
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Slider container */
+.slider-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.test-card-content {
+  padding: 24px;
+}
+
+.test-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+
+.test-card-description {
+  font-size: 1rem;
+  color: var(--text-medium);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* Input styles */
+.test-input-group {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.test-input-label {
+  font-size: 0.95rem;
+  color: var(--text-medium);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.test-input-field {
+  width: 100%;
+  max-width: 200px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: var(--transition);
+  -webkit-appearance: none; /* Remove default styling on iOS */
+}
+
+.test-input-field:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+  outline: none;
+}
+
+.test-input-addon {
+  margin-left: 8px;
+  color: var(--text-medium);
+  font-weight: 500;
+}
+
+/* Radio group styles */
+.test-radio-group {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.test-radio-title {
+  font-size: 0.95rem;
+  color: var(--text-medium);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.test-radio-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.test-radio-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.test-radio-option input[type="radio"] {
+  margin-right: 8px;
+}
+
+.test-radio-label {
+  margin-left: 4px;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+/* Button styles */
+.test-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+}
+
+.test-button {
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  min-width: 120px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.test-button-primary {
+  background-color: var(--primary-color);
+  color: white !important;
+}
+
+.test-button-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.test-button-secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-dark) !important;
+}
+
+.test-button-secondary:hover {
+  background-color: #e0e0e0;
+}
+
+/* Results page styles */
+.test-results {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.test-results-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text-dark);
+}
+
+.test-results-grade {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 30px 0;
+  display: block;
+}
+
+.test-results-description {
+  font-size: 1.1rem;
+  color: var(--text-medium);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.test-results-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Slider customization */
+.slick-slider {
+  margin-bottom: 0;
+}
+
+.slick-dots {
+  bottom: 10px;
+  z-index: 10;
+}
+
+.slick-dots li button:before {
+  font-size: 12px;
+  color: white;
+  opacity: 0.7;
+}
+
+.slick-dots li.slick-active button:before {
+  color: white;
+  opacity: 1;
+}
+
+/* Remove default styles for buttons in Safari */
+input[type="button"],
+input[type="submit"],
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .test-card-content {
+    padding: 20px 16px;
+  }
+  
+  .test-card-title {
+    font-size: 1.3rem;
+  }
+  
+  .test-input-group {
+    align-items: flex-start;
+  }
+  
+  .test-radio-options {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .test-buttons {
+    justify-content: space-between;
+  }
+  
+  .test-button {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .test-stepper {
+    margin-bottom: 20px;
+  }
+  
+  .test-results-grade {
+    font-size: 3rem;
+  }
+  
+  /* Make slick slider dots easier to tap on mobile */
+  .slick-dots li {
+    margin: 0 6px;
+  }
+  
+  .slick-dots li button:before {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .test-container {
+    padding: 15px 12px;
+  }
+  
+  .test-stepper {
+    padding-bottom: 15px;
+  }
+  
+  .test-radio-options {
+    gap: 8px;
+  }
+  
+  .test-input-field {
+    max-width: 160px;
+  }
+  
+  .test-results-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+  }
+  
+  .test-results-buttons .test-button {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .test-container {
+    padding: 12px 8px;
+  }
+  
+  .test-card-content {
+    padding: 16px 12px;
+  }
+  
+  .test-card-title {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+  
+  .test-card-description {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+  
+  .test-input-group {
+    margin: 15px 0;
+  }
+  
+  .test-input-label {
+    font-size: 0.9rem;
+  }
+  
+  .test-input-field {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .test-results-title {
+    font-size: 1.4rem;
+  }
+  
+  .test-results-grade {
+    font-size: 2.5rem;
+    margin: 20px 0;
+  }
+  
+  .test-results-description {
+    font-size: 0.95rem;
+  }
+  
+  .test-button {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+  
+  /* Smaller stepper text for very small screens */
+  .MuiStepLabel-label {
+    font-size: 0.75rem !important;
+  }
+}

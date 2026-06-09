@@ -1,0 +1,93 @@
+.header {
+  grid-area: header;
+  text-align: center;
+  background: var(--color-principal);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 15px;
+  z-index: 1000;
+}
+
+.header-spacer {
+  flex-grow: 1;
+}
+
+/* Logo toggle styles */
+.logo-toggle {
+  background: var(--fondo);
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+}
+
+/* Profile avatar styling */
+.profile-avatar {
+  background-color: var(--fondo);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.profile-avatar:hover {
+  opacity: 0.9;
+}
+
+/* Mobile header styling with class */
+.mobile-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* Profile link styling */
+.user-profile-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+/* Menu toggle button */
+.menu-button {
+  color: white;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .header {
+    justify-content: space-between;
+  }
+  
+  /* Keep logo size consistent on mobile */
+  .logo-toggle {
+    width: 65px;
+    height: 65px;
+    margin-left: 5px;
+  }
+  
+  .miIconButton {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .miAvatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .otroAvatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .user-avatar {
+    width: 54px;
+    height: 54px;
+  }
+}

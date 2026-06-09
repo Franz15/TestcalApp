@@ -1,3 +1,3 @@
 export const Global = {
-  url: "https://testcalapp-production.up.railway.app/api/",
+  url: import.meta.env.VITE_API_URL || "http://localhost:5555/api/",
 };

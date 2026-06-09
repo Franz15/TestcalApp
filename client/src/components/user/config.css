@@ -1,0 +1,224 @@
+/* Config Component Styles */
+:root {
+  --primary-color: var(--color-principal, #e8bf56);
+  --secondary-color: var(--color-secundario, #e89c56);
+  --bg-light: var(--fondo-contenido, #f6f7f9);
+  --bg-medium: var(--fondo-resalte, #ecedef);
+  --text-dark: var(--letra-gris, #454545);
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+/* Container layout */
+.config-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  box-sizing: border-box;
+}
+
+.config-paper {
+  padding: 32px 24px;
+  border-radius: var(--border-radius);
+  background-color: white;
+  box-shadow: var(--box-shadow);
+}
+
+.config-title {
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+/* Avatar section */
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.avatar-wrapper {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.profile-avatar {
+  width: 120px !important;
+  height: 120px !important;
+  border: 3px solid var(--primary-color);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.avatar-upload-button {
+  position: absolute !important;
+  bottom: 0;
+  right: 0;
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  padding: 8px !important;
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+}
+
+.avatar-upload-button:hover {
+  background-color: var(--secondary-color) !important;
+  transform: scale(1.05);
+}
+
+.avatar-helper-text {
+  color: var(--text-dark);
+  opacity: 0.7;
+  font-size: 0.85rem;
+}
+
+/* Form styles */
+.config-form {
+  width: 100%;
+}
+
+.config-input {
+  width: 100%;
+}
+
+.config-input .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-color);
+}
+
+.config-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-color);
+  border-width: 2px;
+}
+
+.config-input .MuiInputLabel-root.Mui-focused {
+  color: var(--primary-color);
+}
+
+/* Action buttons */
+.config-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.config-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  min-width: 200px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.primary-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.primary-button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.primary-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.button-icon {
+  margin-left: 8px;
+}
+
+/* Alert styles */
+.MuiAlert-root {
+  border-radius: var(--border-radius);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .config-paper {
+    padding: 24px 16px;
+  }
+  
+  .profile-avatar {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .config-button {
+    min-width: 180px;
+    padding: 10px 24px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .config-container {
+    padding: 15px 10px;
+  }
+  
+  .config-paper {
+    padding: 20px 14px;
+  }
+  
+  .profile-avatar {
+    width: 90px !important;
+    height: 90px !important;
+  }
+  
+  .avatar-upload-button {
+    padding: 6px !important;
+  }
+  
+  .config-button {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .config-container {
+    padding: 12px 8px;
+  }
+  
+  .config-paper {
+    padding: 16px 12px;
+  }
+  
+  .config-title {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+  
+  .profile-avatar {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .config-button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+  
+  /* Fix number inputs on iOS */
+  input[type="number"] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+  }
+}

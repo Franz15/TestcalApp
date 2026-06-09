@@ -1,35 +1,145 @@
-import React from "react";
-import { Box, Card, Grid } from "@mui/material";
+import React, { useState, useEffect, useRef } from "react";
 import { Table9c } from "../../accesories/Table9c";
-import Ratings from "../../accesories/Ratings";
+import { Global } from "../../../helpers/Global";
+import RatingsNew from "../../accesories/RatingsNew";
 import { RadarChart } from "../../accesories/RadarChart";
-import { LinearChart } from "../../accesories/LinearChart";
-import Note from "../../accesories/Note";
+import LinearChart from "../../accesories/LinearChartNew";
+import { useAuth } from "../../../hooks/useAuth";
+import CircularProgress from "@mui/material/CircularProgress";
+import "./dashboard.css";
+import "./animations.css";
 
 export default function Dashboard() {
+  const token = localStorage.getItem("token");
+  const { auth } = useAuth();
+  const [results, setResults] = useState([]);
+  const [type, setType] = useState("");
+  const [globalResults, setGlobalResults] = useState([]);
+  const [avgResult, setAvgResult] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const dataFetchedRef = useRef(false);
+
+  // Fetch results data
+  const getResults = async () => {
+    try {
+      const request = await fetch(Global.url + "results/list", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+
+      const data = await request.json();
+      if (data.status === "success" && data.results) {
+        console.log("API Results:", data.results); // Debug log
+        setResults(data.results);
+      } else {
+        setResults([]);
+      }
+    } catch (error) {
+      console.error("Error fetching results:", error);
+      setResults([]);
+    }
+    request = await fetch(Global.url + "results/list", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    data = await request.json();
+    if (data.status == "success") {
+      setGlobalResults(data.results);
+    } else {
+      setGlobalResults(0);
+    }
+  };
+
+  // Fetch average result data
+  const getAvgResult = async () => {
+    try {
+      const request = await fetch(Global.url + "results/grade/" + auth._id, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+
+      const data = await request.json();
+      if (data.status === "success") {
+        if (data.result != null) {
+          setAvgResult(data.result[0]);
+        } else {
+          setAvgResult(0);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching average result:", error);
+      setAvgResult(0);
+    }
+  };
+
+  // Handle results update from child components
+  function handleResults(results) {
+    setResults(results);
+  }
+
+  // Load data only once
+  useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        await Promise.all([getResults(), getAvgResult()]);
+      } catch (error) {
+        console.error("Error loading dashboard data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Show loading spinner while data is being fetched
+  if (loading) {
+    return (
+      <div className="dashboard-loading">
+        <CircularProgress size={40} thickness={4} />
+      </div>
+    );
+  }
+
+  // Render dashboard content with animations
   return (
-    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={12}>
-          <Card sx={{ flexGrow: 1, p: 3 }}>
-            <Ratings />
-          </Card>
-        </Grid>
-        <Grid item xs={4} sm={4} md={4}>
-          <Card sx={{ flexGrow: 1, p: 3 }}>
-            <RadarChart />{" "}
-          </Card>
-        </Grid>
-        <Grid item xs={8} sm={8} md={8}>
-          <Card sx={{ maxHeight: "475px", flexGrow: 1, p: 3 }}>
-            <Table9c />{" "}
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <LinearChart />
-        </Grid>
-      </Grid>
-      <Note />
-    </Box>
+    <section className="content">
+      <article className="ratings">
+        {console.log("Passing results to RatingsNew:", results)}
+        <RatingsNew results={results} />
+      </article>
+
+      <div className="noflex-wrap">
+        <article className="linear-chart">
+          <LinearChart results={results} />
+        </article>
+
+        <article className="radar-chart">
+          <RadarChart results={results} />
+        </article>
+
+        <article className="radar-chart">
+          <RadarChart results={results} />
+        </article>
+      </div>
+
+      <article className="table">
+        <Table9c results={results} handleResults={handleResults} />
+      </article>
+    </section>
   );
 }

@@ -8,7 +8,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import moment from "moment";
@@ -20,7 +19,12 @@ const Result = (props) => (
     </TableCell>
     <TableCell align="center">{props.result.test1Peso}</TableCell>
     <TableCell align="center">
-      {Math.trunc(props.result.test1Porcent)}
+    {props.result.test1Porcent !== null ? (
+       <> {Math.trunc(props.result.test1Porcent)}
+       </>
+          ) : (
+            ""
+          )}
     </TableCell>
     <TableCell align="center">{props.result.test2Peso}</TableCell>
     <TableCell align="center">
@@ -31,33 +35,32 @@ const Result = (props) => (
     <TableCell align="center">{props.result.test4Tiempo}</TableCell>
     <TableCell align="center">{props.result.gradoTeorico}</TableCell>
     <TableCell align="center">
-      <Button
-        variant="outlined"
-        color="secondary"
+      <button
+        className="button_table edit"
         onClick={() => {
-          props.deleteResult(props.result._id), window.location.reload(false);
+          props.deleteResult(props.result._id);
         }}
       >
         <DeleteIcon />
-      </Button>
+      </button>
     </TableCell>
   </TableRow>
 );
 
-export function Table9c() {
+export function Table9c({ results, handleResults }) {
   //Token de autenticación
   const token = localStorage.getItem("token");
-
-  let [results, setResults] = useState([]);
+  const [resultados, setResultados] = useState(results);
 
   useEffect(() => {
     async function getResults() {
-      const response = await await fetch(Global.url + "results/list", {
-        method: "GET",
+      const response = await fetch(Global.url + "results/list", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
         },
+        body: JSON.stringify({_type:"test9c"}),
       });
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -65,31 +68,43 @@ export function Table9c() {
         return;
       }
       const results = await response.json();
-      setResults(results.results);
+      if (handleResults) {
+        handleResults(results.results);
+        setResultados(results.results);
+      } else {
+        setResultados(results.results);
+      }
     }
     getResults();
-
-    return;
-  }, [results.length]);
+  }, []);
 
   const deleteResult = (id) => {
     DeleteTest9c(id);
-    const newResults = results.filter((el) => el._id !== id);
-    setResults(newResults);
+    const newResults = resultados.filter((el) => el._id !== id);
+
+    if (handleResults) {
+      handleResults(newResults);
+      setResultados(newResults);
+    } else {
+      setResultados(newResults);
+    }
   };
 
   function resultList() {
-    return results.map((result) => {
-      return (
-        <Result
-          result={result}
-          deleteResult={() => deleteResult(result._id)}
-          key={result._id}
-        />
-      );
-    });
+    if (resultados) {
+      return resultados.map((result) => {
+        if (result._type == "test9c"){
+        return (
+          <Result
+            result={result}
+            deleteResult={() => deleteResult(result._id)}
+            key={result._id}
+          />
+        );
+      }
+      });
+    }
   }
-
   return (
     <TableContainer>
       <Table stickyHeader aria-label="simple table">

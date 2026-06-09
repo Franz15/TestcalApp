@@ -1,0 +1,199 @@
+.desktop-sidebar {
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 230px;
+  z-index: 1100; /* Ensure sidebar appears above other elements */
+  display: block !important;
+  position: relative; /* Allow for relative positioning of logo */
+  overflow-x: hidden; /* Prevent content from overflowing during transition */
+}
+
+/* Logo container styling */
+.sidebar-logo-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  top: -20px;
+  margin-bottom: -20px;
+  padding-left: 25px; /* Increased from 20px to move logo more to the right */
+  height: 80px; /* Increased from 70px to provide more vertical space */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* App title styling */
+.app-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 15px;
+  color: var(--letra-gris, #333);
+  opacity: 1;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.sidebar-logo {
+  background: var(--fondo);
+  width: 58px;
+  height: 58px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1200; /* Ensure logo appears above everything */
+  transition: transform 0.3s ease; /* Add smooth transition for hover effects */
+  position: relative;
+}
+
+.sidebar-logo::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--color-principal);
+  box-sizing: border-box;
+  z-index: -1;
+}
+
+.sidebar-logo:hover {
+  transform: scale(1.05); /* Subtle scale effect on hover */
+}
+
+/* When sidebar is collapsed, only show icons */
+.desktop-sidebar.sidebar-collapsed {
+  width: 80px; /* Increased from 60px to provide more space */
+  transform: translateX(0); /* Don't hide it, keep visible */
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-collapsed .sidebar-logo-container {
+  justify-content: center; /* Center the logo in collapsed mode */
+  padding-left: 0; /* Remove left padding to center properly */
+  top: -20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-text {
+  margin-left: 12px;
+  opacity: 1;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  display: inline-block; /* Ensure width transitions work properly */
+}
+
+/* Hide text but keep icons when sidebar is collapsed */
+.sidebar-collapsed .menu-text {
+  opacity: 0;
+  width: 0;
+  margin-left: 0;
+  overflow: hidden;
+}
+
+/* Hide app title when sidebar is collapsed */
+.sidebar-collapsed .app-title {
+  opacity: 0;
+  width: 0;
+  margin-left: 0;
+  overflow: hidden;
+}
+
+/* Icon container transitions */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 30px; /* Ensure consistent width for icons */
+  margin-left: 0; /* Align with logo */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Make icons more prominent in collapsed mode */
+.sidebar-collapsed .lateral a svg {
+  font-size: 24px;
+  margin: 0 auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Center icons in collapsed mode */
+.sidebar-collapsed .lateral a {
+  justify-content: center; /* Center icons in collapsed mode */
+  padding: 20px 0; /* Remove left padding to center properly */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-sidebar {
+  display: none;
+}
+
+/* Make icons align better with text */
+.lateral a {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease; /* Smooth transition for hover effects and collapsed state */
+}
+
+/* Mobile Sidebar Styling */
+@media (max-width: 768px) {
+  .desktop-sidebar {
+    display: none;
+  }
+
+  .mobile-sidebar {
+    display: block;
+    z-index: 1200; /* Ensure drawer is above other elements */
+  }
+
+  /* Style the drawer */
+  .MuiDrawer-paper {
+    width: 250px;
+    background-color: var(--fondo-contenido);
+    padding-top: 0;
+  }
+
+  /* Logo in mobile sidebar */
+  .sidebar-logo-mobile {
+    background: var(--fondo);
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    position: relative;
+  }
+  
+  .sidebar-logo-mobile::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--color-principal);
+    box-sizing: border-box;
+    z-index: -1;
+  }
+
+  /* Style the drawer items */
+  .MuiListItemButton-root {
+    padding: 15px;
+  }
+
+  /* Style the drawer item text */
+  .MuiListItemText-root {
+    color: var(--letra-gris);
+  }
+
+  /* Active menu item in mobile */
+  .MuiListItemButton-root.Mui-selected {
+    background-color: rgba(232, 191, 86, 0.2);
+  }
+
+  /* Override bottom positioning for last list item in mobile */
+  .MuiListItem-root:last-child {
+    margin-top: auto;
+  }
+}

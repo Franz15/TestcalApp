@@ -13,6 +13,7 @@ const UserSchema = Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     user: {
       type: String,
@@ -36,6 +37,7 @@ const UserSchema = Schema(
     grado: {
       type: String,
       required: true,
+      default: "IV",
     },
     altura: {
       type: Number,
@@ -45,6 +47,15 @@ const UserSchema = Schema(
     },
     envergadura: {
       type: Number,
+    },
+    code: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      required: true,
+      default: "UNVERIFIED",
     },
     created_at: {
       type: Date,
