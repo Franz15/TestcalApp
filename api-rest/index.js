@@ -1,16 +1,21 @@
 //Importar dependencias
+require("dotenv").config();
 const connection = require("./database/connection");
 const express = require("express");
 const cors = require("cors");
+const fs = require("fs");
 
 console.log("API funcionando");
+
+//Asegurar que existe la carpeta de avatares (el volumen de Railway arranca vacío)
+fs.mkdirSync("./uploads/avatars", { recursive: true });
 
 //Conexión a Base de Datos
 connection();
 
 //Crear servidor Node
 const app = express();
-const puerto = 5555;
+const puerto = process.env.PORT || 5555;
 
 //Configurar CORS
 app.use(cors());

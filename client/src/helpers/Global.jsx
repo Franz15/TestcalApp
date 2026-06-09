@@ -1,3 +1,3 @@
 export const Global = {
-  url: "https://api.testcalapp.es/api/",
+  url: "https://testcalapp-production.up.railway.app/api/",
 };
