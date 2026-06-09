@@ -3,7 +3,7 @@ const jwt = require("jwt-simple");
 const moment = require("moment");
 
 //Clave secreta
-const secret = "CLAVE_SECRETA-TestcalApp-TFG_JavierV-ITEP-22";
+const secret = process.env.JWT_SECRET;
 
 //Crear función para generar tokens
 const createToken = (user) => {

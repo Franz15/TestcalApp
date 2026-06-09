@@ -1,4 +1,5 @@
 //Importar dependencias
+require("dotenv").config();
 const connection = require("./database/connection");
 const express = require("express");
 const cors = require("cors");
@@ -10,7 +11,7 @@ connection();
 
 //Crear servidor Node
 const app = express();
-const puerto = 5555;
+const puerto = process.env.PORT || 5555;
 
 //Configurar CORS
 app.use(cors());
