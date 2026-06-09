@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+﻿import { React, useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Global } from "../../helpers/Global";
 import { useNavigate } from "react-router-dom";
@@ -65,7 +65,7 @@ export const Register = () => {
       tempErrors.email = "El email es requerido";
       formIsValid = false;
     } else if (!/\S+@\S+\.\S+/.test(form.email)) {
-      tempErrors.email = "Email inválido";
+      tempErrors.email = "Email invÃ¡lido";
       formIsValid = false;
     }
 
@@ -77,7 +77,7 @@ export const Register = () => {
 
     // Password validation
     if (!form.password) {
-      tempErrors.password = "La contraseña es requerida";
+      tempErrors.password = "La contraseÃ±a es requerida";
       formIsValid = false;
     }
 
@@ -147,7 +147,7 @@ export const Register = () => {
       }
     } catch (error) {
       setSaved("error");
-      setMessage("Error de conexión. Intente nuevamente más tarde.");
+      setMessage("Error de conexiÃ³n. Intente nuevamente mÃ¡s tarde.");
       console.error("Register error:", error);
     } finally {
       setLoading(false);
@@ -214,7 +214,7 @@ export const Register = () => {
               fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
             }}
           >
-            Únete a nosotros
+            Ãšnete a nosotros
           </Typography>
           <Typography
             variant="h6"
@@ -305,7 +305,7 @@ export const Register = () => {
                 >
                   <Box
                     component="img"
-                    src="../../../../testcalapp.png"
+                    src="/testcalapp.png"
                     alt="App Logo"
                     className="login-logo"
                     sx={{
@@ -463,7 +463,7 @@ export const Register = () => {
                   required
                   fullWidth
                   id="email"
-                  label="Correo electrónico"
+                  label="Correo electrÃ³nico"
                   name="email"
                   autoComplete="email"
                   type="email"
@@ -539,7 +539,7 @@ export const Register = () => {
                   required
                   fullWidth
                   name="password"
-                  label="Contraseña"
+                  label="ContraseÃ±a"
                   type={showPassword ? "text" : "password"}
                   id="password"
                   onChange={changed}
@@ -613,7 +613,7 @@ export const Register = () => {
                   id="grado"
                   name="grado"
                   select
-                  label="Máximo grado encadenado en roca"
+                  label="MÃ¡ximo grado encadenado en roca"
                   defaultValue="IV"
                   onChange={changed}
                   disabled={loading}
@@ -850,7 +850,7 @@ export const Register = () => {
                       fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
-                    ¿Ya tienes una cuenta?{" "}
+                    Â¿Ya tienes una cuenta?{" "}
                     <Link
                       href="/login"
                       sx={{
@@ -863,7 +863,7 @@ export const Register = () => {
                         },
                       }}
                     >
-                      Inicia sesión aquí
+                      Inicia sesiÃ³n aquÃ­
                     </Link>
                   </Typography>
                 </Box>
@@ -921,7 +921,7 @@ export const Register = () => {
                   >
                     <Box
                       component="img"
-                      src="../../../../testcalapp.png"
+                      src="/testcalapp.png"
                       sx={{
                         width: { xs: 16, sm: 18, md: 20 },
                         height: { xs: 16, sm: 18, md: 20 },

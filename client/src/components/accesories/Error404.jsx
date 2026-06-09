@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -87,7 +87,7 @@ const Error404 = () => {
                 }}
               >
                 <Avatar
-                  src="../../../../testcalapp.png"
+                  src="/testcalapp.png"
                   sx={{
                     width: "100%",
                     height: "100%",
@@ -141,7 +141,7 @@ const Error404 = () => {
                 fontWeight: 500,
               }}
             >
-              Página no encontrada
+              PÃ¡gina no encontrada
             </Typography>
 
             <Typography
@@ -152,7 +152,7 @@ const Error404 = () => {
                 maxWidth: "90%",
               }}
             >
-              Lo sentimos, la página que estás buscando no existe o ha sido
+              Lo sentimos, la pÃ¡gina que estÃ¡s buscando no existe o ha sido
               movida.
             </Typography>
 
@@ -207,7 +207,7 @@ const Error404 = () => {
                   }
                 }}
               >
-                Página anterior
+                PÃ¡gina anterior
               </Button>
             </Box>
           </Box>

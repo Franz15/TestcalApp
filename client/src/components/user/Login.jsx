@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+﻿import { React, useState, useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Global } from "../../helpers/Global";
 import { useAuth } from "../../hooks/useAuth";
@@ -80,13 +80,13 @@ export const Login = () => {
       tempErrors.email = "El email es requerido";
       formIsValid = false;
     } else if (!/\S+@\S+\.\S+/.test(form.email)) {
-      tempErrors.email = "Email inválido";
+      tempErrors.email = "Email invÃ¡lido";
       formIsValid = false;
     }
 
     // Password validation
     if (!form.password) {
-      tempErrors.password = "La contraseña es requerida";
+      tempErrors.password = "La contraseÃ±a es requerida";
       formIsValid = false;
     }
 
@@ -113,7 +113,7 @@ export const Login = () => {
       // Datos del usuario
       let userToLogin = form;
 
-      // Petición al backend
+      // PeticiÃ³n al backend
       const request = await fetch(Global.url + "user/login", {
         method: "POST",
         headers: {
@@ -144,19 +144,19 @@ export const Login = () => {
         // Setear datos en el auth
         setAuth(data.user);
 
-        // Redirección después de un breve retraso para mostrar el éxito
+        // RedirecciÃ³n despuÃ©s de un breve retraso para mostrar el Ã©xito
         setTimeout(() => {
           window.location.reload();
         }, 800);
       } else {
         setSaved("error");
         setMessage(
-          data.message || "Error al iniciar sesión. Intente nuevamente."
+          data.message || "Error al iniciar sesiÃ³n. Intente nuevamente."
         );
       }
     } catch (error) {
       setSaved("error");
-      setMessage("Error de conexión. Intente nuevamente más tarde.");
+      setMessage("Error de conexiÃ³n. Intente nuevamente mÃ¡s tarde.");
       console.error("Login error:", error);
     } finally {
       setLoading(false);
@@ -289,7 +289,7 @@ export const Login = () => {
                 >
                   <Box
                     component="img"
-                    src="../../../../testcalapp.png"
+                    src="/testcalapp.png"
                     alt="App Logo"
                     className="login-logo"
                     sx={{
@@ -354,7 +354,7 @@ export const Login = () => {
                     fontSize: "16px",
                   }}
                 >
-                  Inicia sesión para acceder a tu cuenta
+                  Inicia sesiÃ³n para acceder a tu cuenta
                 </Typography>
               </Box>
 
@@ -369,7 +369,7 @@ export const Login = () => {
                   required
                   fullWidth
                   id="email"
-                  label="Correo electrónico"
+                  label="Correo electrÃ³nico"
                   name="email"
                   autoComplete="email"
                   autoFocus
@@ -405,7 +405,7 @@ export const Login = () => {
                   fullWidth
                   id="password"
                   name="password"
-                  label="Contraseña"
+                  label="ContraseÃ±a"
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
                   variant="outlined"
@@ -500,7 +500,7 @@ export const Login = () => {
                         }}
                         onClick={() => !loading && setRememberMe(!rememberMe)}
                       >
-                        Mantener sesión iniciada
+                        Mantener sesiÃ³n iniciada
                       </Typography>
                     }
                     sx={{
@@ -524,7 +524,7 @@ export const Login = () => {
                       },
                     }}
                   >
-                    ¿Has olvidado tu contraseña?
+                    Â¿Has olvidado tu contraseÃ±a?
                   </Link>
                 </Box>
 
@@ -562,7 +562,7 @@ export const Login = () => {
                       }}
                     />
                   ) : (
-                    "Iniciar sesión"
+                    "Iniciar sesiÃ³n"
                   )}
                 </Button>
 
@@ -589,7 +589,7 @@ export const Login = () => {
                       fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
-                    ¿No tienes cuenta?{" "}
+                    Â¿No tienes cuenta?{" "}
                     <Link
                       href="/registro"
                       sx={{
@@ -602,7 +602,7 @@ export const Login = () => {
                         },
                       }}
                     >
-                      Regístrate aquí
+                      RegÃ­strate aquÃ­
                     </Link>
                   </Typography>
                 </Box>
@@ -628,7 +628,7 @@ export const Login = () => {
                   >
                     <Box
                       component="img"
-                      src="../../../../testcalapp.png"
+                      src="/testcalapp.png"
                       sx={{
                         width: 20,
                         height: 20,
@@ -688,7 +688,7 @@ export const Login = () => {
                       fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
-                    Sesión iniciada correctamente. Accediendo a su cuenta...
+                    SesiÃ³n iniciada correctamente. Accediendo a su cuenta...
                   </Alert>
                 )}
 

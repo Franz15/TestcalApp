@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+﻿import { React, useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Global } from "../../helpers/Global";
 import { useAuth } from "../../hooks/useAuth";
@@ -44,7 +44,7 @@ export const Recover = () => {
       tempErrors.email = "El email es requerido";
       formIsValid = false;
     } else if (!/\S+@\S+\.\S+/.test(form.email)) {
-      tempErrors.email = "Email inválido";
+      tempErrors.email = "Email invÃ¡lido";
       formIsValid = false;
     }
 
@@ -63,7 +63,7 @@ export const Recover = () => {
       // Datos del usuario
       let email = form.email;
 
-      // Petición al backend
+      // PeticiÃ³n al backend
       const request = await fetch(Global.url + "user/recover/" + email, {
         method: "GET",
       });
@@ -79,7 +79,7 @@ export const Recover = () => {
       }
     } catch (error) {
       setSaved("error");
-      setMessage("Error de conexión. Intente nuevamente más tarde.");
+      setMessage("Error de conexiÃ³n. Intente nuevamente mÃ¡s tarde.");
       console.error("Recover error:", error);
     } finally {
       setLoading(false);
@@ -157,7 +157,7 @@ export const Recover = () => {
               fontFamily: "inherit",
             }}
           >
-            Te enviaremos instrucciones para restablecer tu contraseña
+            Te enviaremos instrucciones para restablecer tu contraseÃ±a
           </Typography>
         </Box>
 
@@ -211,7 +211,7 @@ export const Recover = () => {
                 >
                   <Box
                     component="img"
-                    src="../../../../testcalapp.png"
+                    src="/testcalapp.png"
                     alt="App Logo"
                     className="login-logo"
                     sx={{
@@ -251,7 +251,7 @@ export const Recover = () => {
                     mb: 1,
                   }}
                 >
-                  Recuperación
+                  RecuperaciÃ³n
                   <Box
                     sx={{
                       position: "absolute",
@@ -275,7 +275,7 @@ export const Recover = () => {
                     fontSize: "16px",
                   }}
                 >
-                  Ingresa tu email para restablecer tu contraseña
+                  Ingresa tu email para restablecer tu contraseÃ±a
                 </Typography>
               </Box>
 
@@ -352,7 +352,7 @@ export const Recover = () => {
                       }}
                     />
                   ) : (
-                    "Recuperar contraseña"
+                    "Recuperar contraseÃ±a"
                   )}
                 </Button>
 
@@ -392,7 +392,7 @@ export const Recover = () => {
                         },
                       }}
                     >
-                      Volver al inicio de sesión
+                      Volver al inicio de sesiÃ³n
                     </Link>
                   </Typography>
 
@@ -404,7 +404,7 @@ export const Recover = () => {
                       fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
-                    ¿No tienes una cuenta?{" "}
+                    Â¿No tienes una cuenta?{" "}
                     <Link
                       href="/registro"
                       sx={{
@@ -417,7 +417,7 @@ export const Recover = () => {
                         },
                       }}
                     >
-                      Regístrate aquí
+                      RegÃ­strate aquÃ­
                     </Link>
                   </Typography>
                 </Box>
@@ -471,7 +471,7 @@ export const Recover = () => {
                   >
                     <Box
                       component="img"
-                      src="../../../../testcalapp.png"
+                      src="/testcalapp.png"
                       sx={{
                         width: 20,
                         height: 20,

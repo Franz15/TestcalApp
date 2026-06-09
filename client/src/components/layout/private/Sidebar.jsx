@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+﻿import React, { useContext, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -59,7 +59,7 @@ const Sidebar = () => {
             disableRipple
           >
             <Avatar
-              src="../../../../testcalapp.png"
+              src="/testcalapp.png"
               sx={{ width: 52, height: 52 }}
             />
           </IconButton>
@@ -83,7 +83,7 @@ const Sidebar = () => {
           ))}
           <li>
             <Tooltip
-              title={!sidebarOpen ? "Cerrar Sesión" : ""}
+              title={!sidebarOpen ? "Cerrar SesiÃ³n" : ""}
               placement="right"
               arrow
             >
@@ -91,7 +91,7 @@ const Sidebar = () => {
                 <span className="icon-container">
                   <LogoutIcon />
                 </span>
-                <span className="menu-text logout_text">Cerrar Sesión</span>
+                <span className="menu-text logout_text">Cerrar SesiÃ³n</span>
               </a>
             </Tooltip>
           </li>
@@ -141,7 +141,7 @@ const Sidebar = () => {
               disableRipple
             >
               <Avatar
-                src="../../../../testcalapp.png"
+                src="/testcalapp.png"
                 sx={{ width: 45, height: 45 }}
               />
             </IconButton>
@@ -179,7 +179,7 @@ const Sidebar = () => {
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>
-                <ListItemText primary="Cerrar Sesión" />
+                <ListItemText primary="Cerrar SesiÃ³n" />
               </ListItemButton>
             </ListItem>
           </List>

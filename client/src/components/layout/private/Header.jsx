@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+﻿import React, { useContext, useEffect, useState } from "react";
 import { Global } from "../../../helpers/Global";
 import { Avatar, IconButton } from "@mui/material";
 import { useAuth } from "../../../hooks/useAuth";
@@ -36,7 +36,7 @@ export const Header = () => {
             disableRipple
           >
             <Avatar
-              src="../../../../testcalapp.png"
+              src="/testcalapp.png"
               sx={{ width: 55, height: 55 }}
             />
           </IconButton>
