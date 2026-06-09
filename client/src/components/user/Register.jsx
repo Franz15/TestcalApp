@@ -1,4 +1,4 @@
-﻿import { React, useState } from "react";
+import { React, useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Global } from "../../helpers/Global";
 import { useNavigate } from "react-router-dom";
@@ -65,7 +65,7 @@ export const Register = () => {
       tempErrors.email = "El email es requerido";
       formIsValid = false;
     } else if (!/\S+@\S+\.\S+/.test(form.email)) {
-      tempErrors.email = "Email invÃ¡lido";
+      tempErrors.email = "Email inválido";
       formIsValid = false;
     }
 
@@ -77,7 +77,7 @@ export const Register = () => {
 
     // Password validation
     if (!form.password) {
-      tempErrors.password = "La contraseÃ±a es requerida";
+      tempErrors.password = "La contraseña es requerida";
       formIsValid = false;
     }
 
@@ -147,7 +147,7 @@ export const Register = () => {
       }
     } catch (error) {
       setSaved("error");
-      setMessage("Error de conexiÃ³n. Intente nuevamente mÃ¡s tarde.");
+      setMessage("Error de conexión. Intente nuevamente más tarde.");
       console.error("Register error:", error);
     } finally {
       setLoading(false);
@@ -214,7 +214,7 @@ export const Register = () => {
               fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
             }}
           >
-            Ãšnete a nosotros
+            Únete a nosotros
           </Typography>
           <Typography
             variant="h6"
@@ -463,7 +463,7 @@ export const Register = () => {
                   required
                   fullWidth
                   id="email"
-                  label="Correo electrÃ³nico"
+                  label="Correo electrónico"
                   name="email"
                   autoComplete="email"
                   type="email"
@@ -539,7 +539,7 @@ export const Register = () => {
                   required
                   fullWidth
                   name="password"
-                  label="ContraseÃ±a"
+                  label="Contraseña"
                   type={showPassword ? "text" : "password"}
                   id="password"
                   onChange={changed}
@@ -613,7 +613,7 @@ export const Register = () => {
                   id="grado"
                   name="grado"
                   select
-                  label="MÃ¡ximo grado encadenado en roca"
+                  label="Máximo grado encadenado en roca"
                   defaultValue="IV"
                   onChange={changed}
                   disabled={loading}
@@ -850,7 +850,7 @@ export const Register = () => {
                       fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
-                    Â¿Ya tienes una cuenta?{" "}
+                    ¿Ya tienes una cuenta?{" "}
                     <Link
                       href="/login"
                       sx={{
@@ -863,7 +863,7 @@ export const Register = () => {
                         },
                       }}
                     >
-                      Inicia sesiÃ³n aquÃ­
+                      Inicia sesión aquí
                     </Link>
                   </Typography>
                 </Box>

@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -83,7 +83,7 @@ const Sidebar = () => {
           ))}
           <li>
             <Tooltip
-              title={!sidebarOpen ? "Cerrar SesiÃ³n" : ""}
+              title={!sidebarOpen ? "Cerrar Sesión" : ""}
               placement="right"
               arrow
             >
@@ -91,7 +91,7 @@ const Sidebar = () => {
                 <span className="icon-container">
                   <LogoutIcon />
                 </span>
-                <span className="menu-text logout_text">Cerrar SesiÃ³n</span>
+                <span className="menu-text logout_text">Cerrar Sesión</span>
               </a>
             </Tooltip>
           </li>
@@ -179,7 +179,7 @@ const Sidebar = () => {
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>
-                <ListItemText primary="Cerrar SesiÃ³n" />
+                <ListItemText primary="Cerrar Sesión" />
               </ListItemButton>
             </ListItem>
           </List>

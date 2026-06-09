@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { Avatar } from "@mui/material";
 
 import "./footer.css";
@@ -27,15 +27,15 @@ const Footer = () => {
           <a href="/about" className="footer-link">
             Sobre nosotros
           </a>
-          <span className="footer-divider">â€¢</span>
+          <span className="footer-divider">•</span>
           <a href="/terms" className="footer-link">
-            TÃ©rminos
+            Términos
           </a>
-          <span className="footer-divider">â€¢</span>
+          <span className="footer-divider">•</span>
           <a href="/privacy" className="footer-link">
             Privacidad
           </a>
-          <span className="footer-divider">â€¢</span>
+          <span className="footer-divider">•</span>
           <a href="/help" className="footer-link">
             Ayuda
           </a>

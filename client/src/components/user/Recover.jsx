@@ -1,4 +1,4 @@
-﻿import { React, useState } from "react";
+import { React, useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Global } from "../../helpers/Global";
 import { useAuth } from "../../hooks/useAuth";
@@ -44,7 +44,7 @@ export const Recover = () => {
       tempErrors.email = "El email es requerido";
       formIsValid = false;
     } else if (!/\S+@\S+\.\S+/.test(form.email)) {
-      tempErrors.email = "Email invÃ¡lido";
+      tempErrors.email = "Email inválido";
       formIsValid = false;
     }
 
@@ -63,7 +63,7 @@ export const Recover = () => {
       // Datos del usuario
       let email = form.email;
 
-      // PeticiÃ³n al backend
+      // Petición al backend
       const request = await fetch(Global.url + "user/recover/" + email, {
         method: "GET",
       });
@@ -79,7 +79,7 @@ export const Recover = () => {
       }
     } catch (error) {
       setSaved("error");
-      setMessage("Error de conexiÃ³n. Intente nuevamente mÃ¡s tarde.");
+      setMessage("Error de conexión. Intente nuevamente más tarde.");
       console.error("Recover error:", error);
     } finally {
       setLoading(false);
@@ -157,7 +157,7 @@ export const Recover = () => {
               fontFamily: "inherit",
             }}
           >
-            Te enviaremos instrucciones para restablecer tu contraseÃ±a
+            Te enviaremos instrucciones para restablecer tu contraseña
           </Typography>
         </Box>
 
@@ -251,7 +251,7 @@ export const Recover = () => {
                     mb: 1,
                   }}
                 >
-                  RecuperaciÃ³n
+                  Recuperación
                   <Box
                     sx={{
                       position: "absolute",
@@ -275,7 +275,7 @@ export const Recover = () => {
                     fontSize: "16px",
                   }}
                 >
-                  Ingresa tu email para restablecer tu contraseÃ±a
+                  Ingresa tu email para restablecer tu contraseña
                 </Typography>
               </Box>
 
@@ -352,7 +352,7 @@ export const Recover = () => {
                       }}
                     />
                   ) : (
-                    "Recuperar contraseÃ±a"
+                    "Recuperar contraseña"
                   )}
                 </Button>
 
@@ -392,7 +392,7 @@ export const Recover = () => {
                         },
                       }}
                     >
-                      Volver al inicio de sesiÃ³n
+                      Volver al inicio de sesión
                     </Link>
                   </Typography>
 
@@ -404,7 +404,7 @@ export const Recover = () => {
                       fontFamily: '"roboto", Courier, monospace',
                     }}
                   >
-                    Â¿No tienes una cuenta?{" "}
+                    ¿No tienes una cuenta?{" "}
                     <Link
                       href="/registro"
                       sx={{
@@ -417,7 +417,7 @@ export const Recover = () => {
                         },
                       }}
                     >
-                      RegÃ­strate aquÃ­
+                      Regístrate aquí
                     </Link>
                   </Typography>
                 </Box>
